@@ -1,0 +1,25 @@
+.tabset {
+  clear: both;
+  width: 100%;
+}
+.tabset .tab {
+  display: none;
+}
+.tabset .tab-content {
+  display: block;
+}
+.tabset .tab-content p strong {
+  margin-bottom: 20px;
+}
+.tabset .tab-content li {
+  text-transform: uppercase;
+  font-weight: 400;
+  padding-bottom: .5em;
+}
+@media screen and (min-width: 1024px) {
+  .tabset .tab-content .item {
+    display: inline-block;
+    float: none;
+    margin-bottom: 50px;
+  }
+}

@@ -1,0 +1,28 @@
+@import 'css/reset';
+@import 'css/variables';
+@import 'css/mixins';
+@import 'css/unsemantic-grid-responsive-tablet-no-ie7.css';
+
+body {
+  font: @base-font;
+  background: #ddd;
+  .common();
+}
+
+.grid-row {
+  border: dashed 2px #ccf;
+  margin: -2px;
+  .clear-fix();
+}
+
+.grid_loop (@index, @jump) when (@index < 100) {
+  .grid-@{index} {
+    border: dotted 1px #ccc;
+    margin: -1px;
+
+  }
+  .grid_loop(@index + @jump, @jump);
+}
+
+.grid_loop(5, 5);
+.grid_loop(33, 33);

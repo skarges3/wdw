@@ -1,0 +1,40 @@
+@import "lesshat";
+@tab-border-color: #dadada;
+@active-tab-color: #001441;
+@tab-text-color: #797979;
+.tabset {
+  clear: both;
+  width: 100%;
+  .tab {
+    display: none;
+  }
+  .tab-content {
+    display: block;
+    p {
+      strong {
+        margin-bottom: 20px;
+      }
+    }
+
+    li {
+      text-transform: uppercase;
+      font-weight: 400;
+      padding-bottom: .5em;
+    }
+  }
+
+
+}
+
+@media screen and (min-width: 1024px) {
+  .tabset {
+    .tab-content {
+      .item {
+        display: inline-block;
+        float: none;
+        margin-bottom: 50px;
+      }
+    }
+  }
+
+}

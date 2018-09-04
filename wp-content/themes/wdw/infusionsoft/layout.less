@@ -1,0 +1,957 @@
+/*
+    Layout: One Column
+	Theme Name: Vanilla
+	Description: Vanilla is a starter shopping cart theme for Infusionsoft.
+	Author: Fusetastic
+	Author URI: http://www.fusetastic.com
+	Version: 1.0
+
+	License: GNU General Public License v2.0 (or later)
+	License URI: http://www.opensource.org/licenses/gpl-license.php
+	HTML version 2
+
+The following styles control the general layout of your store
+===============================================================*/
+@import '../css/reset';
+@import '../css/shared';
+@import '../css/mixins';
+@import '../css/unsemantic-grid-responsive-tablet-no-ie7';
+* {
+  margin: 0;
+  padding: 0;
+}
+
+img, img a {
+  border: 0 none;
+}
+
+#wrapper {
+  /* Wraps around everything and sets the total width of the storefront */
+  position: relative;
+  //max-width: @container-max-width;
+  margin: 0 auto;
+  padding: 10px 10px 0 10px;
+  overflow: hidden;
+}
+
+#wrapperCheckout {
+  /* Wrapper with 25px top margin to compensate for missing topNav on checkout pages */
+  position: relative;
+  width: @container-max-width;
+  margin: 30px auto 0 auto;
+  padding: 10px 10px 0 10px;
+}
+
+
+
+/* TOP NAVIGATION AND HEADER
+===============================================================*/
+
+#topNav {
+  /* Contains View Cart link and search field */
+  width: @container-max-width;
+  height: 25px;
+  margin: 10px auto 5px auto;
+  font-size: 12px;
+}
+
+#topNav ul {
+  list-style: none;
+  margin: 0;
+  float: right;
+}
+
+#topNav li {
+  padding-left: 30px;
+  list-style-image: none;
+  display: inline;
+}
+
+#header {
+  /* The main header that contains your banner or logo */
+  margin-bottom: 10px;
+}
+
+#nav {
+  max-width: @container-max-width;
+  overflow: hidden;
+  margin-top: 100px;
+  text-align: center;
+  &[style] {
+    display: block!important;
+  }
+}
+
+#nav ul {
+  list-style: none;
+  margin: 7px 0 7px 0;
+}
+
+#nav li {
+  list-style-image: none;
+  display: inline;
+}
+
+#nav li a {
+  padding: 9px 40px 11px 40px;
+}
+
+#nav li a:hover {
+  padding: 9px 40px 11px 40px;
+}
+
+.navHeader {
+  margin: 30px 0 0 10px;
+}
+
+
+
+/* CONTENT / PRODUCT
+===============================================================*/
+
+#content {
+  /* Content wrapper used on browsing pages */
+  position: relative;
+  max-width: @container-max-width;
+  margin: 10px auto 0 auto;
+}
+
+#contentWide {
+  /* Content wrapper used on checkout pages */
+  position: relative;
+  max-width: @container-max-width;
+  margin: 35px auto 0 auto;
+}
+
+#contentProductDetail {
+  /* Content wrapper used on product details page */
+  position: relative;
+  //width: 920px;
+  margin: 35px auto 0 auto;
+  .common();
+}
+
+#promoBanner {
+  /* Large banner on home page */
+  margin-bottom: 20px;
+}
+
+#breadcrumbs {
+  margin: 0 0 15px 0;
+}
+
+#breadcrumbs ul {
+  list-style: none;
+  margin: 0 -100px 3px 0;
+}
+
+#breadcrumbs li {
+  padding-right: 10px;
+  list-style-image: none;
+  display: inline;
+}
+
+#breadcrumbs li:after {
+  /* Symbol to be displayed between breadcrumbs */
+  content: ">";
+  margin-left: 10px;
+}
+
+#breadcrumbs li:last-child:after {
+  /* Removes the > after last breadcrumb */
+  content: "";
+}
+
+.productGridOneCol {
+  /* Container for product image and description in product grid */
+  .box-sizing(border-box);
+  position: relative;
+  width: 50%;
+  margin: 0;
+  padding: 15px;
+  float: left;
+  &:nth-child(odd){
+    clear: left;
+  }
+  p{
+
+  }
+
+  @media screen and (max-width: 767px){
+    width: 100%;
+  }
+}
+
+.productGridOneCol img {
+  margin: 0px 20px 0 0;
+
+  float:left;
+}
+
+.price {
+  /* Paragraph on product details page that contains product price */
+  margin: 0 0 15px 0;
+}
+
+.productImage {
+  /* Contains the image that appears in the product grid */
+  width: 170px;
+  height: 170px;
+  margin-bottom: 5px;
+}
+
+.productImage img {
+  //float: left;
+}
+
+.productLarge {
+  /* Large image on product details page */
+  float: left;
+}
+
+.productQty {
+  /* Product quantity field on product details page */
+  padding: 4px 2px 4px 6px;
+  width: 26px;
+  display: block;
+  text-align: right;
+  margin-bottom: 5px;
+}
+
+#productDetails {
+  /* Container on product details that wraps around everything from product name to add to cart button */
+  overflow: hidden;
+  padding: 0 20px 0 20px;
+}
+
+#productDescription {
+  /* Contains the long product description on product details page */
+  width: 100%;
+  clear: both;
+  padding: 20px 0 0 0;
+}
+
+#productDescription ul {
+  margin: 15px 30px 0;
+}
+
+.productDescriptionShort {
+  /* Paragraph for short product description on product details page */
+  margin: 0;
+  width: 560px;
+}
+
+.productDescriptionFront {
+  /* Paragraph for product description in product grid */
+  margin: 0;
+  line-height: 2;
+  color: #999;
+  font-family: "Montserrat";
+  letter-spacing: .2em;
+}
+
+#productDetails ul {
+  margin: 15px 0 25px 0;
+  width: @container-max-width;
+}
+
+#productDetails li {
+  list-style-type: none;
+  width: 400px;
+}
+
+.productDrop {
+  /* Dropdown list for product options */
+  margin: 0;
+}
+
+.optionName {
+  /* Label for product option dropdown */
+  width: 60px;
+  height: 20px;
+  float: left;
+}
+
+table.productTable {
+  margin: 20px 0 0 10px;
+  padding: 4px;
+}
+
+.productTable td {
+  padding: 4px;
+}
+
+td.bottom {
+  vertical-align: bottom;
+}
+
+
+
+/* CART AND CHECKOUT
+===============================================================*/
+
+input {
+  margin: 0 0 7px 0;
+}
+
+
+#signinContainer {
+  width: 720px;
+  margin: 40px auto 0 auto;
+  padding-top: 40px;
+}
+
+/* Cart contents
+---------------------------------------------*/
+
+.qtyField {
+  /* Quantity field in cart */
+  padding: 4px 4px 4px 6px;
+  width: 25px;
+  display: block;
+  text-align: right;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+
+.cartThumb {
+  /* Product thumbnail image in cart */
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+.updateCart {
+  font-size: 10px;
+}
+
+.updateCart a:link {
+  text-decoration: none;
+}
+
+.paymentLabel {
+  display: block;
+}
+
+.choosePlan {
+  /* Class for radio buttons */
+  margin-right: 5px;
+}
+
+.promoCode {
+  /* Table that contains promo code field */
+  width: 450px;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+}
+
+.promoCode td {
+  height: 30px;
+}
+
+.shippingOptions {
+  /* Radio buttons for shipping options */
+  margin: 0 10px 3px 0;
+}
+
+.address, .editInfo, .shippingOptions, .cardInfo, .shipInfo {
+  margin: 0 0 4px 0;
+  display: block;
+}
+
+.billName, .billStreet, .billCity, .shipName, .shipStreet, .shipCity {
+  margin: 0;
+  display: block;
+}
+
+
+/* Form fields and labels
+---------------------------------------------*/
+
+.checkout {
+  /* Form fields used in checkout forms */
+  padding: 4px 4px 4px 6px;
+  margin: 0;
+  width: 200px;
+}
+
+.checkoutBottom {
+  /* Provides bottom padding for last form field in a form */
+  padding: 4px 4px 4px 6px;
+  margin: 0 0 20px 0;
+  width: 200px;
+}
+
+.checkoutTop {
+  /* Provides top padding for first form field in a form */
+  padding: 4px 4px 4px 6px;
+  margin: 10px 0 0 0;
+  width: 200px;
+}
+
+.checkoutTopShort {
+  /* Provides top padding for first form field in a form */
+  padding: 4px 4px 4px 6px;
+  margin: 10px 0 0 0;
+  width: 125px;
+}
+
+.checkoutLabel {
+  /* Checkout form label */
+  padding: 0 0 -3px 0;
+  margin: 0 0 -3px 0;
+}
+
+.checkoutShort, .search, .promoField {
+  /* Smaller form field */
+  padding: 4px;
+  margin: 0;
+  width: 125px;
+}
+
+.checkoutShortest {
+  /* Even smaller form field */
+  padding: 5px;
+  margin: 0;
+  width: 70px;
+}
+
+.signinField {
+  /* Shorter form field for sign in table */
+  padding: 4px 4px 4px 6px;
+  margin: 0 0 0 0;
+  width: 160px;
+  height: 18px;
+}
+
+.signinTop {
+  /* Provides top padding for first form field in sign in form */
+  padding: 4px 4px 4px 6px;
+  margin: 10px 0 0 0;
+  width: 160px;
+  height: 18px;
+}
+
+.signinLabel {
+  /* Text label used in sign in table */
+  text-align: right;
+  width: 150px;
+}
+
+.paymentIcon {
+  margin: 0 7px -5px 4px;
+}
+
+
+/* Tables
+---------------------------------------------*/
+
+.viewCart {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  float: left;
+}
+
+.viewCart th, .viewCartShort th, .payPlan th, .summaryCart th, .shippingInfo th, .billingInfo th, .billingTable th, .shippingTable th, .paymentInfo th, .signinTable th, .paymentMethodTable th {
+  padding: 10px 10px 10px 15px;
+  text-align: left;
+}
+
+.viewCart td, .viewCartShort td, .payPlan td, .summaryCart td, .billingTable, .shippingInfo td, .billingInfo td, .paymentInfo td, .paymentMethodTable td {
+  padding: 10px 10px 10px 15px;
+  vertical-align: top;
+}
+
+.payPlan {
+  /* Table on view cart page that contains available pay plans */
+  width: 270px;
+  border-collapse: collapse;
+  margin: 50px 0 20px 20px;
+  text-align: left;
+  float: right;
+}
+
+.tableContainer {
+  /* Wraps around cart table to make it stretch to 100% width when no payment plans are displayed */
+  overflow: hidden;
+}
+
+.tableContainer > table {
+  /* Sets cart table to 100% width when no payment plans are displayed */
+  width: 100%;
+}
+
+.billingTable {
+  /* Table for entering billing address */
+  width: 450px;
+  border-collapse: collapse;
+  margin: 40px 20px 20px 0;
+  text-align: left;
+  float: left;
+  clear: both;
+}
+
+.shippingTable {
+  /* Table for entering shipping address */
+  width: 450px;
+  border-collapse: collapse;
+  margin: 40px 0 20px 0;
+  text-align: left;
+  float: left;
+}
+
+.paymentMethodTable {
+  /* Table for entering payment method */
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 20px 0;
+  text-align: left;
+  float: right;
+}
+
+td.pay1 {
+  /* First column in .paymentMethodTable */
+  width: 220px;
+  padding-bottom: 20px;
+}
+
+td.pay2 {
+  /* First column in .paymentMethodTable */
+  width: 231px;
+  padding-bottom: 20px;
+}
+
+td.pay3 {
+  /* First column in .paymentMethodTable */
+  width: 162px;
+  padding-bottom: 20px;
+}
+
+td.pay4 {
+  /* First column in .paymentMethodTable */
+  padding-bottom: 20px;
+}
+
+.signinTable {
+  /* Table for signing in or registering new customer */
+  width: 340px;
+  border-collapse: collapse;
+  margin: 0 0 120px 20px;
+  text-align: left;
+  float: left;
+}
+
+.signinTable td {
+  padding: 5px 10px 3px 15px;
+  vertical-align: top;
+}
+
+.shippingTable td, .billingTable td {
+  border: none;
+  padding: 5px 0 0 15px;
+}
+
+td.rightAlign, th.rightAlign {
+  text-align: right;
+  vertical-align: top;
+  padding-top: 10px;
+}
+
+td.rightAlignTop, th.rightAlignTop {
+  text-align: right;
+  vertical-align: top;
+  padding-top: 20px;
+  width: 150px;
+}
+
+td.rightAlignBottom {
+  text-align: right;
+  vertical-align: top;
+  padding: 10px 10px 20px 0;
+  width: 150px;
+}
+
+td.leftAlign, th.leftAlign {
+  text-align: left;
+}
+
+td.centerAlign, th.centerAlign {
+  text-align: center;
+}
+
+td .rightCell {
+  text-align: right;
+}
+
+.summaryCart {
+  /* Table that contains content of shopping cart, displayed on summary page */
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  float: left;
+}
+
+.shippingInfo {
+  /* Table on summary page that contains shipping info */
+  width: 293px;
+  border-collapse: collapse;
+  text-align: left;
+  margin: 0 20px 20px 0;
+  float: left;
+}
+
+.billingInfo {
+  /* Table on summary page that contains billing info */
+  width: 293px;
+  border-collapse: collapse;
+  margin: 0 20px 20px 0;
+  text-align: left;
+  float: left;
+}
+
+.paymentInfo {
+  /* Table for pay plan info and scheduled payments on summary page */
+  width: 293px;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 10px;
+  text-align: left;
+  float: left;
+}
+
+.checkoutLinksTop {
+  /* Container for 'Checkout' and 'Continue Shopping' buttons */
+  margin: 0 0 20px 0;
+  text-align: right;
+}
+
+@media screen and (min-width: 768px){
+  .checkoutLinksTop{
+    position: absolute;
+    right: 0;
+  }
+}
+
+.checkoutLinks {
+  /* Container for 'Checkout' and 'Continue Shopping' buttons */
+  width: 300px;
+  margin: 17px 20px 40px 0;
+  text-align: right;
+  float: right;
+  clear: both;
+}
+
+.checkoutLinksBottom {
+  /* Container for 'Checkout' and 'Continue Shopping' buttons */
+  height: 30px;
+  margin: 17px 20px 40px 0;
+  text-align: right;
+}
+
+#checkoutLinksSummary {
+  /* Container for 'Checkout' and 'Continue Shopping' buttons on summary page */
+  position: absolute;
+  top: 570px;
+  right: 0;
+  width: 300px;
+  height: 30px;
+  margin: 17px 0 30px 0;
+  text-align: right;
+  float: right;
+}
+
+
+/* Forgot password
+---------------------------------------------*/
+
+#forgotPasswordWindow {
+  /* Container for forgot password information */
+  width: 400px;
+  margin: 40px auto 0 auto;
+  padding: 20px;
+}
+
+p.forgotPassword {
+  /* Explanation in forgot password window */
+  margin: 10px 0 0 0;
+  padding: 0;
+}
+
+.forgotPasswordTable th {
+  text-align: left;
+  padding-left: 15px;
+}
+
+.forgotPasswordTable td {
+  padding: 5px 10px 3px 15px;
+}
+
+.forgotPasswordTable input {
+  /* Form fields in forgot password window */
+  padding: 4px 4px 4px 6px;
+  margin: 0 0 0 0;
+  width: 160px;
+  height: 28px;
+}
+
+
+
+/* UPSELLS
+===============================================================*/
+
+#upsellContainer {
+  /* Contains all upsells */
+  width: 940px;
+  clear: both;
+  margin: 20px 0 0 0;
+  padding-bottom: 40px;
+}
+
+#upsellContainer li {
+  display: inline;
+  margin-right: 20px;
+}
+
+.upsell {
+  /* Box that contains single upsell */
+  width: 245px;
+  padding: 10px 20px 20px 20px;
+  float: left;
+  margin: 0 20px 10px 0;
+}
+
+.upsellImage {
+  float: left;
+  margin: 3px 15px 0 0;
+}
+
+.upsellItem {
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.subscriptionPrice {
+  margin: 0;
+}
+
+.upsellAdd {
+  /* Add to cart button for upsells */
+  float: right;
+  margin: 10px 15px 0 0;
+}
+
+
+
+/* TYPOGRAPHY
+===============================================================*/
+
+h1 {
+  /* Used for product and page headers */
+  margin: 0 0 15px 0;
+}
+
+h3 {
+  /* Used for product grid headline */
+  margin: 0 0 15px 0;
+  padding-bottom: 3px;
+}
+
+h4 {
+  margin: 20px 0 5px 0;
+}
+
+h5 {
+  margin: 2px 0 5px 5px;
+}
+
+#upsellContainer h4 {
+  margin: 0 0 5px 0;
+}
+
+.tableHeader {
+  margin: 20px 0 5px 0;
+  display: block;
+}
+
+p.homeLink {
+  float: right;
+  margin-bottom: 40px;
+}
+
+.shippingOptions {
+  /* Radio buttons for shipping options */
+  margin: 0 10px 3px 0;
+}
+
+.address, .editInfo, .shippingOptions, .cardInfo, .shipInfo {
+  margin: 0 0 4px 0;
+  display: block;
+}
+
+.billName, .billStreet, .billCity, .shipName, .shipStreet, .shipCity {
+  margin: 0;
+  display: block;
+}
+
+p.signupInfo {
+  margin: 0 0 20px 0;
+}
+
+
+
+/* LINKS AND BUTTONS
+===============================================================*/
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.codeButton {
+  padding: 7px 15px 5px 15px;
+  margin: 0 0 0 15px;
+  cursor: pointer;
+}
+
+.continueButton, .formButton {
+  padding: 7px 15px 5px 15px;
+  margin: 10px 0 0 10px;
+  cursor: pointer;
+}
+
+.cartButton, .continueButton, .formButton {
+  padding: 7px 15px 5px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.newsButton {
+  margin-left: 85px;
+  padding: 7px 15px 5px 15px;
+  cursor: pointer;
+}
+
+.searchButton {
+  margin: 1px 0 0 5px;
+  padding: 4px 9px 4px 9px;
+  cursor: pointer;
+}
+
+.upsellButton {
+  margin: 1px 0 0 5px;
+  padding: 4px 9px 4px 9px;
+  cursor: pointer;
+}
+
+.buttonRight a:hover, .buttonLeft a:hover {
+  text-decoration: none;
+}
+
+
+
+/* FOOTER
+===============================================================*/
+
+#footer {
+  position: relative;
+  //margin-top: 40px;
+  padding-top: 30px;
+  width: 100%;
+  //height: 50px;
+  text-align: center;
+  clear: both;
+}
+
+
+
+/* HTML AREAS
+===============================================================*/
+
+#customCheckoutBottom {
+  clear: both;
+}
+
+#customHomeProductGridTop {
+  width: 740px;
+  margin-bottom: 20px;
+}
+
+
+/* MISC
+===============================================================*/
+
+.payPalImage {
+  margin: 0 0 -5px 0;
+}
+
+p.successMessage {
+  margin: 20px 0 20px 0;
+}
+
+.checkoutWithPayPalLink {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.checkoutWithPayPalImg {
+  display: block;
+  margin: 0 0 -8px;
+}
+
+.payPalPayWithCardInstead, .creditCardPayWithPayPalInstead {
+  cursor: pointer;
+}
+
+.payPalPaymentInfoImage {
+  margin: 10px 0 0 0;
+}
+
+.payPalPaymentInfoMessage {
+  width: 440px;
+}
+
+/* PAYPAL LIGHTBOX
+===============================================================*/
+
+.payPalLightboxIcon {
+  float: right;
+  padding: 20px;
+}
+
+.payPalMessage {
+  padding: 55px 30px 0;
+}
+
+.closePayPalLightbox {
+  margin-right: 30px;
+  margin-top: 50px;
+  float: right;
+}
+
+.payPalGo {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background: url("https://www.paypalobjects.com/en_US/i/pui/core/btn_bg_sprite.gif") repeat-x scroll left 17.5% #FFA822;
+  border-color: #D5BD98 #935E0D #935E0D #D5BD98;
+  border-image: none;
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 30px;
+  margin-top: 10px;
+  padding: 1px;
+}
+
+#PRODUCT_DETAIL, #BRIEF_PRODUCT_SUMMARY{
+  .common();
+  h1{
+    padding-bottom: 10px;
+  }
+}
