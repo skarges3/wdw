@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php get_header( 'invites' ); ?>
 
 <?php the_post() ?>
 <?php the_content() ?>
@@ -61,7 +61,7 @@
 
 <div class="wdw-theme">
   <section
-    class="invite invite--WDWRetreat invite--<?php echo $theme; ?> invite--<?php echo $color; ?>"
+    class="invite invite--WDWRetreat invite--<?php echo str_replace(" ", "", $theme); ?> invite--<?php echo $color; ?>"
   >
 
     <?php 
@@ -78,101 +78,87 @@
 
     ?>
 
+    <?php 
+    
+    if ($color == "Mulberry") {
+        $ppp_image = "mulberry";
+    } elseif ($color == "Teal") {
+        $ppp_image = "teal";
+    } else {
+        $ppp_image = "navy";
+    }
+
+    ?>
+
     <img
       class="env-behind"
-      src="/assets/img/content/invites/<?php echo $env_behind_image; ?>.png"
+      src="/wp-content/themes/wdw/images/invites/<?php echo $env_behind_image; ?>.png"
     />
 
-    <img class="env-front" src="/assets/img/content/invites/env-front.png" />
+    <img class="env-front" src="/wp-content/themes/wdw/images/invites/env-front.png" />
     <div
-      class="env-card env-card--WDWRetreat env-card--{{ theme }} env-card--{{ themecolor }}"
+      class="env-card env-card--WDWRetreat env-card--<?php echo str_replace(" ", "", $theme); ?> env-card--<?php echo $color; ?>"
     >
       <div class="border"></div>
 
-      {# SOLID THEME #}
+
       <div class="detailbox detailbox--solid">
-        <img src="/assets/img/content/wdw/wdw-white.png" />
+        <img src="/wp-content/themes/wdw/images/invites/wdw-white.png" />
         <p class="env-card__details">
           Join us <em>for a</em><br />
           Women Doing Well Retreat
         </p>
         <p class="break"><span></span></p>
         <p class="env-card__details">
-          <em>Hosted by</em> {{ host }}<br />
-          {{ event_location | nl2br }}<br />
-          {{ event_zip }}<br />
-          {{ event_date }}
+          <em>Hosted by</em> <?php echo $hosted_by; ?><br />
+          <?php echo $invite_location; ?><br />
+          <?php echo $invite_citystatezip; ?><br />
+          <?php echo $invite_date; ?>
         </p>
-        <img src="/assets/img/content/wdw/ppp-wide-white.png" />
+        <img src="/wp-content/themes/wdw/images/invites/ppp-wide-white.png" />
       </div>
 
-      {# POWER WORDS THEME #}
+
       <div class="detailbox detailbox--powerwords">
         <p class="env-card__details">
           Join us <em>for a</em><br />
           Women Doing Well Retreat
         </p>
         <p class="break"><span></span></p>
-        {% if themecolor == "Teal" %}
-        <img id="ppp" src="/assets/img/content/wdw/ppp-teal.png" /> {% elseif
-        themecolor == "Mulberry" %}
-        <img id="ppp" src="/assets/img/content/wdw/ppp-mulberry.png" /> {% else
-        %} <img id="ppp" src="/assets/img/content/wdw/ppp-navy.png" /> {% endif
-        %}
+        <img id="ppp" src="/wp-content/themes/wdw/images/invites/ppp-<?php echo $ppp_image; ?>.png" /> 
         <p class="break"><span></span></p>
         <p class="env-card__details">
-          <em>Hosted by</em> {{ host }}<br />
-          {{ event_location | nl2br }}<br />
-          {{ event_zip }}<br />
-          {{ event_date }}
+        <em>Hosted by</em> <?php echo $hosted_by; ?><br />
+          <?php echo $invite_location; ?><br />
+          <?php echo $invite_citystatezip; ?><br />
+          <?php echo $invite_date; ?>
         </p>
       </div>
 
-      {# PICTURE RIGHT THEME #}
       <div class="detailbox detailbox--pictureright">
-        {% if themecolor == "Teal" %}
         <img
           id="sig-event-navy"
-          src="/assets/img/content/wdw/retreat-teal.png"
+          src="/wp-content/themes/wdw/images/invites/retreat-<?php echo $ppp_image; ?>.png"
         />
-        {% elseif themecolor == "Mulberry" %}
-        <img
-          id="sig-event-navy"
-          src="/assets/img/content/wdw/retreat-mulberry.png"
-        />
-        {% else %}
-        <img
-          id="sig-event-navy"
-          src="/assets/img/content/wdw/retreat-navy.png"
-        />
-        {% endif %}
         <p class="break"><span></span></p>
-        {% if themecolor == "Teal" %}
-        <img id="ppp-navy" src="/assets/img/content/wdw/ppp-disc-teal.png" /> {%
-        elseif themecolor == "Mulberry" %}
-        <img
-          id="ppp-navy"
-          src="/assets/img/content/wdw/ppp-disc-mulberry.png"
-        />
-        {% else %}
-        <img id="ppp-navy" src="/assets/img/content/wdw/ppp-disc-navy.png" /> {%
-        endif %}
+
+        <img id="ppp-navy" src="/wp-content/themes/wdw/images/invites/ppp-disc-<?php echo $ppp_image; ?>.png" />
+
         <p class="break"><span></span></p>
         <p class="env-card__details">
-          <em>Hosted by</em> {{ host }}<br /><br />
-          {{ event_location | nl2br }}<br />
-          {{ event_zip }}<br />
-          {{ event_date }}
+        <em>Hosted by</em> <?php echo $hosted_by; ?><br />
+          <?php echo $invite_location; ?><br />
+          <?php echo $invite_citystatezip; ?><br />
+          <?php echo $invite_date; ?>
         </p>
       </div>
 
-      {# PICTURE MASK THEME #}
       <div class="detailbox detailbox--picturemask">
         <p class="env-card__intro">
           <span>Join us<br /><em>for a</em></span>
           <span>Women Doing Well Retreat</span>
         </p>
-        <img id="whitemask" src="/assets/img/content/wdw/white-mask.svg" />
+        <img id="whitemask" src="/wp-content/themes/wdw/images/invites/white-mask.svg" />
         <div id="mask-bg"></div>
 
         {% if themecolor == "Teal" %}
@@ -184,17 +170,17 @@
         endif %}
 
         <p class="env-card__details">
-          <em>Hosted by</em> {{ host }}<br /><br />
-          {{ event_location | nl2br }}<br />
-          {{ event_zip }}<br />
-          {{ event_date }}
+          <em>Hosted by</em> <?php echo $hosted_by; ?><br /><br />
+          <?php echo $invite_location; ?><br />
+          <?php echo $invite_citystatezip; ?><br />
+          <?php echo $invite_date; ?>
         </p>
       </div>
 
-      {% if theme == "PictureRight" or theme == "PictureMask" %}
-      <div class="bg-img-contain"><div class="bg-img woman-jacket"></div></div>
+        <?php if (($theme == "Picture Right") || ($color == "Picture Mask")) : ?>
+            <div class="bg-img-contain"><div class="bg-img woman-jacket"></div></div> 
+        <?php endif;  ?>
 
-      {% else %} {% endif %}
     </div>
 
   </section>
@@ -205,66 +191,36 @@
   >
     <div>
       <h3>Host</h3>
-      {% if host %}
-      <h2>{{ host }}</h2>
-      <a href="mailto:{{ contact_email }}?subject={{ event_type }}"
+      <h2><?php echo $hosted_by; ?></h2>
+      <a href="mailto:<?php echo $contact_email; ?>?subject=WDW Retreat"
         >Send a message</a
       >
-      {% else %}
-      <h2>TBA</h2>
-      {#
-      <a href="mailto:{{ contact_email }}?subject={{ event_type }}"
-        >Send a message</a
-      >
-      #} {% endif %}
     </div>
     <div>
       <h3>Date</h3>
-      {% if event_date %}
-      <h2>{{ event_date }}<br />{{ event_time }}</h2>
-      <span class="addtocalendar atc-style-jog">
-        <var class="atc_event">
-          <var class="atc_date_start">{{ event_start_time }}</var>
-          <var class="atc_date_end">{{ event_end_time }}</var>
-          <var class="atc_timezone">{{ event_time_zone }}</var>
-          <var class="atc_title">{{ event_type }}</var>
-          <var class="atc_description">{{ event_desc }}</var>
-          <var class="atc_location"
-            >{{ event_location }}, {{ event_street }}, {{ event_zip }}</var
-          >
-          <var class="atc_organizer">{{ host }}</var>
-          <var class="atc_organizer_email">{{ contact_email }}</var>
-        </var>
-      </span>
-      {% else %}
-      <h2>TBA</h2>
-      {% endif %}
+      <h2><?php echo $invite_date; ?><br /><?php echo $invite_time; ?></h2>
+      <a href="#">Add to calendar</a>
     </div>
     <div>
       <h3>Location</h3>
-      {% if event_location %}
       <h2>
-        {{ event_location | nl2br }}<br />{{ event_street }}<br />{{
-          event_zip
-        }}
+      <?php echo $invite_location; ?><br /><?php echo $invite_street; ?><br /><?php echo $invite_citystatezip; ?>
       </h2>
       <a
         target="_blank"
-        href="http://maps.google.com/?q={{ event_street|replace({'#':'%23'}) }}, {{ event_zip }}"
+        href="http://maps.google.com/?q=<?php echo str_replace("#", "%23", $invite_street); ?>, <?php echo $invite_citystatezip; ?>"
         >GET DIRECTIONS</a
       >
-      {% else %}
-      <h2>TBA</h2>
-      {% endif %}
+
     </div>
   </section>
 
 
-  <section class="register register--{{ themecolor }}">
-    <a class="btn btn--wdw btn--{{ themecolor }}" href="#register">REGISTER</a>
+  <section class="register register--<?php echo $color; ?>">
+    <a class="btn btn--wdw btn--<?php echo $color; ?>" href="#register">REGISTER</a>
   </section>
 
-  <section class="power-words-banner-{{ themecolor }}"></section>
+  <section class="power-words-banner-<?php echo $color; ?>"></section>
   <section class="about--section about--IGJ animated" id="about-section">
     <h1>What is a Women Doing Well Retreat?</h1>
     <div class="about__desc">
@@ -296,47 +252,24 @@
   <section class="rsvp rsvp-retreat">
     <div>
       <h3>Details from your host</h3>
-      {% if entry.invType == "std" %}
-      <p>
-        We are excited about the opportunity to fellowship together and hope you
-        are able to join us! Please know that nothing will be asked of you by
-        anyone at the event. The desire is that you leave blessed, in addition
-        to feeling encouraged and enriched in your journey.
-      </p>
-      {% else %}
-      <p>{{ event_desc | nl2br }}</p>
-      {% endif %}
+      <p><?php echo $event_description; ?></p>
     </div>
-    <span></span> {% if entry.invType == "std" %} {% elseif entry.invType ==
-    "rsvp" %} <span></span>
-    <div>
-      <h3>RSVP</h3>
-      <p>
-        <strong>We look forward to seeing you!</strong> If you have questions or
-        to send regrets, please email
-        <a
-          href="mailto:{{ contact_email }}?subject={{ event_type }}&cc={{ contact_email_2 }}"
-          >{{ contact_name }}</a
-        >
-        or call {{ contact_phone }}.
-      </p>
-    </div>
-    {% else %} <span></span>
+    <span></span>
+    <span></span>
     <div>
       <h3>RSVP</h3>
       <p>
         This is an invitation-only event with limited space available. If you
         would like to attend please register by filling out the registration
-        form by {{ event.Invite_RSVP_Date__c }}. If you have questions or
+        form by <?php echo $rsvp_date; ?>. If you have questions or
         to send regrets, please email
         <a
-          href="mailto:{{ contact_email }}?subject={{ event_type }}&cc={{ contact_email_2 }}"
-          >{{ contact_name }}</a
+          href="mailto:<?php echo $contact_email; ?>?subject=Retreat&cc=<?php echo $contact_email_2; ?>"
+          ><?php echo $contact_name; ?></a
         >
-        or call {{ contact_phone }}.
+        or call <?php echo $contact_phone; ?>.
       </p>
     </div>
-    {% endif %}
   </section>
 
   <section class="invitation_form invitation_form--IGJ">

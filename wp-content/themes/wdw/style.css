@@ -2673,7 +2673,7 @@ background-color: #fff;
 }
 /* home page */ 
 .power-words-banner-Teal{
-	background-image: url('https://generousgiving.org/assets/img/content/wdw/Power-Words-Teal-Light-Repeat.png');
+	background-image: url('/wp-content/themes/wdw/images/invites/Power-Words-Teal-Light-Repeat.png');
 	min-height: 15vh;
 	background-position: center;
 }
@@ -3256,13 +3256,13 @@ table.dotlead td:last-child {padding-left: .2em; width: 36%;}
   display: none;
 }
 .env-card.env-card--IGJ.env-card--PowerWords.env-card--Navy {
-  background-image: url("/assets/img/content/wdw/power-words-bg-teal.png");
+  background-image: url("/wp-content/themes/wdw/images/invites/power-words-bg-teal.png");
 }
 .env-card.env-card--IGJ.env-card--PowerWords.env-card--Teal {
-  background-image: url("/assets/img/content/wdw/power-words-bg-teal.png");
+  background-image: url("/wp-content/themes/wdw/images/invites/power-words-bg-teal.png");
 }
 .env-card.env-card--IGJ.env-card--PowerWords.env-card--Mulberry {
-  background-image: url("/assets/img/content/wdw/power-words-bg-blush.png");
+  background-image: url("/wp-content/themes/wdw/images/invites/power-words-bg-blush.png");
 }
 .env-card.env-card--IGJ.env-card--PowerWords.env-card--Mulberry .env-card__details {
   color: #653156;
@@ -3271,7 +3271,7 @@ table.dotlead td:last-child {padding-left: .2em; width: 36%;}
   background: #f7eae8;
 }
 .env-card.env-card--IGJ.env-card--PowerWords.env-card--Mulberry {
-  background-image: url("/assets/img/content/wdw/power-words-bg-blush.png");
+  background-image: url("/wp-content/themes/wdw/images/invites/power-words-bg-blush.png");
 }
 .env-card.env-card--IGJ.env-card--PowerWords.env-card--Mulberry .env-card__details {
   color: #653156;
@@ -3296,10 +3296,10 @@ table.dotlead td:last-child {padding-left: .2em; width: 36%;}
   width: 100%;
 }
 .env-card.env-card--IGJ.env-card--PictureRight .bg-img-contain .bg-img.wee-burn {
-  background-image: url("/assets/img/content/wdw/Wee-Burn.jpg");
+  background-image: url("/wp-content/themes/wdw/images/invites/Wee-Burn.jpg");
 }
 .env-card.env-card--IGJ.env-card--PictureRight .bg-img-contain .bg-img.woman-jacket {
-  background-image: url("/assets/img/content/wdw/woman-blushjacket.jpeg");
+  background-image: url("/wp-content/themes/wdw/images/invites/woman-blushjacket.jpeg");
 }
 .env-card.env-card--IGJ.env-card--PictureRight .border {
   grid-area: 1/1/2/3;
@@ -3426,7 +3426,7 @@ table.dotlead td:last-child {padding-left: .2em; width: 36%;}
   width: 100%;
 }
 .env-card.env-card--IGJ.env-card--PictureMask .detailbox #mask-bg {
-  background-image: url("/assets/img/content/wdw/Wee-Burn.jpg");
+  background-image: url("/wp-content/themes/wdw/images/invites/Wee-Burn.jpg");
   background-size: cover;
   background-position: center;
   box-shadow: inset 2px 2px 0px white, inset -2px -2px 0px white;
@@ -3531,14 +3531,14 @@ table.dotlead td:last-child {padding-left: .2em; width: 36%;}
 }
 
 .power-words-banner-Teal, .power-words-banner-Navy {
-  background-image: url("/assets/img/content/wdw/Power-Words-Teal-Light-Repeat.png");
+  background-image: url("/wp-content/themes/wdw/images/invites/Power-Words-Teal-Light-Repeat.png");
   background-size: 100%;
   min-height: 15vh;
   background-position: center;
 }
 
 .power-words-banner-Mulberry, .power-words-banner-Blush {
-  background-image: url("/assets/img/content/wdw/Power-Words-Blush-Light-Repeat.png");
+  background-image: url("/wp-content/themes/wdw/images/invites/Power-Words-Blush-Light-Repeat.png");
   background-size: 100%;
   min-height: 15vh;
   background-position: center;
@@ -3752,13 +3752,13 @@ table.dotlead td:last-child {padding-left: .2em; width: 36%;}
   display: none;
 }
 .env-card.env-card--WDWRetreat.env-card--PowerWords.env-card--Navy {
-  background-image: url("/assets/img/content/wdw/power-words-bg-teal.png");
+  background-image: url("/wp-content/themes/wdw/images/invites/power-words-bg-teal.png");
 }
 .env-card.env-card--WDWRetreat.env-card--PowerWords.env-card--Teal {
-  background-image: url("/assets/img/content/wdw/power-words-bg-teal.png");
+  background-image: url("/wp-content/themes/wdw/images/invites/power-words-bg-teal.png");
 }
 .env-card.env-card--WDWRetreat.env-card--PowerWords.env-card--Mulberry {
-  background-image: url("/assets/img/content/wdw/power-words-bg-blush.png");
+  background-image: url("/wp-content/themes/wdw/images/invites/power-words-bg-blush.png");
 }
 .env-card.env-card--WDWRetreat.env-card--PowerWords.env-card--Mulberry .env-card__details {
   color: #653156;
@@ -3767,7 +3767,7 @@ table.dotlead td:last-child {padding-left: .2em; width: 36%;}
   background: #f7eae8;
 }
 .env-card.env-card--WDWRetreat.env-card--PowerWords.env-card--Blush {
-  background-image: url("/assets/img/content/wdw/power-words-bg-blush.png");
+  background-image: url("/wp-content/themes/wdw/images/invites/power-words-bg-blush.png");
 }
 .env-card.env-card--WDWRetreat.env-card--PowerWords.env-card--Blush .env-card__details {
   color: #0b496d;
@@ -3792,10 +3792,10 @@ table.dotlead td:last-child {padding-left: .2em; width: 36%;}
   width: 100%;
 }
 .env-card.env-card--WDWRetreat.env-card--PictureRight .bg-img-contain .bg-img.conn-skyline {
-  background-image: url("/assets/img/content/wdw/conn-igj.jpeg");
+  background-image: url("/wp-content/themes/wdw/images/invites/conn-igj.jpeg");
 }
 .env-card.env-card--WDWRetreat.env-card--PictureRight .bg-img-contain .bg-img.woman-jacket {
-  background-image: url("/assets/img/content/wdw/woman-blushjacket.jpeg");
+  background-image: url("/wp-content/themes/wdw/images/invites/woman-blushjacket.jpeg");
 }
 .env-card.env-card--WDWRetreat.env-card--PictureRight .border {
   grid-area: 1/1/2/3;
@@ -3922,7 +3922,7 @@ table.dotlead td:last-child {padding-left: .2em; width: 36%;}
   width: 100%;
 }
 .env-card.env-card--WDWRetreat.env-card--PictureMask .detailbox #mask-bg {
-  background-image: url("/assets/img/content/wdw/conn-igj.jpeg");
+  background-image: url("/wp-content/themes/wdw/images/invites/conn-igj.jpeg");
   background-size: cover;
   background-position: center;
   box-shadow: inset 2px 2px 0px white, inset -2px -2px 0px white;
