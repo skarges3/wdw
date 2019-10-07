@@ -101,7 +101,8 @@ class NewsletterStatistics extends NewsletterModule {
                 // Track an action as an email read and not a click
                 $this->update_open_value(self::SENT_READ, $user_id, $email_id, $ip);
             }
-
+            
+            $this->update_user_ip($user, $ip);
             $this->update_user_last_activity($user);
 
             header('Location: ' . apply_filters('newsletter_redirect_url', $url, $email, $user));
@@ -194,7 +195,7 @@ class NewsletterStatistics extends NewsletterModule {
         $this->relink_email_token = $email_token;
 
         $this->logger->debug('Relink with token: ' . $email_token);
-        $text = preg_replace_callback('/(<[aA][^>]+href[\s]*=[\s]*["\'])([^>"\']+)(["\'][^>]*>)(.*?)(<\/[Aa]>)/s', array($this, 'relink_callback'), $text);
+        $text = preg_replace_callback('/(<[aA][^>]+href[\s]*=[\s]*["\'])([^>"\']+)(["\'][^>]*>)(.*?)(<\/[Aa]>)/is', array($this, 'relink_callback'), $text);
 
         $signature = md5($email_id . $user_id . $email_token);
         $text = str_replace('</body>', '<img width="1" height="1" alt="" src="' . home_url('/') . '?noti=' . urlencode(base64_encode($email_id . ';' . $user_id . ';' . $signature)) . '"/></body>', $text);
@@ -205,7 +206,12 @@ class NewsletterStatistics extends NewsletterModule {
         $href = trim(str_replace('&amp;', '&', $matches[2]));
 
         // Do not replace the tracking or subscription/unsubscription links.
-        if (strpos($href, '/newsletter/') !== false) {
+        //if (strpos($href, '/newsletter/') !== false) {
+        //    return $matches[0];
+        //}
+        
+        // Do not replace URL which are tags (special case for ElasticEmail)
+        if (strpos($href, '{') === 0) {
             return $matches[0];
         }
 

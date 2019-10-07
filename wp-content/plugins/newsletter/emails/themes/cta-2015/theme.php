@@ -69,7 +69,7 @@ $social_icon_url = plugins_url('newsletter') . '/emails/themes/cta-2015/images';
                             <td style="font-size: 15px" align="center">
                                 <h1>Super catching title</h1>
                                 <p>
-                                    Here you should introduce your incredible offer. Remeber the golden rule: write
+                                    Here you should introduce your incredible offer. Remember the golden rule: write
                                     something useful for your readers, not for yourself.
                                 </p>
                                 <p>

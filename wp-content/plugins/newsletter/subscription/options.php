@@ -72,7 +72,7 @@ if ($controls->is_action()) {
             $addresses = array();
             foreach ($users as &$user) {
                 $addresses[] = $user->email;
-                $res = $module->mail($user->email, $module->replace($module->options['confirmation_subject']), $module->replace($module->options['confirmation_message'], $user));
+                $res = $module->send_message('confirmation', $user);
                 if (!$res) {
                     $controls->errors = 'The email address ' . $user->email . ' failed.';
                     break;
@@ -93,7 +93,7 @@ if ($controls->is_action()) {
             $addresses = array();
             foreach ($users as $user) {
                 $addresses[] = $user->email;
-                $res = $module->mail($user->email, $module->replace($module->options['confirmed_subject']), $module->replace($module->options['confirmed_message'], $user));
+                $res = $module->send_message('confirmed', $user);
                 if (!$res) {
                     $controls->errors = 'The email address ' . $user->email . ' failed.';
                     break;
@@ -169,7 +169,7 @@ if ($controls->is_action()) {
                         </tr>
                     </table>
                     <?php } else { ?>
-                    <p>Switch to your main language to manage these options.</p>
+                    <p>Switch to "All languages" to manage these options.</p>
                     <?php } ?>
                     
                 </div>
@@ -267,7 +267,7 @@ if ($controls->is_action()) {
                                 <?php _e('Welcome email', 'newsletter') ?>
                             </th>
                             <td>
-                                <?php $controls->email('confirmed', 'wordpress', true); ?>
+                                <?php $controls->email('confirmed', 'wordpress', $is_all_languages); ?>
                                 <br>
                                 <?php $controls->button('test-confirmed', 'Send a test'); ?>
                             </td>

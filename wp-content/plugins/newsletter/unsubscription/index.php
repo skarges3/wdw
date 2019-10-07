@@ -81,7 +81,7 @@ if (!$controls->is_action()) {
                         <tr>
                             <th><?php _e('Goodbye email', 'newsletter') ?></th>
                             <td>
-                                <?php $controls->email('unsubscribed', 'wordpress', true, array('editor_height'=>250)); ?>
+                                <?php $controls->email('unsubscribed', 'wordpress', $is_all_languages, array('editor_height'=>250)); ?>
                                 <p class="description">
 
                                 </p>

@@ -32,10 +32,10 @@ $this_type = get_queried_object();
                 the_post();
                 get_template_part('content', 'initiative-intro');
             } ?>
-        </div>
+        </div><h2 style="margin-bottom: 0; clear: both;">Our Promise</h2>
         <?php
         if (!empty($this_type)){
-            ?><div class="initiative-footer grid-100 tablet-grid-100 mobile-grid-100"><?php
+            ?><div class="initiative-footer grid-100 tablet-grid-100 mobile-grid-100" style="padding: 30px 0;"><?php
             echo apply_filters('the_content', get_metadata('initiative_type', $this_type->term_id, 'footer',true));
             ?></div><?php
         }

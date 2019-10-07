@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,14 +23,11 @@
  * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
 
-abstract class Ai1wm_Database {
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Kangaroos cannot jump here' );
+}
 
-	/**
-	 * Number of queries per transaction
-	 *
-	 * @var int
-	 */
-	const QUERIES_PER_TRANSACTION = 1000;
+abstract class Ai1wm_Database {
 
 	/**
 	 * WordPress database handler
@@ -119,9 +116,23 @@ abstract class Ai1wm_Database {
 	/**
 	 * Visual Composer
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	protected $visual_composer = false;
+
+	/**
+	 * BeTheme Responsive
+	 *
+	 * @var boolean
+	 */
+	protected $betheme_responsive = false;
+
+	/**
+	 * Optimize Press
+	 *
+	 * @var boolean
+	 */
+	protected $optimize_press = false;
 
 	/**
 	 * Constructor
@@ -134,7 +145,7 @@ abstract class Ai1wm_Database {
 		// Check Microsoft SQL Server support
 		if ( is_resource( $this->wpdb->dbh ) ) {
 			if ( get_resource_type( $this->wpdb->dbh ) === 'SQL Server Connection' ) {
-				throw new Exception(
+				throw new Ai1wm_Database_Exception(
 					'Your WordPress installation uses Microsoft SQL Server. ' .
 					'In order to use All in One WP Migration, please change your installation to MySQL and try again. ' .
 					'<a href="https://help.servmask.com/knowledgebase/microsoft-sql-server/" target="_blank">Technical details</a>'
@@ -160,8 +171,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set old table prefixes
 	 *
-	 * @param  array $prefixes List of table prefixes
-	 * @return Ai1wm_Database
+	 * @param  array  $prefixes List of table prefixes
+	 * @return object
 	 */
 	public function set_old_table_prefixes( $prefixes ) {
 		$this->old_table_prefixes = $prefixes;
@@ -181,8 +192,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set new table prefixes
 	 *
-	 * @param  array $prefixes List of table prefixes
-	 * @return Ai1wm_Database
+	 * @param  array  $prefixes List of table prefixes
+	 * @return object
 	 */
 	public function set_new_table_prefixes( $prefixes ) {
 		$this->new_table_prefixes = $prefixes;
@@ -202,8 +213,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set old column prefixes
 	 *
-	 * @param  array $prefixes List of column prefixes
-	 * @return Ai1wm_Database
+	 * @param  array  $prefixes List of column prefixes
+	 * @return object
 	 */
 	public function set_old_column_prefixes( $prefixes ) {
 		$this->old_column_prefixes = $prefixes;
@@ -223,8 +234,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set new column prefixes
 	 *
-	 * @param  array $prefixes List of column prefixes
-	 * @return Ai1wm_Database
+	 * @param  array  $prefixes List of column prefixes
+	 * @return object
 	 */
 	public function set_new_column_prefixes( $prefixes ) {
 		$this->new_column_prefixes = $prefixes;
@@ -244,8 +255,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set old replace values
 	 *
-	 * @param  array $values List of values
-	 * @return Ai1wm_Database
+	 * @param  array  $values List of values
+	 * @return object
 	 */
 	public function set_old_replace_values( $values ) {
 		$this->old_replace_values = $values;
@@ -265,8 +276,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set new replace values
 	 *
-	 * @param  array $values List of values
-	 * @return Ai1wm_Database
+	 * @param  array  $values List of values
+	 * @return object
 	 */
 	public function set_new_replace_values( $values ) {
 		$this->new_replace_values = $values;
@@ -286,8 +297,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set old replace raw values
 	 *
-	 * @param  array $values List of values
-	 * @return Ai1wm_Database
+	 * @param  array  $values List of values
+	 * @return object
 	 */
 	public function set_old_replace_raw_values( $values ) {
 		$this->old_replace_raw_values = $values;
@@ -307,8 +318,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set new replace raw values
 	 *
-	 * @param  array $values List of values
-	 * @return Ai1wm_Database
+	 * @param  array  $values List of values
+	 * @return object
 	 */
 	public function set_new_replace_raw_values( $values ) {
 		$this->new_replace_raw_values = $values;
@@ -328,12 +339,12 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set table where clauses
 	 *
-	 * @param  string $table   Table name
-	 * @param  array  $clauses Table clauses
-	 * @return Ai1wm_Database
+	 * @param  string $table_name    Table name
+	 * @param  array  $where_clauses Table clauses
+	 * @return object
 	 */
-	public function set_table_where_clauses( $table, $clauses ) {
-		$this->table_where_clauses[ strtolower( $table ) ] = $clauses;
+	public function set_table_where_clauses( $table_name, $where_clauses ) {
+		$this->table_where_clauses[ strtolower( $table_name ) ] = $where_clauses;
 
 		return $this;
 	}
@@ -341,12 +352,12 @@ abstract class Ai1wm_Database {
 	/**
 	 * Get table where clauses
 	 *
-	 * @param  string $table Table name
+	 * @param  string $table_name Table name
 	 * @return array
 	 */
-	public function get_table_where_clauses( $table ) {
-		if ( isset( $this->table_where_clauses[ strtolower( $table ) ] ) ) {
-			return $this->table_where_clauses[ strtolower( $table ) ];
+	public function get_table_where_clauses( $table_name ) {
+		if ( isset( $this->table_where_clauses[ strtolower( $table_name ) ] ) ) {
+			return $this->table_where_clauses[ strtolower( $table_name ) ];
 		}
 
 		return array();
@@ -355,13 +366,13 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set table prefix columns
 	 *
-	 * @param  string $table   Table name
-	 * @param  array  $columns Table columns
-	 * @return Ai1wm_Database
+	 * @param  string $table_name     Table name
+	 * @param  array  $prefix_columns Table columns
+	 * @return object
 	 */
-	public function set_table_prefix_columns( $table, $columns ) {
-		foreach ( $columns as $column ) {
-			$this->table_prefix_columns[ strtolower( $table ) ][ strtolower( $column ) ] = true;
+	public function set_table_prefix_columns( $table_name, $prefix_columns ) {
+		foreach ( $prefix_columns as $column_name ) {
+			$this->table_prefix_columns[ strtolower( $table_name ) ][ strtolower( $column_name ) ] = true;
 		}
 
 		return $this;
@@ -370,12 +381,12 @@ abstract class Ai1wm_Database {
 	/**
 	 * Get table prefix columns
 	 *
-	 * @param  string $table Table name
+	 * @param  string $table_name Table name
 	 * @return array
 	 */
-	public function get_table_prefix_columns( $table ) {
-		if ( isset( $this->table_prefix_columns[ strtolower( $table ) ] ) ) {
-			return $this->table_prefix_columns[ strtolower( $table ) ];
+	public function get_table_prefix_columns( $table_name ) {
+		if ( isset( $this->table_prefix_columns[ strtolower( $table_name ) ] ) ) {
+			return $this->table_prefix_columns[ strtolower( $table_name ) ];
 		}
 
 		return array();
@@ -384,8 +395,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set include table prefixes
 	 *
-	 * @param  array $prefixes List of table prefixes
-	 * @return Ai1wm_Database
+	 * @param  array  $prefixes List of table prefixes
+	 * @return object
 	 */
 	public function set_include_table_prefixes( $prefixes ) {
 		$this->include_table_prefixes = $prefixes;
@@ -405,8 +416,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set exclude table prefixes
 	 *
-	 * @param  array $prefixes List of table prefixes
-	 * @return Ai1wm_Database
+	 * @param  array  $prefixes List of table prefixes
+	 * @return object
 	 */
 	public function set_exclude_table_prefixes( $prefixes ) {
 		$this->exclude_table_prefixes = $prefixes;
@@ -426,8 +437,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set atomic tables
 	 *
-	 * @param  array $tables List of tables
-	 * @return Ai1wm_Database
+	 * @param  array  $tables List of tables
+	 * @return object
 	 */
 	public function set_atomic_tables( $tables ) {
 		$this->atomic_tables = $tables;
@@ -447,8 +458,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set Visual Composer
 	 *
-	 * @param  bool $active Is Visual Composer Active?
-	 * @return Ai1wm_Database
+	 * @param  boolean $active Is Visual Composer Active?
+	 * @return object
 	 */
 	public function set_visual_composer( $active ) {
 		$this->visual_composer = $active;
@@ -459,10 +470,52 @@ abstract class Ai1wm_Database {
 	/**
 	 * Get Visual Composer
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function get_visual_composer() {
 		return $this->visual_composer;
+	}
+
+	/**
+	 * Set BeTheme Responsive
+	 *
+	 * @param  boolean $active Is BeTheme Responsive Active?
+	 * @return object
+	 */
+	public function set_betheme_responsive( $active ) {
+		$this->betheme_responsive = $active;
+
+		return $this;
+	}
+
+	/**
+	 * Get BeTheme Responsive
+	 *
+	 * @return boolean
+	 */
+	public function get_betheme_responsive() {
+		return $this->betheme_responsive;
+	}
+
+	/**
+	 * Set Optimize Press
+	 *
+	 * @param  boolean $active Is Optimize Press Active?
+	 * @return object
+	 */
+	public function set_optimize_press( $active ) {
+		$this->optimize_press = $active;
+
+		return $this;
+	}
+
+	/**
+	 * Get Optimize Press
+	 *
+	 * @return boolean
+	 */
+	public function get_optimize_press() {
+		return $this->optimize_press;
 	}
 
 	/**
@@ -527,12 +580,13 @@ abstract class Ai1wm_Database {
 	/**
 	 * Export database into a file
 	 *
-	 * @param  string $file_name    Name of file
-	 * @param  int    $table_index  Table index
-	 * @param  int    $table_offset Table offset
-	 * @return bool
+	 * @param  string  $file_name    File name
+	 * @param  integer $table_index  Table index
+	 * @param  integer $table_offset Table offset
+	 * @param  integer $table_rows   Table rows
+	 * @return boolean
 	 */
-	public function export( $file_name, &$table_index = 0, &$table_offset = 0 ) {
+	public function export( $file_name, &$table_index = 0, &$table_offset = 0, &$table_rows = 0 ) {
 		// Set file handler
 		$file_handler = ai1wm_open( $file_name, 'ab' );
 
@@ -593,6 +647,12 @@ abstract class Ai1wm_Database {
 			// Get primary keys
 			$primary_keys = $this->get_primary_keys( $table_name );
 
+			// Get table columns
+			$table_columns = $this->get_column_types( $table_name );
+
+			// Get prefix columns
+			$prefix_columns = $this->get_table_prefix_columns( $table_name );
+
 			do {
 
 				// Set query
@@ -615,7 +675,7 @@ abstract class Ai1wm_Database {
 					$table_where = implode( ' AND ', $table_where );
 
 					// Set query with offset and rows count
-					$query = sprintf( 'SELECT t1.* FROM `%s` AS t1 JOIN (SELECT %s FROM `%s` WHERE %s ORDER BY %s LIMIT %d, %d) AS t2 USING (%s)', $table_name, $table_keys, $table_name, $table_where, $table_keys, $table_offset, 1000, $table_keys );
+					$query = sprintf( 'SELECT t1.* FROM `%s` AS t1 JOIN (SELECT %s FROM `%s` WHERE %s ORDER BY %s LIMIT %d, %d) AS t2 USING (%s)', $table_name, $table_keys, $table_name, $table_where, $table_keys, $table_offset, AI1WM_MAX_SELECT_RECORDS, $table_keys );
 
 				} else {
 
@@ -631,11 +691,8 @@ abstract class Ai1wm_Database {
 					$table_where = implode( ' AND ', $table_where );
 
 					// Set query with offset and rows count
-					$query = sprintf( 'SELECT * FROM `%s` WHERE %s ORDER BY %s LIMIT %d, %d', $table_name, $table_where, $table_keys, $table_offset, 1000 );
+					$query = sprintf( 'SELECT * FROM `%s` WHERE %s ORDER BY %s LIMIT %d, %d', $table_name, $table_where, $table_keys, $table_offset, AI1WM_MAX_SELECT_RECORDS );
 				}
-
-				// Apply additional table prefix columns
-				$columns = $this->get_table_prefix_columns( $table_name );
 
 				// Run SQL query
 				$result = $this->query( $query );
@@ -657,19 +714,18 @@ abstract class Ai1wm_Database {
 					while ( $row = $this->fetch_assoc( $result ) ) {
 
 						// Write start transaction
-						if ( $table_offset % Ai1wm_Database::QUERIES_PER_TRANSACTION === 0 ) {
+						if ( $table_offset % AI1WM_MAX_TRANSACTION_QUERIES === 0 ) {
 							ai1wm_write( $file_handler, "START TRANSACTION;\n" );
 						}
 
 						$items = array();
 						foreach ( $row as $key => $value ) {
 							// Replace table prefix columns
-							if ( isset( $columns[ strtolower( $key ) ] ) ) {
+							if ( isset( $prefix_columns[ strtolower( $key ) ] ) ) {
 								$value = $this->replace_column_prefixes( $value, 0 );
 							}
 
-							// Replace table values
-							$items[] = is_null( $value ) ? 'NULL' : "'" . $this->escape( $value ) . "'";
+							$items[] = $this->prepare_table_values( $value, $table_columns[ strtolower( $key ) ] );
 						}
 
 						// Set table values
@@ -684,15 +740,18 @@ abstract class Ai1wm_Database {
 						// Set current table offset
 						$table_offset++;
 
+						// Set current table rows
+						$table_rows++;
+
 						// Write end of transaction
-						if ( $table_offset % Ai1wm_Database::QUERIES_PER_TRANSACTION === 0 ) {
+						if ( $table_offset % AI1WM_MAX_TRANSACTION_QUERIES === 0 ) {
 							ai1wm_write( $file_handler, "COMMIT;\n" );
 						}
 					}
 				} else {
 
 					// Write end of transaction
-					if ( $table_offset % Ai1wm_Database::QUERIES_PER_TRANSACTION !== 0 ) {
+					if ( $table_offset % AI1WM_MAX_TRANSACTION_QUERIES !== 0 ) {
 						ai1wm_write( $file_handler, "COMMIT;\n" );
 					}
 
@@ -725,9 +784,9 @@ abstract class Ai1wm_Database {
 	/**
 	 * Import database from a file
 	 *
-	 * @param  string $file_name    Name of file
-	 * @param  int    $query_offset Query offset
-	 * @return bool
+	 * @param  string  $file_name    File name
+	 * @param  integer $query_offset Query offset
+	 * @return boolean
 	 */
 	public function import( $file_name, &$query_offset = 0 ) {
 		// Set max allowed packet
@@ -763,29 +822,43 @@ abstract class Ai1wm_Database {
 					// Check max allowed packet
 					if ( strlen( $query ) <= $max_allowed_packet ) {
 
-						// Replace table prefixes
-						$query = $this->replace_table_prefixes( $query );
+						// Skip cache query
+						if ( ! $this->is_cache_query( $query ) ) {
 
-						// Replace table collations
-						$query = $this->replace_table_collations( $query );
+							// Replace table prefixes
+							$query = $this->replace_table_prefixes( $query );
 
-						// Replace table values
-						$query = $this->replace_table_values( $query );
+							// Replace table collations
+							$query = $this->replace_table_collations( $query );
 
-						// Replace raw values
-						$query = $this->replace_raw_values( $query );
+							// Replace table values
+							$query = $this->replace_table_values( $query );
 
-						// Run SQL query
-						$this->query( $query );
-
-						// Replace table engines (Azure)
-						if ( $this->errno() === 1030 ) {
-
-							// Replace table engines
-							$query = $this->replace_table_engines( $query );
+							// Replace raw values
+							$query = $this->replace_raw_values( $query );
 
 							// Run SQL query
 							$this->query( $query );
+
+							// Replace table engines (Azure)
+							if ( $this->errno() === 1030 ) {
+
+								// Replace table engines
+								$query = $this->replace_table_engines( $query );
+
+								// Run SQL query
+								$this->query( $query );
+							}
+
+							// Replace table row format (MyISAM and InnoDB)
+							if ( $this->errno() === 1071 || $this->errno() === 1709 ) {
+
+								// Replace table row format
+								$query = $this->replace_table_row_format( $query );
+
+								// Run SQL query
+								$this->query( $query );
+							}
 						}
 
 						// Set query offset
@@ -848,7 +921,7 @@ abstract class Ai1wm_Database {
 	/**
 	 * Get MySQL max allowed packet
 	 *
-	 * @return int
+	 * @return integer
 	 */
 	protected function get_max_allowed_packet() {
 		$result = $this->query( "SHOW VARIABLES LIKE 'max_allowed_packet'" );
@@ -958,6 +1031,29 @@ abstract class Ai1wm_Database {
 	}
 
 	/**
+	 * Get MySQL column types
+	 *
+	 * @param  string $table_name Table name
+	 * @return array
+	 */
+	protected function get_column_types( $table_name ) {
+		$column_types = array();
+
+		// Get column types
+		$result = $this->query( "SHOW COLUMNS FROM `{$table_name}`" );
+		while ( $row = $this->fetch_assoc( $result ) ) {
+			if ( isset( $row['Field'] ) ) {
+				$column_types[ strtolower( $row['Field'] ) ] = $row['Type'];
+			}
+		}
+
+		// Close result cursor
+		$this->free_result( $result );
+
+		return $column_types;
+	}
+
+	/**
 	 * Replace table prefixes
 	 *
 	 * @param  string $input    Table value
@@ -972,7 +1068,7 @@ abstract class Ai1wm_Database {
 		// Replace first occurance at a specified position
 		if ( $position !== false ) {
 			for ( $i = 0; $i < count( $search ); $i++ ) {
-				$current = stripos( $input, $search[ $i ] );
+				$current = stripos( $input, $search[ $i ], $position );
 				if ( $current === $position ) {
 					$input = substr_replace( $input, $replace[ $i ], $current, strlen( $search[ $i ] ) );
 				}
@@ -981,7 +1077,6 @@ abstract class Ai1wm_Database {
 			return $input;
 		}
 
-		// Replace all occurrences
 		return str_ireplace( $search, $replace, $input );
 	}
 
@@ -1000,7 +1095,7 @@ abstract class Ai1wm_Database {
 		// Replace first occurance at a specified position
 		if ( $position !== false ) {
 			for ( $i = 0; $i < count( $search ); $i++ ) {
-				$current = stripos( $input, $search[ $i ] );
+				$current = stripos( $input, $search[ $i ], $position );
 				if ( $current === $position ) {
 					$input = substr_replace( $input, $replace[ $i ], $current, strlen( $search[ $i ] ) );
 				}
@@ -1009,20 +1104,24 @@ abstract class Ai1wm_Database {
 			return $input;
 		}
 
-		// Replace all occurrences
 		return str_ireplace( $search, $replace, $input );
 	}
 
 	/**
 	 * Replace table values
 	 *
-	 * @param  string  $input Table value
+	 * @param  string $input Table value
 	 * @return string
 	 */
 	protected function replace_table_values( $input ) {
 		// Replace base64 encoded values (Visual Composer)
 		if ( $this->get_visual_composer() ) {
-			$input = preg_replace_callback( '/\[vc_raw_html\](.+?)\[\/vc_raw_html\]/S', array( $this, 'replace_base64_values_callback' ), $input );
+			$input = preg_replace_callback( '/\[vc_raw_html\]([a-zA-Z0-9\/+]+={0,2})\[\/vc_raw_html\]/S', array( $this, 'replace_visual_composer_values_callback' ), $input );
+		}
+
+		// Replace base64 encoded values (BeTheme Responsive and Optimize Press)
+		if ( $this->get_betheme_responsive() || $this->get_optimize_press() ) {
+			$input = preg_replace_callback( "/'([a-zA-Z0-9\/+]+={0,2})'/S", array( $this, 'replace_base64_values_callback' ), $input );
 		}
 
 		// Replace serialized values
@@ -1037,37 +1136,68 @@ abstract class Ai1wm_Database {
 	}
 
 	/**
-	 * Replace table values (callback)
+	 * Replace base64 values callback (Visual Composer)
+	 *
+	 * @param  array  $matches List of matches
+	 * @return string
+	 */
+	protected function replace_visual_composer_values_callback( $matches ) {
+		// Validate base64 data
+		if ( Ai1wm_Database_Utility::base64_validate( $matches[1] ) ) {
+
+			// Decode base64 characters
+			$matches[1] = Ai1wm_Database_Utility::base64_decode( $matches[1] );
+
+			// Replace values
+			$matches[1] = Ai1wm_Database_Utility::replace_values( $this->get_old_replace_values(), $this->get_new_replace_values(), $matches[1] );
+
+			// Encode base64 characters
+			$matches[1] = Ai1wm_Database_Utility::base64_encode( $matches[1] );
+		}
+
+		return '[vc_raw_html]' . $matches[1] . '[/vc_raw_html]';
+	}
+
+	/**
+	 * Replace base64 values callback (BeTheme Responsive and Optimize Press)
+	 *
+	 * @param  array  $matches List of matches
+	 * @return string
+	 */
+	protected function replace_base64_values_callback( $matches ) {
+		// Validate base64 data
+		if ( Ai1wm_Database_Utility::base64_validate( $matches[1] ) ) {
+
+			// Decode base64 characters
+			$matches[1] = Ai1wm_Database_Utility::base64_decode( $matches[1] );
+
+			// Replace serialized values
+			$matches[1] = Ai1wm_Database_Utility::replace_serialized_values( $this->get_old_replace_values(), $this->get_new_replace_values(), $matches[1] );
+
+			// Encode base64 characters
+			$matches[1] = Ai1wm_Database_Utility::base64_encode( $matches[1] );
+		}
+
+		return "'" . $matches[1] . "'";
+	}
+
+	/**
+	 * Replace table values callback
 	 *
 	 * @param  array  $matches List of matches
 	 * @return string
 	 */
 	protected function replace_table_values_callback( $matches ) {
 		// Unescape MySQL special characters
-		$input = Ai1wm_Database_Utility::unescape_mysql( $matches[1] );
+		$matches[1] = Ai1wm_Database_Utility::unescape_mysql( $matches[1] );
 
 		// Replace serialized values
-		$input = Ai1wm_Database_Utility::replace_serialized_values( $this->get_old_replace_values(), $this->get_new_replace_values(), $input );
+		$matches[1] = Ai1wm_Database_Utility::replace_serialized_values( $this->get_old_replace_values(), $this->get_new_replace_values(), $matches[1] );
 
 		// Escape MySQL special characters
-		return "'" . Ai1wm_Database_Utility::escape_mysql( $input ) . "'";
-	}
+		$matches[1] = Ai1wm_Database_Utility::escape_mysql( $matches[1] );
 
-	/**
-	 * Replace base64 values (callback)
-	 *
-	 * @param  array  $matches List of matches
-	 * @return string
-	 */
-	protected function replace_base64_values_callback( $matches ) {
-		// Decode base64 characters
-		$input = rawurldecode( base64_decode( strip_tags( $matches[1] ) ) );
-
-		// Replace serialized values
-		$input = Ai1wm_Database_Utility::replace_values( $this->get_old_replace_values(), $this->get_new_replace_values(), $input );
-
-		// Encode base64 characters
-		return '[vc_raw_html]' . base64_encode( rawurlencode( $input ) ) . '[/vc_raw_html]';
+		return "'" . $matches[1] . "'";
 	}
 
 	/**
@@ -1122,10 +1252,40 @@ abstract class Ai1wm_Database {
 	}
 
 	/**
+	 * Check whether input is transient query
+	 *
+	 * @param  string  $input SQL statement
+	 * @return boolean
+	 */
+	protected function is_transient_query( $input ) {
+		return strpos( $input, "'_transient_" ) !== false;
+	}
+
+	/**
+	 * Check whether input is site transient query
+	 *
+	 * @param  string  $input SQL statement
+	 * @return boolean
+	 */
+	protected function is_site_transient_query( $input ) {
+		return strpos( $input, "'_site_transient_" ) !== false;
+	}
+
+	/**
+	 * Check whether input is WooCommerce session query
+	 *
+	 * @param  string  $input SQL statement
+	 * @return boolean
+	 */
+	protected function is_wc_session_query( $input ) {
+		return strpos( $input, "'_wc_session_" ) !== false;
+	}
+
+	/**
 	 * Check whether input is START TRANSACTION query
 	 *
-	 * @param  string $input SQL statement
-	 * @return bool
+	 * @param  string  $input SQL statement
+	 * @return boolean
 	 */
 	protected function is_start_transaction_query( $input ) {
 		return strpos( $input, 'START TRANSACTION' ) === 0;
@@ -1134,8 +1294,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Check whether input is COMMIT query
 	 *
-	 * @param  string $input SQL statement
-	 * @return bool
+	 * @param  string  $input SQL statement
+	 * @return boolean
 	 */
 	protected function is_commit_query( $input ) {
 		return strpos( $input, 'COMMIT' ) === 0;
@@ -1144,8 +1304,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Check whether input is DROP TABLE query
 	 *
-	 * @param  string $input SQL statement
-	 * @return bool
+	 * @param  string  $input SQL statement
+	 * @return boolean
 	 */
 	protected function is_drop_table_query( $input ) {
 		return strpos( $input, 'DROP TABLE' ) === 0;
@@ -1154,8 +1314,8 @@ abstract class Ai1wm_Database {
 	/**
 	 * Check whether input is CREATE TABLE query
 	 *
-	 * @param  string $input SQL statement
-	 * @return bool
+	 * @param  string  $input SQL statement
+	 * @return boolean
 	 */
 	protected function is_create_table_query( $input ) {
 		return strpos( $input, 'CREATE TABLE' ) === 0;
@@ -1164,19 +1324,40 @@ abstract class Ai1wm_Database {
 	/**
 	 * Check whether input is INSERT INTO query
 	 *
-	 * @param  string $input SQL statement
-	 * @param  string $table Table name (case insensitive)
-	 * @return bool
+	 * @param  string  $input      SQL statement
+	 * @param  string  $table_name Table name (case insensitive)
+	 * @return boolean
 	 */
-	protected function is_insert_into_query( $input, $table ) {
-		return stripos( $input, sprintf( 'INSERT INTO `%s`', $table ) ) === 0;
+	protected function is_insert_into_query( $input, $table_name ) {
+		return stripos( $input, sprintf( 'INSERT INTO `%s`', $table_name ) ) === 0;
+	}
+
+	/**
+	 * Check whether input is cache query
+	 *
+	 * @param  string  $input SQL statement
+	 * @return boolean
+	 */
+	public function is_cache_query( $input ) {
+		$cache = false;
+
+		// Skip cache based on table query
+		switch ( true ) {
+			case $this->is_transient_query( $input ):
+			case $this->is_site_transient_query( $input ):
+			case $this->is_wc_session_query( $input ):
+				$cache = true;
+				break;
+		}
+
+		return $cache;
 	}
 
 	/**
 	 * Check whether input is atomic query
 	 *
-	 * @param  string $input SQL statement
-	 * @return bool
+	 * @param  string  $input SQL statement
+	 * @return boolean
 	 */
 	protected function is_atomic_query( $input ) {
 		$atomic = false;
@@ -1264,6 +1445,26 @@ abstract class Ai1wm_Database {
 	}
 
 	/**
+	 * Replace table row format
+	 *
+	 * @param  string $input SQL statement
+	 * @return string
+	 */
+	protected function replace_table_row_format( $input ) {
+		// Set table replace row format
+		$search  = array(
+			'ENGINE=InnoDB',
+			'ENGINE=MyISAM',
+		);
+		$replace = array(
+			'ENGINE=InnoDB ROW_FORMAT=DYNAMIC',
+			'ENGINE=MyISAM ROW_FORMAT=DYNAMIC',
+		);
+
+		return str_ireplace( $search, $replace, $input );
+	}
+
+	/**
 	 * Returns header for dump file
 	 *
 	 * @return string
@@ -1287,6 +1488,39 @@ abstract class Ai1wm_Database {
 	}
 
 	/**
+	 * Prepare table values
+	 *
+	 * @param  string  $input       Table value
+	 * @param  integer $column_type Column type
+	 * @return string
+	 */
+	protected function prepare_table_values( $input, $column_type ) {
+		if ( is_null( $input ) ) {
+			return 'NULL';
+		} elseif ( stripos( $column_type, 'tinyint' ) === 0 ) {
+			return $input;
+		} elseif ( stripos( $column_type, 'smallint' ) === 0 ) {
+			return $input;
+		} elseif ( stripos( $column_type, 'mediumint' ) === 0 ) {
+			return $input;
+		} elseif ( stripos( $column_type, 'int' ) === 0 ) {
+			return $input;
+		} elseif ( stripos( $column_type, 'bigint' ) === 0 ) {
+			return $input;
+		} elseif ( stripos( $column_type, 'float' ) === 0 ) {
+			return $input;
+		} elseif ( stripos( $column_type, 'double' ) === 0 ) {
+			return $input;
+		} elseif ( stripos( $column_type, 'decimal' ) === 0 ) {
+			return $input;
+		} elseif ( stripos( $column_type, 'bit' ) === 0 ) {
+			return $input;
+		}
+
+		return "'" . $this->escape( $input ) . "'";
+	}
+
+	/**
 	 * Run MySQL query
 	 *
 	 * @param  string   $input SQL query
@@ -1305,7 +1539,7 @@ abstract class Ai1wm_Database {
 	/**
 	 * Return the error code for the most recent function call
 	 *
-	 * @return int
+	 * @return integer
 	 */
 	abstract public function errno();
 
@@ -1343,7 +1577,7 @@ abstract class Ai1wm_Database {
 	 * Return the number for rows from MySQL results
 	 *
 	 * @param  resource $result MySQL resource
-	 * @return int
+	 * @return integer
 	 */
 	abstract public function num_rows( $result );
 
@@ -1351,7 +1585,7 @@ abstract class Ai1wm_Database {
 	 * Free MySQL result memory
 	 *
 	 * @param  resource $result MySQL resource
-	 * @return bool
+	 * @return boolean
 	 */
 	abstract public function free_result( $result );
 }

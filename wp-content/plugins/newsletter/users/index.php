@@ -41,6 +41,11 @@ if ($controls->is_action('remove')) {
     unset($controls->data['subscriber_id']);
 }
 
+if ($controls->is_action('delete_selected')) {
+    $r = Newsletter::instance()->delete_user($_POST['ids']);
+    $controls->messages .= $r . ' user(s) deleted';
+}
+
 // We build the query condition
 $where = 'where 1=1';
 $query_args = array();
@@ -114,7 +119,7 @@ $controls->data['search_page'] ++;
     <div id="tnp-heading">
 
         <h2><?php _e('Subscribers', 'newsletter') ?>
-            <a class="tnp-btn-h1" href="?page=newsletter_users_new">+</a>
+            <a class="tnp-btn-h1" href="?page=newsletter_users_new"><?php _e('Add a subscriber', 'newsletter') ?></a>
         </h2>
 
     </div>
@@ -152,12 +157,15 @@ $controls->data['search_page'] ++;
                 <?php $controls->button('last', '»'); ?>
 
                 <?php echo $count ?> <?php _e('subscriber(s) found', 'newsletter') ?>
+                
+                <?php $controls->button_confirm('delete_selected', __('Delete selected', 'newsletter')); ?>
 
             </div>
 
             <table class="widefat">
                 <thead>
                     <tr>
+                        <th><input type="checkbox" onchange="jQuery('input.tnp-selector').prop('checked', this.checked)"</th>
                         <th>Id</th>
                         <th>Email</th>
                         <th><?php _e('Name', 'newsletter') ?></th>
@@ -173,7 +181,7 @@ $controls->data['search_page'] ++;
                 <?php $i = 0; ?>
                 <?php foreach ($list as $s) { ?>
                     <tr class="<?php echo ($i++ % 2 == 0) ? 'alternate' : ''; ?>">
-
+                        <td><input class="tnp-selector" type="checkbox" name="ids[]" value="<?php echo $s->id; ?>"/></td>
                         <td>
                             <?php echo $s->id; ?>
                         </td>
@@ -188,18 +196,7 @@ $controls->data['search_page'] ++;
 
                         <td>
                             <small>
-                                <?php
-                                switch ($s->status) {
-                                    case 'S': _e('NOT CONFIRMED', 'newsletter');
-                                        break;
-                                    case 'C': _e('CONFIRMED', 'newsletter');
-                                        break;
-                                    case 'U': _e('UNSUBSCRIBED', 'newsletter');
-                                        break;
-                                    case 'B': _e('BOUNCED', 'newsletter');
-                                        break;
-                                }
-                                ?>
+                                <?php echo $module->get_user_status_label($s) ?>
                             </small>
                         </td>
 

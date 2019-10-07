@@ -1,77 +1,83 @@
 === Newsletter ===
-Tags: newsletter,email,subscription,mass mail,list build,email marketing,direct mailing,automation,automated,mailing list
+Tags: email, email marketing, newsletter, newsletter subscribers, welcome email, signup forms, contact, lead generation, popup, marketing automation
 Requires at least: 3.4.0
-Tested up to: 4.9.8
-Stable tag: 5.6.7
+Tested up to: 5.2.2
+Stable tag: 6.1.6
 Contributors: satollo,webagile,michael-travan
 
 Add a real newsletter system to your blog. For free. With unlimited newsletters and subscribers.
 
 == Description ==
 
-Newsletter is a **real newsletter system** for your WordPress blog: perfect for list building, you can easily create,
-send and track e-mails, headache-free. It just works out of box!
+Newsletter is a **real newsletter and email marketing system** for your WordPress blog: perfect for list building, you can easily create, send and track e-mails, headache-free. It just works out of box!
+
+= Discover a completely rewritten composer =
+
+We redesigned our drag and drop composer to make your campaign creation even easier. Try it!
 
 = Main Features =
 
-* **Unlimited subscribers** with statistics 
-* **Unlimited newsletter** with tracking
+* **Easy-to-use Drag and drop composer** to build responsive newsletters
+* **Unlimited subscribers** with statistics
+* **Unlimited newsletters** with tracking
 * **Subscription spam check** with domain/ip black lists, Akismet, captcha
 * **Delivery speed** fine control (from 12 emails per hour to as much as your blog can manage)
-* [WPML ready](https://www.thenewsletterplugin.com/documentation/multilanguage)
-* [GDPR ready](https://www.thenewsletterplugin.com/documentation/gdpr-compliancy) 
-* **Multi-list targeting** with list combinations like all in, at least one, not in and so on
-* **Drag and drop composer** with responsive email layout
+* [WPML ready](https://www.thenewsletterplugin.com/documentation/multilanguage), [Polylang ready](https://www.thenewsletterplugin.com/documentation/multilanguage), [Translatepress ready](https://www.thenewsletterplugin.com/documentation/multilanguage)
+* All messages are **fully translatable** from administration panels (no .po/.mo file to edit)
+* [GDPR ready](https://www.thenewsletterplugin.com/documentation/gdpr-compliancy)
+* **Advanced targeting** with lists combinations like all in, at least one, not in and so on
 * Customizable **subscription widget**, **page** or **custom form**
-* Wordpress User Registration **seamless integration**
+* Wordpress Users registration **seamless integration**
 * **Single** And **Double Opt-In** plus privacy checkbox for EU laws compliance
 * **Subscribers lists** to fine-target your campaigns
 * PHP API and REST API for coders and integrations
 * SMTP-Ready 
 * Customizable Themes
-* All messages are **fully translatable** from administration panels (no .po/.mo file to edit)
 * **Status panel** to check your blog mailing capability and configuration
-* **Compatible with every SMTP plugin**: Postman, WP Mail SMTP, Easy WP SMTP, Easy SMTP Mail, WP Mail Bank, ...
+* **Compatible with every SMTP plugin**: Post SMTP (aka Postman), WP Mail SMTP, Easy WP SMTP, Easy SMTP Mail, WP Mail Bank, ...
 * **Subscribers import** from file
 * Newsletter with Html and Text message versions 
 
-= GDPR =
+= Find Us =
 
-The Newsletter Plugin provides all the technical tools needed to achieve GDPR compliancy and 
-we're continuously working to improve them and to give support even for specific 
-use cases.
+Newsletter is a continuously evolving plugin. Stay tuned following us on [Facebook](https://www.facebook.com/thenewsletterplugin/) or [our site](https://www.thenewsletterplugin.com/).
 
-The plugin does not collect users' own subscribers data, nor it has any access to those data: 
-hence, we are not a data processor, so a data processing agreement is not needed.
+= Free Addons =
 
-Anyway if you configure the plugin to use external services (usually an external mail
-delivery service) you should check with that service if some sort of agreement is required.
-
-= Integration with WordPress registration =
-
-* Newsletter subscription check box on standard WordPress registration form
-* Auto confirmation on first login
-* Imports already registered users
-
-= Free Extensions =
-
-Find and install them from the Extensions panel in your blog.
+Improve The Newsletter Plugin with these free addons:
 
 * [WP Registration Integration](https://www.thenewsletterplugin.com/documentation/wpusers-extension) - connects the WordPress standard and custom registration with Newsletter subscription. Optionally imports all registered users as subscribers.
-* [Archive Extension](https://www.thenewsletterplugin.com/documentation/archive-extension) - creates a simple blog page which lists all your sent newsletters
-* [Locked Content Extension](https://www.thenewsletterplugin.com/documentation/locked-content-extension) - open up your premium content only after subscription
+* [Archive](https://www.thenewsletterplugin.com/documentation/archive-extension) - creates a simple blog page which lists all your sent newsletters
+* [Locked Content](https://www.thenewsletterplugin.com/documentation/locked-content-extension) - open up your premium content only after subscription
+* [Newsletter REST API](https://www.thenewsletterplugin.com/developers/dev-newsletter-api) - adds a tier of REST api to integrate with the Newsletter core services
+* BuddyPress integration - subscription opt-in inside BuddyPress signup form
 
-= Professional Extensions =
+(*easily add them from our [Addons panel](https://www.thenewsletterplugin.com/documentation/install-extensions)*)
 
-Need *more power*? Feel *something's missing*? The Newsletter Plugin features can be easily extended through 
-our **premium, professional Extensions**! Let us introduce just two of them : )
+= Professional Addons =
 
-* [Reports Extension](https://www.thenewsletterplugin.com/reports) - improves the internal statistics collection system and provides better reports of data collected for each sent email. Neat.
-* [Automated Extension](https://www.thenewsletterplugin.com/automated) - generates and sends your newsletters using your blog last posts, even custom ones like events or products. Just sit and watch!
-* [WooCommerce Extension](https://www.thenewsletterplugin.com/woocommerce) - subscribe customers to a mailing list and generate product newletters.
-* [Amazon SES and other providers integration](https://www.thenewsletterplugin.com/integrations) - seamlessly integrate Amazon SES and other email service providers with The Newsletter Plugin. Hassle-free.
-* [Contact Form 7 Extension](https://www.thenewsletterplugin.com/documentation/contact-form-7-extension) - integrate the subscription on Contact Form 7 forms
-* [Google Analytics Extension](https://www.thenewsletterplugin.com/google-analytics) - track newsletter links with Google UTM tracking paramaters
+Need *more power*? Feel *something's missing*? The Newsletter Plugin features can be easily extended through our **premium, professional Addons**! Let us introduce just two of them : )
+
+* Extended Composer Blocks - adds new blocks to the drag & drop composer
+* [WooCommerce Integration](https://www.thenewsletterplugin.com/woocommerce) - subscribe customers to a mailing list and generate product newletters.
+* [Reports](https://www.thenewsletterplugin.com/reports) - improves the internal statistics collection system and provides better reports of data collected for each sent email. And retargeting. Neat.
+* [Automated](https://www.thenewsletterplugin.com/automated) - generates and sends your newsletters using your blog last posts, even custom ones like events or products. Just sit and watch!
+* [Autoresponder](https://www.thenewsletterplugin.com/autoresponder) - creates email series to follow up your subscribers
+* [Leads](https://www.thenewsletterplugin.com/leads) adds a fancy subscription popup box or a fixed bar to your website that will boost your conversion rate
+* [Amazon SES and other mail providers integration](https://www.thenewsletterplugin.com/integrations) - seamlessly integrate Amazon SES and other email service providers with The Newsletter Plugin. Hassle-free.
+* [Contact Form 7 Integration](https://www.thenewsletterplugin.com/documentation/contact-form-7-extension) - integrate the subscription on Contact Form 7 forms
+* [Ninja Forms Integration](https://www.thenewsletterplugin.com/documentation/ninjaforms-extension) - integrate the subscription on Ninja Forms
+* [WP Forms Integration](https://www.thenewsletterplugin.com/documentation/wpforms-extension) - integrate the subscription on WP Forms
+* Events Manager and The Events Calendar (By Modern Tribe) integrations - easily add events to your newsletters
+* [Google Analytics](https://www.thenewsletterplugin.com/google-analytics) - track newsletter links with Google UTM tracking paramaters
+* [Subscribe on Comment](https://www.thenewsletterplugin.com/documentation/comments-extension) - adds the subscription option to your blog comment form
+* [Geolocation](https://www.thenewsletterplugin.com/documentation/geolocation-extension) - adds geolocation capability to target subscribers by location
+
+= GDPR =
+
+The Newsletter Plugin provides all the technical tools needed to achieve GDPR compliancy and we're continuously working to improve them and to give support even for specific use cases.
+The plugin does not collect users' own subscribers data, nor it has any access to those data: hence, we are not a data processor, so a data processing agreement is not needed.
+Anyway if you configure the plugin to use external services (usually an external mail delivery service) you should check with that service if some sort of agreement is required.
 
 = Support =
 
@@ -81,15 +87,9 @@ Premium Users with an active license have access to one-to-one support via our [
 
 = Follow Us =
 
-* **Our Official Website** - https://www.thenewsletterplugin.com/ 
-* **Our Facebook Page** - https://www.facebook.com/thenewsletterplugin 
-* **Our Twitter Account** - https://twitter.com/newsletterwp 
-
-== Installation ==
-
-1. Put the plug-in folder into [wordpress_dir]/wp-content/plugins/
-2. Go into the WordPress admin interface and activate the plugin
-3. Optional: go to the options page and configure the plugin
+* **Our Official Website** - [https://www.thenewsletterplugin.com/](https://www.thenewsletterplugin.com/)
+* **Our Facebook Page** - [https://www.facebook.com/thenewsletterplugin](https://www.facebook.com/thenewsletterplugin)
+* **Our Twitter Account** - [https://twitter.com/newsletterwp](https://twitter.com/newsletterwp)
 
 == Frequently Asked Questions ==
 
@@ -102,11 +102,239 @@ Thank you, The Newsletter Team
 
 == Screenshots ==
 
-1. The plugin dashboard
-2. The responsive email Drag & Drop composer
+1. The responsive email Drag & Drop composer
+2. The plugin dashboard
 3. The Reports extension
 
 == Changelog ==
+
+= 6.1.6 =
+
+* Fixed roles management
+
+= 6.1.5 =
+
+* Improved the Gutenberg block
+
+= 6.1.4 =
+
+* Support for Automated theme regeneration
+* Fixed link tracking
+
+= 6.1.3 =
+
+* Fix to avoid third party plugin notices to interfere with the composer
+* NEW! Added subscription block to the Gutenberg editor
+* Code cleanup
+
+= 6.1.2 =
+
+* Added support for roles
+
+= 6.1.1 =
+
+* Added support for custom blocks
+
+= 6.1.0 =
+
+* Fixed data cleanup for non utf8mb4 database. Emoji not saved solved.
+* Small changes to the addons panel
+
+= 6.0.9 =
+
+* Changed the access control for editors
+* Added the convert to utf8mb4 on status panel
+* Small loading improvements
+* API Subscribe activation message fix
+* Fixed debug notice on composer
+* Fixed alt attribute on social block
+
+= 6.0.8 =
+
+* Specific link tracking patch for ElasticEmail
+* Compatibility code for WP 4.7
+* Fixed minimal widget subscribe button
+
+= 6.0.7 =
+
+* Fixed the wrong edit mode of duplicated newsletters
+* Fixed the alignment of small images on composer
+* Added addons update notice on status panel
+
+= 6.0.6 =
+
+* Fixed the textual part saving
+* Fixed required check on extra field of type "select"
+* Fixed old CTA theme text part
+
+= 6.0.5 =
+
+* Fixed repated CSS inclusion in emails
+* Email body weight optimization
+* Fix warning on posts block
+
+= 6.0.4 =
+
+* Fixed the hero block
+
+= 6.0.3 =
+
+* Fixed link and color picker on text block
+
+= 6.0.2 =
+
+* Fixed posts block (link missing)
+
+= 6.0.1 =
+
+* Fixed new newsletter creating panel "proceed" button
+
+= 6.0.0 =
+
+* The Newsletter Plugin Composer - A new revamped drag & drop composer
+* Several improvements and fixes
+
+= 5.9.5 =
+
+* Changed edit and delete icons on composer to avoid conflict with FontAwesome JS
+
+= 5.9.4 =
+
+* Added multi subscriber deletion
+
+= 5.9.3 =
+
+* Fixed multi newsletter deletion warning
+* Fixed privacy checkbox
+* Fixed a link on header warning
+
+= 5.9.2 =
+
+* Fixed a debug notice on subscription page
+
+= 5.9.1 =
+
+* Fixed language support on some shortcodes
+
+= 5.9.0 =
+
+* Fixes on privacy setting with multilanguage plugins
+* Added per language statistics on subscribers statistics panel
+* Added language set action on subscribers maintenance panel
+* Separated the pre confirm and post confirm tokens
+
+= 5.8.9 =
+
+* Global constant to block the media resizing
+* Resized thumbnails folder changed to the uploads folder (newsletter/thumbnails subfolder)
+* Fall back on first post gallery image if the featured image is missing
+* Patch to block third party plugins visual editor injection in out pages
+* Fix media selector button on visual composer
+
+= 5.8.8 =
+
+* Fixed multilanguage text for newsletter page
+* Fixed a profile panel debug notice
+
+= 5.8.7 =
+
+* Tags replacement even on template for messages
+* Fixed profile page labels translation
+* Added text and title color on hero block
+* Added text color on preheader block
+* Fixed giphy options panel
+
+
+= 5.8.6 =
+
+* Improved geolocation support
+* Improved composer image block
+
+= 5.8.5 =
+
+* Reverted back to select2 3.x
+* Added last_ip field for better geolocation
+
+= 5.8.4 =
+
+* Fixed export error
+
+= 5.8.3 =
+
+* Fixed a debug notice with PHP 7.2
+* Status, SMTP and main settings limited to the administrators
+* Fixed buttons overlapping on composer text block
+* Support for the advanced import addons
+
+= 5.8.2 =
+
+* Fixed shortcode check on dedicated page
+
+= 5.8.1 =
+
+* Delivery expected time indicator on status panel
+* Fixed notice on email token missing
+* Addons installation availability on status panel
+* Option to remove the dedicated page check
+
+= 5.8.0 =
+
+* Addons manager compatibility
+
+= 5.7.9 =
+
+* Fixes on add-ons panel
+
+= 5.7.8 =
+
+* Support for the [Add on Manager](https://www.thenewsletterplugin.com/documentation/how-to-install-the-addons-manager) 
+
+= 5.7.7 =
+
+* TinyMCE library fix
+
+= 5.7.6 =
+
+* Included third party's js libraries
+
+= 5.7.5 =
+
+* Init hook priority fix for who uses alternative wp cron
+
+= 5.7.4 =
+
+* Support for first and last name from wp users integration extension
+* CSS fix for few themes
+
+= 5.7.3 =
+
+* Fixed block padding warning
+* Fixed lists display on import panel
+* Fixed lists display on targeting panel when in multilanguage mode
+
+= 5.7.2 =
+
+* Improvements on posts block
+* New hero block layout
+* Transaltepress extension compatibility pack
+
+= 5.7.1 =
+
+* Improvements on posts block
+
+= 5.7.0 =
+
+* Cancellation error message fix
+
+= 5.6.9 =
+
+* Improved separator block for Outlook compatibility
+* Fixed "read more" button on posts block
+* Fixed lists on notification email
+
+= 5.6.8 =
+
+* Removed debug notices
 
 = 5.6.7 =
 

@@ -65,23 +65,27 @@ $themes = $module->themes->get_all_with_data();
             <?php $controls->init(); ?>
             <?php $controls->hidden('theme'); ?>
 
-            <div class="tnp-theme-preview">
-                <p><?php echo _e('Responsive Drag & Drop Composer', 'newsletter') ?></p>
-                <a href="<?php echo $module->get_admin_page_url('composer'); ?>" style="margin-right: 20px; margin-bottom: 20px">
-                    <img src="<?php echo plugins_url('newsletter') . '/emails/themes/composer.gif' ?>" width="420" height="200">
-                </a>
-            </div>
-            
-            <div class="tnp-theme-preview">
-                 <p>&lt;&gt; Raw HTML</p>
-                    <a href="#" onclick="var f = document.getElementById('newsletter-form');
-                            f.act.value = 'theme';
-                            f.elements['options[theme]'].value = 'rawhtml';
-                            f.submit();
-                            return false;" style="margin-right: 20px; margin-bottom: 20px">
-                        <img src="<?php echo plugins_url('newsletter') . '/emails/images/html.png' ?>" width="200" height="200">
-                    </a>
-            </div>
+                <div class="tnp-themes-new">
+
+                    <div class="tnp-theme-preview">
+                        <p><?php echo _e('Responsive Drag & Drop Composer', 'newsletter') ?></p>
+                        <a href="<?php echo $module->get_admin_page_url('composer'); ?>" style="margin-right: 20px; margin-bottom: 20px">
+                            <img src="<?php echo plugins_url('newsletter') . '/emails/images/composer.gif' ?>" width="420" height="200">
+                        </a>
+                    </div>
+
+                    <div class="tnp-theme-preview">
+                         <p>&lt;&gt; Raw HTML</p>
+                            <a href="#" onclick="var f = document.getElementById('newsletter-form');
+                                    f.act.value = 'theme';
+                                    f.elements['options[theme]'].value = 'rawhtml';
+                                    f.submit();
+                                    return false;" style="margin-right: 20px; margin-bottom: 20px">
+                                <img src="<?php echo plugins_url('newsletter') . '/emails/images/html.png' ?>" width="200" height="200">
+                            </a>
+                    </div>
+
+                </div>
 
             <?php foreach ($themes as $key => $data) { ?>
                 <div class="tnp-theme-preview">

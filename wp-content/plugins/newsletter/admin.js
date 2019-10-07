@@ -39,3 +39,8 @@ jQuery.cookie = function(name, value, options) {
     return cookieValue;
   }
 };
+
+function tnp_toggle_schedule() {
+  jQuery("#tnp-schedule-button").toggle();
+  jQuery("#tnp-schedule").toggle();
+}

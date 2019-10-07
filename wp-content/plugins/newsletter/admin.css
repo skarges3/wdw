@@ -1,9 +1,9 @@
+@import url('//fonts.googleapis.com/css?family=Open+Sans:400,600');
+@import url('//use.fontawesome.com/releases/v5.7.2/css/all.css');
+@import url('css/dropdown.css');
+@import url('vendor/jquery-ui/jquery-ui.min.css');
+@import url('css/fields.css');
 
-@import url(//fonts.googleapis.com/css?family=Montserrat:400,700);
-@import url(//fonts.googleapis.com/css?family=Open+Sans:400,600);
-@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
-@import url(css/dropdown.css);
-@import url(//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css);
 
 /* Bootstrap like */
 
@@ -103,6 +103,24 @@
 
 /* Global Fonts */
 
+@font-face {
+    font-family: "Circular Std";
+    src: url("vendor/fonts/CircularStd-Medium.woff") format("woff"),
+    url("vendor/fonts/CircularStd-Medium.woff2") format("woff2"),
+    url("vendor/fonts/CircularStd-Medium.eot") format("embedded-opentype"),
+    url("vendor/fonts/CircularStd-Medium.ttf") format("truetype");
+
+}
+
+@font-face {
+    font-family: "Circular Std";
+    font-weight: bold;
+    src: url("vendor/fonts/CircularStd-Bold.woff") format("woff"),
+    url("vendor/fonts/CircularStd-Bold.woff2") format("woff2"),
+    url("vendor/fonts/CircularStd-Bold.eot") format("embedded-opentype"),
+    url("vendor/fonts/CircularStd-Bold.ttf") format("truetype");
+}
+
 #tnp-wrap, 
 #tnp-header, 
 #tnp-body p, 
@@ -111,14 +129,18 @@
 #tnp-body input,
 #tnp-body select,
 #tnp-body textarea {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Circular Std", sans-serif;
+    -webkit-font-smoothing: antialiased; /* Chrome, Safari */
+    -moz-osx-font-smoothing: grayscale; /* Firefox */
 }
 
 #tnp-body h1, 
 #tnp-body h2, 
 #tnp-body h3, 
 #tnp-body h4 {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
+    -webkit-font-smoothing: antialiased; /* Chrome, Safari */
+    -moz-osx-font-smoothing: grayscale; /* Firefox */
 }
 
 
@@ -130,7 +152,7 @@
     text-align: left;
     font-size: 12px;
     color: #fff;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
 }
 
 #tnp-header input {
@@ -139,7 +161,7 @@
 
 #tnp-header a {
     text-decoration: none;
-    /*font-family: "Montserrat",sans-serif;*/
+    /*font-family: "Circular Std",sans-serif;*/
     color: white;
     letter-spacing: 0.1em;
 }
@@ -159,24 +181,28 @@
 .tnp-error {
     border-left: 5px solid #dd0000;
     background-color: #fff;
-    padding: 10px;
+    padding: 15px;
     margin: 15px 0; 
     font-size: 1.2em;
+    line-height: 1.5em;
 }
 
 .tnp-warning {
     border-left: 5px solid #ffb900;
     background-color: #fff;
-    padding: 10px;
+    padding: 15px;
     margin: 15px 0; 
     font-size: 1.2em;
+    line-height: 1.5em;
 }
 
 .tnp-message {
     border-left: 5px solid #46b450;
     background-color: #fff;
-    padding: 10px;
+    padding: 15px;
     margin: 15px 0;
+    font-size: 1.2em;
+    line-height: 1.5em;
 }
 
 /* Default font colors for our dark background page body */
@@ -324,7 +350,7 @@
 
 #tnp-body .widefat thead {
     background-color: #3498DB;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
     color: #fff !important;
 }
 
@@ -336,8 +362,16 @@
     vertical-align: middle;
 }
 
+.tnp-newsletters-list tbody tr {
+    height: 70px;
+}
+
+.widefat tr:nth-child(even) {
+    background-color: #f4faff;
+}
+
 /* Buttons on widgets top bar */
-#tnp-body .tnp-widget h3 a, 
+#tnp-body .tnp-widget h3 a,
 #tnp-body .tnp-widget h3 a:visited, 
 #tnp-body .tnp-widget h3 a:hover {
     color: #fff;
@@ -404,6 +438,11 @@ table.clicks {
     padding: 5px;
     white-space: nowrap;
     margin-right: 5px;
+}
+
+.tnp-buttons {
+    /*background-color: #0073aa;*/
+    padding: 10px;
 }
 
 .newsletter-checkbox-group, .nl-checkbox-group {
@@ -477,7 +516,7 @@ table.clicks {
     margin: 10px 0;
     padding-right: 70px;
     position: relative;
-    border: 1px sold #eee;
+    border: 1px solid #eee;
     background-color: #fff;
     color: #444;
     font-size: 13px;
@@ -514,7 +553,7 @@ table.clicks {
     box-shadow: none;
     background-color: #27AE60;
     padding: 8px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
     font-size: 13px;
     color: #fff;
     cursor: pointer;
@@ -655,13 +694,13 @@ table.clicks {
     color: #FD5F65;
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    /*font-family: "Montserrat";*/
+    /*font-family: "Circular Std";*/
     font-size: 10px;
     border: 1px red solid;
 }
 
 .tip-content {
-    /*font-family: "Montserrat";*/
+    /*font-family: "Circular Std";*/
     font-weight: 500;
     font-size: 11px;
     color: #999999;
@@ -682,24 +721,18 @@ p.description {
 }
 
 .tnp-theme-preview p {
-    /*font-family: "Montserrat";*/
-    font-size: 11px;
+    font-family: "Circular Std";
+    font-size: 13px;
     letter-spacing: 0.2em;
-    text-transform: uppercase;
     color: #fff;
 }
 
 .tnp-theme-preview img:hover {
-    border: 5px solid #FD5F65;
-    border-radius: 10px;
-    padding: 5px;
-    background-color: #FD5F65;
+    box-shadow: 3px 3px 8px 2px #293848;
 }
 
 .tnp-theme-preview img {
-    border: 5px solid transparent;
     border-radius: 10px;
-    padding: 5px;
 }
 
 
@@ -723,10 +756,7 @@ p.description {
 #tnp-body {
     padding: 10px;
     background-color: #28313C;
-    border-color: #28313C;
-    border-width: 10px;
-    border-style: solid;
-    /*overflow: auto;*/
+    /*border-color: 10px solid #28313C;*/
 }
 
 .tnp-darkbg {
@@ -755,7 +785,7 @@ p.description {
 
 #tnp-heading {
     padding: 10px;
-    background-color: #28313C;
+    /*background-color: #28313C;*/
     margin-bottom: 10px;
     border-radius: 5px;
 }
@@ -772,14 +802,27 @@ p.description {
 }
 
 #tnp-heading div p {
-    color: #666;
+    color: #565656;
 }
 
 #tnp-heading h2 {
     color: #fff;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
     letter-spacing: 0.1rem;
     font-size: 1.1rem;
+    line-height: 1.8rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    font-weight: 700;
+    padding: 0;
+    margin: 0px;
+}
+
+#tnp-heading h3 {
+    color: #27AE60;
+    font-family: "Circular Std", sans-serif;
+    letter-spacing: 0.1rem;
+    font-size: .8rem;
     line-height: 1.8rem;
     text-transform: uppercase;
     vertical-align: middle;
@@ -806,7 +849,7 @@ p.description {
     padding: 6px 11px;
     text-decoration: none;
     text-transform: capitalize;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
     margin-left: 10px;
     font-size: 0.75rem;
     font-weight: 300;
@@ -837,7 +880,7 @@ p.description {
 
 /* Widget title */
 .tnp-widget h3 {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
     letter-spacing: 0.05rem;
     background-color: #2980B9;
     color: #fff;
@@ -907,7 +950,7 @@ p.description {
 }
 
 #dashboard-widgets .postbox-container .postbox h3 {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
     letter-spacing: 0.05rem;
     background-color: #415b76;
     color: #fff;
@@ -964,7 +1007,7 @@ p.description {
     text-decoration: none;
     color: #fff;
     display: block;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
     padding: 5px 10px;
 }
 
@@ -975,7 +1018,7 @@ p.description {
     margin-top: 10px;
     padding: 20px 10px 10px 40px;
     background-color: #28313C;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
 }
 
 #tnp-footer div {
@@ -1034,7 +1077,7 @@ p.description {
     border: none;
     box-shadow: none;
     color: #fff;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Circular Std',sans-serif;
     margin: 0px 2px;
     width: auto;
 }
@@ -1043,7 +1086,7 @@ p.description {
     background-color: #3498db;
     box-shadow: none;
     color: #fff;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Circular Std',sans-serif;
     margin: 0px 2px;
 }
 
@@ -1078,7 +1121,7 @@ span.wp-media-buttons-icon:before {
 
 .tnp-paginator {
     color: #fff;
-    font-family: "Montserrat",sans-serif;
+    font-family: "Circular Std",sans-serif;
     margin: 10px 0px;
 }
 
@@ -1116,7 +1159,7 @@ span.wp-media-buttons-icon:before {
 
 .tnp-subscribers-search {
     color: #fff;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
     background-color: #2C3E50;
     padding: 20px;
     border-radius: 5px;
@@ -1126,7 +1169,7 @@ span.wp-media-buttons-icon:before {
 
 .tnp-subscribers-search select {
     margin-left: 5px;
-    padding: none;
+    padding: 0;
     line-height: inherit;
 }
 
@@ -1261,7 +1304,7 @@ table.widefat {
  */
 
 #tnp-body .ui-widget {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
 }
 
 #tnp-body #tabs .ui-widget-header {
@@ -1305,13 +1348,13 @@ table.widefat {
 #tnp-body .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
     background: #fff !important;
     font-weight: normal;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
 }
 
 #tnp-body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
     border: none;
     background: #ECF0F1;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
 }
 
 
@@ -1342,7 +1385,7 @@ table.widefat {
 }
 
 .tnp-extension-premium-box h3 {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
     padding: 5px 8px !important;
     border-radius: 3px;
     display: inline-block;
@@ -1356,7 +1399,7 @@ table.widefat {
 }
 
 .tnp-extension-free-box h3 {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
     padding: 5px 8px !important;
     border-radius: 3px;
     display: inline-block;
@@ -1370,7 +1413,7 @@ table.widefat {
 }
 
 .tnp-integration-box h3 {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
     padding: 5px 8px !important;
     border-radius: 3px;
     display: inline-block;
@@ -1388,7 +1431,7 @@ table.widefat {
     position: absolute;
     width: 100%;
     padding: 12px; 
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
 }
 
 .tnp-extension-free-action {
@@ -1396,7 +1439,7 @@ table.widefat {
     position: absolute;
     width: 100%;
     padding: 12px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
 }
 
 .tnp-integration-action {
@@ -1404,7 +1447,7 @@ table.widefat {
     position: absolute;
     width: 100%;
     padding: 12px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
 }
 
 
@@ -1436,6 +1479,13 @@ table.widefat {
 
 .tnp-extension-buy {
     color: #F1C40F;
+    padding: 5px 8px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#tnp-body a.tnp-extension-details{
+    color: #999999;
     padding: 5px 8px;
     text-decoration: none;
     cursor: pointer;
@@ -1552,7 +1602,7 @@ img.tnp-extensions-free-badge {
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
     border: none;
     background: #ECF0F1;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
 }
 
 
@@ -1927,13 +1977,13 @@ input:checked + .slider:before {
     font-size: 16px;
     display: inline-block;
     margin: 20px 0px;
-    width: 70%;
+    width: auto;
     border-radius: 4px;
     padding: 5px 10px;
 }
 
 .tnp-suggest-button {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
     margin-left: 8px;
     border-radius: 3px;
     background-color: #2980B9;
@@ -1984,7 +2034,7 @@ input:checked + .slider:before {
     font-size: 16px;
     color: #fff;
     padding: 0px 70px 20px 20px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Circular Std", sans-serif;
     border-bottom: 1px solid #282828;
 }
 
@@ -2004,7 +2054,7 @@ input:checked + .slider:before {
 .tnp-subject-category {
     color: #565656;
     margin: 25px 0px 10px 0px;
-    /* font-family: "Montserrat"; */
+    /* font-family: "Circular Std"; */
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -2069,4 +2119,328 @@ iframe.tnp-editor-preview-desktop {
      margin-right: 20px; 
      height: 500px; 
      float: left;
+}
+
+
+/* Form inserimento licenza in Addons Manager */
+
+#tnp-license-control  {
+    border-left: 5px solid #27ae60;
+    display: inline-block;
+    padding: 15px 20px;
+    margin-left: -10px;
+    margin-top: 15px;
+    border-radius: 2px;
+    background-color: #fff;
+}
+
+#tnp-license-control form {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#tnp-license-control form input {
+    padding-left: 10px;
+}
+
+#tnp-license-control a {
+    border-bottom: none;
+    color: #27AE60;
+}
+
+
+/* Status Box Style */
+
+#tnp-nl-status {
+    width: 100%;
+    background: #fffafa;
+    padding: 15px 25px 15px 25px;
+    border-left: 10px solid #27AE60;
+    border-radius: 0px 5px 5px 0px;
+}
+
+#tnp-nl-status p {
+    font-size: 17px;
+}
+
+.tnp-nl-status-row {
+    margin: 10px 0;
+}
+
+.tnp-nl-status-title {
+    font-size: 26px;
+    line-height: 32px;
+    margin: 5px 0px 0px 0px;
+    color: #3498DB;
+    font-weight: 900;
+    vertical-align: middle;
+}
+
+.tnp-nl-status-title-value {
+    font-size: 13px;
+    line-height: 32px;
+    margin: 0px 0px 0px 5px;
+    color: #fff;
+    background-color: #95A5A6;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    vertical-align: sub;
+}
+
+.tnp-nl-status-schedule-targeting {
+    font-size: 15px;
+    color: #34495E;
+}
+
+.tnp-nl-status-schedule-value {
+    font-size: 15px;
+    color: #34495E;
+}
+
+/*.tnp-nl-status-bar {
+    height: 24px;
+    width: auto;
+    background-color: #fe5e64;
+    margin: 10px 0px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.tnp-nl-status-bar span {
+    color: #fff;
+    line-height: 24px;
+}*/
+/*
+#tnp-nl-status-toggle {
+    width: 30px;
+    height: 30px;
+    background-color: #22272d;
+    z-index: 999999;
+    position: fixed;
+    right: 390px;
+    color: white;
+    text-align: center;
+}*/
+
+.tnp-status-header #options-subject {
+    width: calc(100% - 150px);
+}
+
+/* Grid Helpers */
+
+.tnp-one-third {
+    width: 40%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.tnp-two-thirds {
+    width: 59%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* Progress bar */
+.tnp-progress {
+    display: flex;
+    height: 1.5rem;
+    overflow: hidden;
+    font-size: .75rem;
+    background-color: #c9cccf;
+    border-radius: .25rem;
+    margin: 0px 0px 0px;
+    min-width: 100px;
+}
+
+.tnp-progress-bar {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #007bff;
+    transition: width .6s ease;
+}
+
+.tnp-progress.sent .tnp-progress-bar {
+    background-color: green;
+}
+
+.tnp-progress-numbers {
+    text-align: center;
+    color: #666;
+}
+
+.tnp-progress-date {
+    color: #666;
+    font-style: italic;
+}
+
+/* Email status label */
+span.tnp-email-status-new {
+    background-color: #8E44AD;
+    padding: 2px 10px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+span.tnp-email-status-paused {
+    background-color: #95A5A6;
+    padding: 2px 10px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+span.tnp-email-status-sending {
+    background-color:#27AE60;
+    padding: 2px 10px;
+    border-radius: 4px;
+    color: #fff;
+
+}
+
+span.tnp-email-status-scheduled {
+    background-color: #E67E22;
+    padding: 2px 10px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+span.tnp-email-status-sent {
+    background-color: #95A5A6;
+    padding: 2px 10px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+
+/* Composer/themes choice panel */
+
+.tnp-themes-new {
+    border-bottom: 2px solid #243342;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+}
+
+
+
+/* Schedule buttons styles */
+
+#tnp-schedule-button {
+    background-color: #E67E22 !important;
+}
+
+#tnp-schedule-button:hover {
+    background-color: #ec913f !important;
+}
+
+.tnp-button-cancel {
+    background-color: #E74C3C !important;
+}
+
+/* Newsletter preview on targeting panel */
+.tnpc-preview {
+    margin-top: 10px;
+}
+
+.tnpc-preview .fake-browser-ui iframe {
+    width: 700px;
+}
+
+.tnpc-preview .fake-mobile-browser-ui iframe {
+    width: 320px;
+}
+
+.fake-browser-ui {
+    padding: 30px 0 0;
+    border-radius: 3px;
+    border-bottom: 10px solid #ccc;
+    background: #ddd;
+    display: inline-block;
+    position: relative;
+    line-height: 0;
+    vertical-align: top;
+    margin-left: 20px;
+}
+
+.fake-mobile-browser-ui {
+    padding: 30px 10px 37px;
+    border-radius: 10px;
+    border-bottom: 10px solid #ccc;
+    background: #ddd;
+    display: inline-block;
+    position: relative;
+    line-height: 0;
+    margin-left: 30px;
+}
+
+.fake-browser-ui .frame {
+    display: block;
+    height: 25px;
+    position: absolute;
+    top: 12px;
+    left: 8px;
+}
+
+.fake-mobile-browser-ui .frame {
+    display: block;
+    height: 25px;
+    margin-top: 10px;
+}
+
+.fake-browser-ui span {
+    height: 12px;
+    width: 12px;
+    border-radius: 8px;
+    background-color: #eee;
+    border: 1px solid #dadada;
+    float: left;
+    margin: 0 0 0 4px;
+}
+
+.fake-mobile-browser-ui span {
+    height: 50px;
+    width: 50px;
+    border-radius: 60px;
+    background-color: #eee;
+    border: 2px solid #ccc;
+    display: block;
+    margin: auto;
+}
+
+.fake-browser-ui .bt-1 {
+    background-color: #ED594A;
+}
+
+.fake-browser-ui .bt-2 {
+    background-color: #FDD800;
+}
+
+.fake-browser-ui .bt-3 {
+    background-color: #5AC05A;
+}
+
+.tnp-field-row {
+    clear: both;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.tnp-field-col-2 {
+    width: 50%;
+    box-sizing: border-box;
+    padding: 10px;
+    float: left;
+}
+
+.tnp-field-col-3 {
+    width: 33%;
+    box-sizing: border-box;
+    padding: 10px;
+    float: left;
 }

@@ -7,11 +7,16 @@
  */
 
 /* @var $options array */
-/* @var $wpdb wpdb */
 
 $default_options = array(
     'color'=>'#dddddd',
-    'height'=>1
+    'height'=>1,
+    'block_padding_top'=>20,
+    'block_padding_bottom'=>20,
+    'block_padding_right'=>20,
+    'block_padding_left'=>20,
+    'block_background'=>'#ffffff'
+    
 );
 
 $options = array_merge($default_options, $options);
@@ -21,8 +26,6 @@ $options = array_merge($default_options, $options);
 
 <table border="0" cellpadding="0" align="center" cellspacing="0" width="100%">
     <tr>
-        <td style="padding: 20px;">
-            <div style="height: <?php echo $options['height'] ?>px!important; background-color: <?php echo $options['color'] ?>; border: 0; margin:0; padding: 0; line-height: 0; width: 100%!important; display: block;"></div>
-        </td>
+        <td style="border-bottom: <?php echo $options['height'] ?>px solid <?php echo $options['color'] ?>;"></td>
     </tr>
 </table>

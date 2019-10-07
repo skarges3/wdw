@@ -20,15 +20,12 @@ class NewsletterProfile extends NewsletterModule {
 
     function __construct() {
         parent::__construct('profile', '1.1.0');
-        add_action('init', array($this, 'hook_init'));
+        add_action('init', array($this, 'hook_init'), 1);
         add_action('wp_loaded', array($this, 'hook_wp_loaded'));
         add_shortcode('newsletter_profile', array($this, 'shortcode_newsletter_profile'));
     }
 
     function hook_init() {
-        if (is_admin()) {
-            add_action('wp_ajax_newsletter_users_export', array($this, 'hook_wp_ajax_newsletter_users_export'));
-        }
         add_filter('newsletter_replace', array($this, 'hook_newsletter_replace'), 10, 3);
         add_filter('newsletter_page_text', array($this, 'hook_newsletter_page_text'), 10, 3);
     }
@@ -300,16 +297,18 @@ class NewsletterProfile extends NewsletterModule {
             $buffer .= $x['field'];
             $buffer .= "</div>\n";
         }
+        
+        $local_options = $this->get_options('', $this->get_user_language($user));
 
         // Privacy
         $privacy_url = NewsletterSubscription::instance()->get_privacy_url();
-        if (!empty($this->options['privacy_label']) && !empty($privacy_url)) {
+        if (!empty($local_options['privacy_label']) && !empty($privacy_url)) {
             $buffer .= '<div class="tnp-field tnp-field-privacy">';
             if ($privacy_url) {
                 $buffer .= '<a href="' . $privacy_url . '" target="_blank">';
             }
 
-            $buffer .= $this->options['privacy_label'];
+            $buffer .= $local_options['privacy_label'];
 
             if ($privacy_url) {
                 $buffer .= '</a>';
@@ -318,7 +317,7 @@ class NewsletterProfile extends NewsletterModule {
         }
 
         $buffer .= '<div class="tnp-field tnp-field-button">';
-        $buffer .= '<input class="tnp-submit" type="submit" value="' . esc_attr($this->options['save_label']) . '">';
+        $buffer .= '<input class="tnp-submit" type="submit" value="' . esc_attr($local_options['save_label']) . '">';
         $buffer .= "</div>\n";
 
         $buffer .= "</form>\n</div>\n";

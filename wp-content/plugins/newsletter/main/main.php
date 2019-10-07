@@ -7,10 +7,16 @@ $module = Newsletter::instance();
 
 if (!$controls->is_action()) {
     $controls->data = get_option('newsletter_main');
+    if (!isset($controls->data['roles'])) {
+        $controls->data['roles'] = array();
+        if (!empty($controls->data['editor'])) $controls->data['roles'] = 'editor';
+    }
 } else {
 
     if ($controls->is_action('save')) {
         $errors = null;
+        
+        if (!isset($controls->data['roles'])) $controls->data['roles'] = array();
 
         // Validation
         $controls->data['sender_email'] = $module->normalize_email($controls->data['sender_email']);
@@ -72,6 +78,8 @@ if (!$controls->is_action()) {
     }
 }
 
+/* TODO switch to check_license function */
+
 if (!empty($controls->data['contract_key']) || defined('NEWSLETTER_LICENSE_KEY')) {
 
     if (defined('NEWSLETTER_LICENSE_KEY')) {
@@ -114,17 +122,14 @@ if (!empty($return_path)) {
 }
 
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.37.0/codemirror.css" type="text/css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.37.0/addon/hint/show-hint.css">
+
+<?php include NEWSLETTER_INCLUDES_DIR . '/codemirror.php'; ?>
 <style>
     .CodeMirror {
         border: 1px solid #ddd;
     }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.37.0/codemirror.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.37.0/mode/css/css.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.37.0/addon/hint/show-hint.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.37.0/addon/hint/css-hint.js"></script>
+
 <script>
     jQuery(function () {
         var editor = CodeMirror.fromTextArea(document.getElementById("options-css"), {
@@ -198,7 +203,7 @@ if (!empty($return_path)) {
                         <tr>
                             <th><?php _e('Dedicated page', 'newsletter') ?></th>
                             <td>
-                                <?php $controls->page('page', __('Unstyled page', 'newsletter')); ?>
+                                <?php $controls->page('page', __('Unstyled page', 'newsletter'), '', true); ?>
                                 <?php
                                 if (empty($controls->data['page'])) {
                                     $controls->button('create', __('Create the page', 'newsletter'));
@@ -241,6 +246,8 @@ if (!empty($return_path)) {
                             </td>
                         </tr>
                     </table>
+                    
+                    <?php do_action('newsletter_panel_main_speed', $controls) ?>
                 </div>
 
 
@@ -267,9 +274,19 @@ if (!empty($return_path)) {
                             </td>
                         </tr>
                         <tr>
-                            <th><?php _e('Enable access to blog editors?', 'newsletter') ?></th>
+                            <th><?php _e('Allowed roles', 'newsletter') ?></th>
                             <td>
-                                <?php $controls->yesno('editor'); ?>
+                                <?php 
+                                $wp_roles = get_editable_roles();
+                                $roles = array();
+                                foreach ($wp_roles as $key=>$wp_role) {
+                                    if ($key == 'administrator') continue;
+                                    if ($key == 'subscriber') continue;
+                                    $roles[$key] = $wp_role['name'];
+                                }
+                                $controls->checkboxes('roles', $roles); 
+                                ?>
+                                
                             </td>
                         </tr>
 

@@ -29,12 +29,11 @@ class NewsletterWidgetMinimal extends WP_Widget {
             echo $before_title . $title . $after_title;
         }
 
-        if (empty($instance['button'])) {
-            $instance['button'] = 'Subscribe';
-        }
-
         $options_profile = NewsletterSubscription::instance()->get_options('profile', $current_language);
 
+        if (empty($instance['button'])) {
+            $instance['button'] = $options_profile['subscribe'];
+        }
 
         $form = '<div class="tnp tnp-widget-minimal">';
         $form .= '<form class="tnp-form" action="' . $newsletter->build_action_url('s') . '" method="post" onsubmit="return newsletter_check(this)">';

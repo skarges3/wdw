@@ -88,6 +88,36 @@ $controls = new NewsletterControls();
                         </tr>
                     </tbody>
                 </table>
+                
+                <?php if ($module->is_multilanguage()) { ?>
+                <h3>By language</h3>
+                <?php $languages = $module->get_languages(); ?>
+                
+                <table class="widefat" style="width: auto">
+                    <thead>
+                        <tr>
+                            <th><?php _e('Status', 'newsletter') ?></th>
+                            <th><?php _e('Total', 'newsletter') ?></th>
+                        </tr>
+                        <tbody>
+                            <?php foreach ($languages as $code=>$label) { ?>
+                        <tr>
+                            <td><?php echo esc_html($label) ?></td>
+                            <td>
+                                <?php echo $wpdb->get_var($wpdb->prepare("select count(*) from " . NEWSLETTER_USERS_TABLE . " where language=%s", $code)); ?>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                        <tr>
+                            <td><?php _e('Without language', 'newsletter') ?></td>
+                            <td>
+                                <?php echo $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where language=''"); ?>
+                            </td>
+                        </tr>
+                    </thead>
+                    </tbody>
+                </table>
+                <?php } ?>
 
             </div>
 

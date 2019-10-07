@@ -1,9 +1,9 @@
 === Flamingo ===
 Contributors: takayukister, megumithemes
 Tags: bird, contact, mail, crm
-Requires at least: 4.9
-Tested up to: 4.9
-Stable tag: 1.9
+Requires at least: 5.0
+Tested up to: 5.2
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,13 +32,13 @@ This plugin stores submission data collected through contact forms, which may in
 
 == Changelog ==
 
+= 2.0 =
+
+* Displays spam logs in the Inbound Message editor page.
+* Displays reCAPTCHA logs in the Inbound Message editor page.
+
 = 1.9 =
 
 * The admin screen UI has been updated.
 * Enables to search Inbound Messages by keywords used in the Consent and Meta sections.
 * Introduces personal data eraser for Address Book and Inbound Messages data.
-
-= 1.8 =
-
-* Remove support for outdated Akismet APIs.
-* Take consent data through an inbound message.

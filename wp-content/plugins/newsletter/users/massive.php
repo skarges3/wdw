@@ -56,6 +56,11 @@ if ($controls->is_action('list_delete')) {
     $controls->messages = $count . ' ' . __('deleted', 'newsletter');
 }
 
+if ($controls->is_action('language')) {
+    $count = $wpdb->query($wpdb->prepare("update " . NEWSLETTER_USERS_TABLE . " set language=%s where language=''", $controls->data['language']));
+    $controls->add_message_done();
+}
+
 if ($controls->is_action('list_manage')) {
     if ($controls->data['list_action'] == 'move') {
         $wpdb->query("update " . NEWSLETTER_USERS_TABLE . ' set list_' . ((int) $controls->data['list_1']) . '=0, list_' . ((int) $controls->data['list_2']) . '=1' .
@@ -261,6 +266,19 @@ if ($controls->is_action('bounces')) {
                                 <?php $controls->button_confirm('update_inactive', __('Update', 'newsletter')); ?>
                             </td>
                         </tr>
+                        
+                        <?php if ($module->is_multilanguage()) { ?>
+                        <tr>
+                            <td>Language</td>
+                            <td>
+                                <?php _e('Set to', 'newsletter') ?>
+                                <?php $controls->language('language', false) ?> <?php _e('subscribers without a language', 'newsletter') ?> 
+                            </td>
+                            <td>
+                                <?php $controls->button_confirm('language', '&raquo;'); ?>
+                            </td>
+                        </tr>
+                        <?php } ?>
                     </table>
 
 
@@ -294,6 +312,8 @@ if ($controls->is_action('bounces')) {
                                 <?php $controls->lists_select('list_3') ?> <?php _e('subscribers without a list', 'newsletter') ?> <?php $controls->button_confirm('list_none', '&raquo;'); ?>
                             </td>
                         </tr>
+                        
+                        
 
                     </table>
                 </div>

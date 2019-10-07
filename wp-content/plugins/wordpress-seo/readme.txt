@@ -3,10 +3,10 @@ Contributors: yoast, joostdevalk, tacoverdo, omarreiss, atimmer, jipmoors
 Donate link: https://yoa.st/1up
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
-Tags: SEO, XML sitemap, Google Search Console, Content analysis, Readability
-Requires at least: 4.8
-Tested up to: 4.9.8
-Stable tag: 8.1.1
+Tags: SEO, XML sitemap, Content analysis, Readability
+Requires at least: 4.9
+Tested up to: 5.2.2
+Stable tag: 11.8
 Requires PHP: 5.2.4
 
 Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast SEO plugin.
@@ -34,25 +34,24 @@ Yoast SEO does everything in its power to please both visitors and search engine
 
 * Content & SEO analysis: Invaluable tools to write SEO-friendly texts.
 * The snippet preview shows you how your post or page will look in the search results - even on mobile. Yoast SEO Premium even has social media previews!
-* **[Premium]** The Insights tool shows you what your text focuses on so you can keep your article in line with your keywords.
-* **[Premium]** Multiple focus keywords: Optimize your article for synonyms and related keywords.
+* **[Premium]** The Insights tool shows you what your text focuses on so you can keep your article in line with your keyphrases.
+* **[Premium]** Synonyms & related keyphrases: Optimize your article for synonyms and related keyphrases.
 * **[Premium]** Automatic internal linking suggestions: write your article and get automatic suggested posts to link to.
 
 #### Keep your site in perfect shape
 
 * Yoast SEO tunes the engine of your site so you can work on creating great content.
 * Our cornerstone content and internal linking features help you optimize your site structure in a breeze.
-* Integrates with Google Search Console: See how your site performs in the search engines and fix crawl errors.
 * Manage SEO roles: Give your colleagues access to specific sections of the Yoast SEO plugin.
 * Bulk editor: Make large-scale edits to your site.
 * **[Premium]** Social previews to manage the way your page is shared on social networks like Facebook and Twitter.
-* **[Premium]** Redirect manager: It keeps your site healthy by easily redirecting errors from Google Search Console, deleted pages and changed URLs.
+* **[Premium]** Redirect manager: It keeps your site healthy by easily redirecting deleted pages and changed URLs.
 
 ### Premium support
 
 The Yoast team does not always provide active support for the Yoast SEO plugin on the WordPress.org forums, as we prioritize our email support. One-on-one email support is available to people who [bought Yoast SEO Premium](https://yoa.st/1v8) only.
 
-Note that the [Yoast SEO Premium](https://yoa.st/1v8) also has several extra features too, including the option to have multiple focus keywords, internal linking suggestions, cornerstone content checks and a redirect manager, so it is well worth your investment!
+Note that the [Yoast SEO Premium](https://yoa.st/1v8) also has several extra features too, including the option to have synonyms and related keyphrases, internal linking suggestions, cornerstone content checks and a redirect manager, so it is well worth your investment!
 
 You should also check out the [Yoast Local SEO](https://yoa.st/1uu), [Yoast News SEO](https://yoa.st/1uv) and [Yoast Video SEO](https://yoa.st/1uw) extensions to Yoast SEO. They work with the free version of Yoast SEO already, and these premium extensions of course come with support too.
 
@@ -106,59 +105,38 @@ You'll find answers to many of your questions on [kb.yoast.com](https://yoa.st/1
 
 == Changelog ==
 
-= 8.1.1 =
-Release Date: September 3rd, 2018
+= 11.8.0 =
+Release Date: August 6th, 2019
 
-Bugfixes:
-
-* Fixes compatibility with Gutenberg 3.7, which removed a feature we were relying on.
-* Fixes a bug where the Twitter meta-tags would not have the snippet variables replaced with their dynamic values.
-* Fixes a bug where the `og:url` would not be set to the canonical URL if the canonical URL is explicitly set on Post types, Terms or Tags.
-* Fixes a bug on the Term page when editting the `slug`, it would not be updated in the Snippet Preview directly.
-
-= 8.1.0 =
-Release Date: August 28th, 2018
+Release history tells us that the releases in the months of July and August are usually very quiet and not 'that notable'. Due to vacations from team members, the focus is usually on fixing bugs and cleaning up. Not for Yoast SEO 11.8! This new release gives us an enhanced metabox, bug fixes and the help of contributors from outside the company! Find out all about Yoast SEO 11.8 in [our 11.8 release post](https://yoa.st/release-11-8)!
 
 Enhancements:
 
-* Adds the Snippet Preview Editor to the sidebar.
-* Introduces the Primary Category picker to Gutenberg.
-* Introduces a loading indicator in the analysis that is shown until we're ready to analyze the content.
-* Optimizes the content analysis calculations. This fixes the issue where the UI could freeze when you have a long post.
-* Changes the "Check Inlinks (OSE)" menu item in the Yoast Admin bar "Analyze this page" dropdown from the Moz OpenSite Explorer (OSE) to Google Search Console, as the former service is being disabled on August 30th 2018.
+* Moves advanced SEO settings to a collapsible in the SEO tab.
+* Social settings tab in the metabox now contains collapsibles instead of tabs.
+* Adds style for padding to the metabox menu to avoid it being overwritten by custom editor styles. Props to [@emilyatmobtown](https://github.com/emilyatmobtown).
+* Improves sanitization of the schema output.
 
 Bugfixes:
 
-* Fixes a bug where the analysis scores would change multiple times due to a delay in the loading of the actual scores. We now show loading indicators until the actual scores have been calculated.
-* Fixes a bug where the parent title snippet variable wasn't properly being replaced with the actual parent title in Gutenberg.
-* Fixes a plugin compatibility bug where the SEO score in the admin bar could not be retrieved.
-* Fixes a bug where the editor would not be usable when deferred or async loading of JavaScript is being forced.
-* Fixes a bug where the analysis for previously used keywords would only be triggered if the keyword was changed, resulting in an incorrect SEO score.
+* Fixes a bug where the `WP_Query::get_posts()` method would be called multiple times when the query includes several taxonomy terms, resulting in different results. Props to [@Chouby](https://github.com/Chouby).
+* Fixes a bug where the checkbox in the customizer about showing the blog page in the breadcrumbs would do exactly the opposite of what it promised. Props to [@garrett-eclipse](https://github.com/garrett-eclipse).
+* Fixes a bug where the snippet title and meta description fields would still be left-to-right when the site was set to a right-to-left language.
 
-= 8.0.0 =
-Release Date: August 14th, 2018
+= 11.7.0 =
+Release Date: July 23rd, 2019
+
+By now you probably know the 11.x releases of Yoast SEO are all about Schema. In this release, we’ve enabled the possibility to use a subset of HTML tags in the FAQ and HowTo blocks! Find out all about Yoast SEO 11.7 in [our 11.7 release post](https://yoa.st/release-11-7)!
 
 Enhancements:
 
-* Implements the Yoast sidebar for Gutenberg: added the Readability, Focus Keyword and Cornerstone content tabs to the sidebar.
-* Revamps the Yoast metabox to use the same vertical design as the new sidebar.
-* Implements the same tabbed layout in the plugin's network settings screen that is also used in the plugin's site settings screens.
-* Implements a plugin-specific network settings API and use it in the network settings screen.
-* Introduces a network admin-specific admin bar menu.
-* Adds notifications to the Notification Center in regards to Gutenberg compatibility. If Gutenberg is older than the minimum supported version by Yoast SEO, a 'problem' notification is added. If Gutenberg is only slightly outdated, a 'normal' notification is added.
-* Implements the automatic detection of the keyword for terms based on the term's title.
+* Allows a subset of HTML tags in FAQ answer, HowTo description and HowToStep description schema output: `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, `<h6>`, `<br>`, `<ol>`, `<ul>`, `<li>`, `<a>`, `<p>`, `<b>`, `<strong>`, `<i>`, `<em>`, and their closing counterparts.
+* Remove the `noindex` from feeds as this causes issues for podcasts and other feeds.
+* Improves the accessibility of the horizontal tabs in the metabox by implementing an ARIA tabbed user interface.
 
 Bugfixes:
 
-* Fixes a bug where `/sitemap.xml` would not correctly redirect to `/sitemap_index.xml` in some environments.
-* Fixes a bug where sitemap cache transients would not be correctly cleared.
-* Fixes a bug where markers were wrongfully displayed in Gutenberg.
-* Fixes a bug where SEO titles were incorrectly evaluated as being of a good length when they were actually slightly too long.
-
-Other:
-
-* Moves the network's Restore Site functionality into its own tab.
+* Fixes a bug where the avatar in the knowledge graph settings would incorrectly overwrite the default user profile picture.
 
 = Earlier versions =
-
-For the changelog of earlier versions, please refer to https://yoa.st/yoast-seo-changelog
+For the changelog of earlier versions, please refer to [the changelog on yoast.com](https://yoa.st/yoast-seo-changelog).

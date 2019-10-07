@@ -1,143 +1,34 @@
-
-jQuery.fn.hover_edit = function () {
-
-    this.hover(
-            function () {
-                jQuery(this).append('<div class="tnpc-row-edit-hover"><i class="fa fa-pencil" style="line-height:30px;"></i></div>');
-                jQuery(".tnpc-row-edit-hover").click(function (e) {
-                    e.preventDefault()
-                });
-                jQuery(".tnpc-row-edit-hover i").click(function (e) {
-                    e.preventDefault();
-                    $this = jQuery(this);
-                    target = $this.parent().parent();
-                    $this.parent().remove();
-
-                    //edit image
-                    if (target.attr("data-type") == 'image') {
-                        jQuery("#tnpc-edit-image .image").val(target.find('img').attr("src"));
-                        jQuery("#tnpc-edit-image .alt").val(target.find('img').attr("alt"));
-                        jQuery("#tnpc-edit-image .url").val(target.find('a').attr("href"));
-                        jQuery("#tnpc-edit-image").fadeIn(500);
-                        jQuery("#tnpc-edit-image .tnpc-edit-box").slideDown(500);
-                        jQuery("#tnpc-edit-image .tnpc-edit-box-buttons-save").click(function () {
-                            jQuery(this).parent().parent().parent().fadeOut(500)
-                            jQuery(this).parent().parent().slideUp(500)
-                            target.find('img').attr("src", jQuery("#tnpc-edit-image .image").val());
-                            target.find('img').attr("alt", jQuery("#tnpc-edit-image .alt").val());
-                            target.find('a').attr("href", jQuery("#tnpc-edit-image .url").val());
-                            tnp_mobile_preview();
-                        });
-                    }
-
-                    //edit link
-                    if (target.attr("data-type") == 'link') {
-                        jQuery("#tnpc-edit-link .title").val(target.text());
-                        jQuery("#tnpc-edit-link .url").val(target.attr("href"));
-                        jQuery("#tnpc-edit-link").show();
-                        jQuery("#tnpc-edit-link .tnpc-edit-box").show();
-                        //jQuery("#tnpc-edit-link .tnpc-edit-box").slideDown(300);
-                        jQuery("#tnpc-edit-link .tnpc-edit-box-buttons-save").click(function () {
-                            jQuery(this).parent().parent().parent().fadeOut(500)
-                            jQuery(this).parent().parent().slideUp(500)
-                            target.text(jQuery("#tnpc-edit-link .title").val());
-                            target.attr("href", jQuery("#tnpc-edit-link .url").val());
-                            tnp_mobile_preview();
-                        });
-                    }
-
-                    //edit button
-                    if (target.attr("data-type") == 'button') {
-                        jQuery("#tnpc-edit-button .title").val(target.text());
-                        jQuery("#tnpc-edit-button .url").val(target.attr("href"));
-                        jQuery('.bgcolor, .fgcolor').wpColorPicker({
-                            //                change: function (event, ui) {
-                            //                    jQuery('.bgcolor').iris('hide');
-                            //                },
-                        });
-                        jQuery('.bgcolor').wpColorPicker().iris('color', target.css("background-color"));
-                        jQuery('.fgcolor').wpColorPicker().iris('color', target.css("color"));
-                        jQuery("#tnpc-edit-button").fadeIn(500);
-                        jQuery("#tnpc-edit-button .tnpc-edit-box").slideDown(500);
-                        jQuery("#tnpc-edit-button .tnpc-edit-box-buttons-save").click(function () {
-                            jQuery(this).parent().parent().parent().fadeOut(500)
-                            jQuery(this).parent().parent().slideUp(500)
-                            target.text(jQuery("#tnpc-edit-button .title").val());
-                            target.attr("href", jQuery("#tnpc-edit-button .url").val());
-                            target.css("color", jQuery("#tnpc-edit-button .fgcolor").val());
-                            target.css("background-color", jQuery("#tnpc-edit-button .bgcolor").val());
-                            target.css("border-color", jQuery("#tnpc-edit-button .bgcolor").val());
-                            tnp_mobile_preview();
-                        });
-                    }
-
-                    //edit title
-                    if (target.attr("data-type") == 'title') {
-                        jQuery("#tnpc-edit-title .title").val(target.text());
-                        jQuery("#tnpc-edit-title .color").val(target.css("color"));
-                        jQuery("#tnpc-edit-title .color").wpColorPicker({});
-                        jQuery("#tnpc-edit-title .color").wpColorPicker().iris('color', target.css("color"));
-                        
-                        jQuery("#tnpc-edit-title-font-size").val(parseInt(target.css("fontSize")));
-                        jQuery("#tnpc-edit-title-font-family").val(target.css("fontFamily"));
-                        jQuery("#tnpc-edit-title-text-align").val(target.css("textAlign"));
-                        
-                        jQuery("#tnpc-edit-title").fadeIn(500);
-                        jQuery("#tnpc-edit-title .tnpc-edit-box").slideDown(500);
-                        jQuery("#tnpc-edit-title .tnpc-edit-box-buttons-save").click(function () {
-                            jQuery(this).parent().parent().parent().fadeOut(500)
-                            jQuery(this).parent().parent().slideUp(500)
-                            target.text(jQuery("#tnpc-edit-title .title").val());
-                            target.css("color", jQuery("#tnpc-edit-title .color").val());
-                            
-                            target.css("fontSize", jQuery("#tnpc-edit-title-font-size").val() + "px");
-                            target.css("fontFamily", jQuery("#tnpc-edit-title-font-family").val());
-                            target.css("textAlign", jQuery("#tnpc-edit-title-text-align").val());
-                            
-                            tnp_mobile_preview();
-                        });
-                    }
-
-                    //edit text
-                    if (target.attr("data-type") == 'text') {
-                        jQuery("#tnpc-edit-text .text").val(target.text());
-
-                        if (tinymce.activeEditor != null)
-                            tinymce.activeEditor.setContent(target.html());
-                        jQuery("#tnpc-edit-text").fadeIn(500);
-                        jQuery("#tnpc-edit-text .tnpc-edit-box").slideDown(500);
-                        jQuery("#tnpc-edit-text .tnpc-edit-box-buttons-save").click(function () {
-                            jQuery(this).parent().parent().parent().fadeOut(500)
-                            jQuery(this).parent().parent().slideUp(500)
-                            target.html(tinymce.activeEditor.getContent());
-                            tnp_mobile_preview();
-                        });
-                    }
-
-                });
-            }, function () {
-        jQuery(this).children(".tnpc-row-edit-hover").remove();
-    }
-    );
-}
-
+// add delete buttons
 jQuery.fn.add_delete = function () {
-    this.append('<div class="tnpc-row-delete"><i class="fa fa-times" ></i></div>');
+    this.append('<div class="tnpc-row-delete" title="Delete"><img src="' + TNP_PLUGIN_URL + '/emails/tnp-composer/_assets/delete.png" width="32"></div>');
     this.find('.tnpc-row-delete').perform_delete();
-}
+};
 
+// delete row
 jQuery.fn.perform_delete = function () {
     this.click(function () {
+        // hide block edit form
+        jQuery("#tnpc-block-options").hide();
+        // remove block
         jQuery(this).parent().remove();
-        tnp_mobile_preview();
+        tnpc_mobile_preview();
     });
-
 }
 
+// add edit button
 jQuery.fn.add_block_edit = function () {
-    this.append('<div class="tnpc-row-edit-block"><i class="fa fa-pencil" ></i></div>');
-    this.find('.tnpc-row-edit-block i').perform_block_edit();
+    this.append('<div class="tnpc-row-edit-block" title="Edit"><img src="' + TNP_PLUGIN_URL + '/emails/tnp-composer/_assets/edit.png" width="32"></div>');
+    this.find('.tnpc-row-edit-block').perform_block_edit();
 }
+
+// add clone button
+jQuery.fn.add_block_clone = function () {
+    this.append('<div class="tnpc-row-clone" title="Clone"><img src="' + TNP_PLUGIN_URL + '/emails/tnp-composer/_assets/copy.png" width="32"></div>');
+    this.find('.tnpc-row-clone').perform_clone();
+}
+
+let start_options = null;
+let container = null;
 
 jQuery.fn.perform_block_edit = function () {
 
@@ -145,204 +36,126 @@ jQuery.fn.perform_block_edit = function () {
         e.preventDefault()
     });
 
+    this.click(function (e) {
 
+        e.preventDefault();
+
+        target = jQuery(this).parent().find('.edit-block');
+
+        jQuery("#tnpc-edit-block .bgcolor").val(target.css("background-color"));
+        jQuery("#tnpc-edit-block .font").val(target.css("font-family"));
+
+        jQuery('.bgcolor').wpColorPicker().iris('color', target.css("background-color"));
+
+        // The row container which is a global variable and used later after the options save
+        container = jQuery(this).closest("table");
+
+        if (container.hasClass('tnpc-row-block')) {
+
+            jQuery("#tnpc-block-options").fadeIn(500);
+            var options = container.find(".tnpc-block-content").attr("data-json");
+            // Compatibility
+            if (!options) {
+                options = target.attr("data-options");
+            }
+            //debugger;
+            jQuery("#tnpc-block-options-form").load(ajaxurl, {
+                action: "tnpc_options",
+                id: container.data("id"),
+                options: options
+            }, function () {
+                start_options = jQuery("#tnpc-block-options-form").serialize();
+            });
+
+        } else {
+            alert("This is deprecated block version and cannot be edited. Please replace it with a new one.");
+        }
+
+    });
+
+};
+
+jQuery.fn.perform_clone = function () {
+
+    jQuery(".tnpc-row-clone").click(function (e) {
+        e.preventDefault()
+    });
 
     this.click(function (e) {
 
         e.preventDefault();
 
-        target = jQuery(this).parent().parent().find('.edit-block');
+        // hide block edit form
+        jQuery("#tnpc-block-options").hide();
 
-        jQuery("#tnpc-edit-block .bgcolor").val(target.css("background-color"));
-        jQuery("#tnpc-edit-block .font").val(target.css("font-family"));
+        // find the row
+        let row = jQuery(this).closest('.tnpc-row');
 
-        jQuery('.bgcolor').wpColorPicker({
-//                change: function (event, ui) {
-//                    jQuery('.bgcolor').iris('hide');
-//                },
-        });
-        jQuery('.bgcolor').wpColorPicker().iris('color', target.css("background-color"));
+        // clone the block
+        let new_row = row.clone();
+        new_row.find(".tnpc-row-delete").remove();
+        new_row.find(".tnpc-row-edit-block").remove();
+        new_row.find(".tnpc-row-clone").remove();
 
-        // The row container which is a global variable and used later after the options save
-        $container = jQuery(this).closest("table");
-        if (jQuery(this).parent().parent().hasClass('tnpc-row-posts')) {
-
-            jQuery("#tnpc-edit-posts").fadeIn(500);
-            jQuery("#tnpc-edit-posts .tnpc-edit-box").slideDown(500);
-
-        } else if ($container.hasClass('tnpc-row-block')) {
-            jQuery("#tnpc-block-options").fadeIn(500);
-            jQuery("#tnpc-block-options .tnpc-edit-box").slideDown(500);
-            // Qua bisogna mandare anche le opzioni
-            jQuery("#tnpc-block-options-form").load(ajaxurl, "action=tnpc_options&id=" + $container.data("id") + "&" + target.attr("data-options"), function (data) {
-
-            });
-        } else {
-
-            jQuery("#tnpc-edit-block").fadeIn(500);
-            jQuery("#tnpc-edit-block .tnpc-edit-box").slideDown(500);
-
-        }
-
-        jQuery("#tnpc-edit-block .tnpc-edit-box-buttons-save").click(function () {
-            jQuery(this).parent().parent().parent().fadeOut(500)
-            jQuery(this).parent().parent().slideUp(500)
-
-            target.css("background-color", jQuery("#tnpc-edit-block .bgcolor").val());
-            target.css("font-family", jQuery("#tnpc-edit-block .font").val());
-
-        });
-
-
-
-        jQuery("#tnpc-edit-posts .tnpc-edit-box-buttons-save").click(function () {
-
-            jQuery(this).parent().parent().parent().fadeOut(500)
-            jQuery(this).parent().parent().slideUp(500)
-            var categories = [];
-            jQuery('#tnpc-edit-posts input[name="options[theme_categories][]"]:checked').each(function ()
-            {
-                categories.push(jQuery(this).val());
-            });
-            var data = {
-                'action': 'tnpc_render',
-                'b': target.parent().parent().parent().data('block') + ".block",
-                'num': jQuery("#tnpc-edit-posts .number").val(),
-                'tags': jQuery("#tnpc-edit-posts .tags").val(),
-                'categories': categories,
-                'bgcolor': jQuery("#tnpc-edit-posts .bgcolor").val()
-            };
-            jQuery.post(ajaxurl, data, function (response) {
-                new_row = jQuery(response);
-                target.parent().before(new_row).remove();
-                new_row.add_delete();
-                new_row.add_block_edit();
-
-                new_row.find(".tnpc-row-edit").hover_edit();
-            });
-        });
-
+        new_row.add_delete();
+        new_row.add_block_edit();
+        new_row.add_block_clone();
+        // if (new_row.hasClass('tnpc-row-block')) {
+        //     new_row.find(".tnpc-row-edit-block i").click();
+        // }
+        new_row.insertAfter(row);
+        tnpc_mobile_preview();
     });
+};
 
-}
 
 jQuery(function () {
 
     // collapse wp menu
     jQuery('body').addClass('folded');
-    tinymce.init({
-        selector: '#tnpc-edit-text .text',
-        menubar: false,
-        relative_urls: false,
-        remove_script_host: false,
-        height: 500,
-        toolbar: [
-            'fontselect fontsizeselect forecolor | bold italic underline | link | bullist numlist | emoticons | alignleft aligncenter alignright alignjustify tnp'
-        ],
-        plugins: "textcolor,link,emoticons",
-        init_instance_callback: function (editor) {
-            //editor.setContent(target.html());
-        },
-        elementpath: false,
-        statusbar: false,
-        forced_root_block: false,
-        font_formats: "Arial=arial,helvetica,sans-serif" +
-                "Arial Black=arial black,avant garde;" +
-                "Tahoma=tahoma,arial,helvetica,sans-serif;" +
-                "Trebuchet MS=trebuchet ms,geneva;" +
-                "Verdana=verdana,geneva;" +
-                "Georgia=georgia,palatino;" +
-                "Times=times,times new roman;" +
-                "Times New Roman=times new roman,times;" +
-                "Courier=courier,courier new;" +
-                "Courier New=courier new,courier",
-        setup: function (editor) {
-            editor.addButton('tnp', {
-                type: 'menubutton',
-                //image: tinymce.baseURL + '/skins/tnp.png',
-                menu: [
-                    {text: '{blog_url}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{blog_url}&nbsp;');
-                        }},
-                    {text: '{blog_title}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{blog_title}&nbsp;');
-                        }},
-                    {text: '{blog_description}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{blog_description}&nbsp;');
-                        }},
-                    {text: '{date}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{date}&nbsp;');
-                        }},
-                    {text: '{date_NNN}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{date_NNN}&nbsp;');
-                        }},
-                    {text: '{email_url}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{email_url}&nbsp;');
-                        }},
-                    {text: '{name}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{name}&nbsp;');
-                        }},
-                    {text: '{surname}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{surname}&nbsp;');
-                        }},
-                    {text: '{title}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{title}&nbsp;');
-                        }},
-                    {text: '{email}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{email}&nbsp;');
-                        }},
-                    {text: '{profile_N}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{profile_N}&nbsp;');
-                        }},
-                    {text: '{ip}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{ip}&nbsp;');
-                        }},
-                    {text: '{subscription_confirm_url}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{subscription_confirm_url}&nbsp;');
-                        }},
-                    {text: '{unsubscription_confirm_url}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{unsubscription_confirm_url}&nbsp;');
-                        }},
-                    {text: '{profile_url}', onclick: function () {
-                            console.log(this.text);
-                            editor.insertContent('&nbsp;{profile_url}&nbsp;');
-                        }},
-                ],
-            });
-        },
-    });
 
-//Drag & Drop
+    // open blocks tab
+    document.getElementById("defaultOpen").click();
+
+    // preload content from a body named input
+    var preloadedContent = jQuery('input[name="body"]').val();
+    if (!preloadedContent) {
+        preloadedContent = jQuery('input[name="options[body]"]').val();
+    }
+    // console.log(preloadedContent);
+    if (!preloadedContent) {
+        tnpc_show_presets();
+    } else {
+        // Extract the body part
+        //var x = preloadedContent.indexOf("<body");
+        //var y = preloadedContent.indexOf("</body>");
+        //preloadedContent = preloadedContent.substring(x, y);
+        jQuery('#newsletter-builder-area-center-frame-content').html(preloadedContent);
+        start_composer();
+    }
+
+    // subject management
+    jQuery('#options-title').val(jQuery('#tnpc-form input[name="options[subject]"]').val());
+
+});
+
+function start_composer() {
+
+    //Drag & Drop
     jQuery("#newsletter-builder-area-center-frame-content").sortable({
         revert: false,
         placeholder: "placeholder",
         forcePlaceholderSize: true,
         opacity: 0.6,
         tolerance: "pointer",
-//        helper: function(e) {
-//            //console.log(e.currentTarget.dataset.id);
-//            //debugger;
-//            var helper = jQuery(document.getElementById("sortable-helper")).clone();
-//            return helper;
-//        },
+        helper: function (e) {
+            var helper = jQuery(document.getElementById("sortable-helper")).clone();
+            return helper;
+        },
         update: function (event, ui) {
             //console.log(event);
             //console.log(ui.item.data("id"));
-            //debugger;
+            // debugger;
             if (ui.item.attr("id") == "draggable-helper") {
                 loading_row = jQuery('<div style="text-align: center; padding: 20px; background-color: #d4d5d6; color: #52BE7F;"><i class="fa fa-cog fa-2x fa-spin" /></div>');
                 ui.item.before(loading_row);
@@ -360,29 +173,27 @@ jQuery(function () {
                     loading_row.remove();
                     new_row.add_delete();
                     new_row.add_block_edit();
-                    new_row.find(".tnpc-row-edit").hover_edit();
+                    new_row.add_block_clone();
+                    // new_row.find(".tnpc-row-edit").hover_edit();
                     if (new_row.hasClass('tnpc-row-block')) {
-                        new_row.find(".tnpc-row-edit-block i").click();
+                        new_row.find(".tnpc-row-edit-block").click();
                     }
-                    tnp_mobile_preview();
+                    tnpc_mobile_preview();
+                }).fail(function () {
+                    alert("Block rendering failed.");
+                    loading_row.remove();
                 });
+            } else {
+                tnpc_mobile_preview();
             }
         }
     });
 
-//    jQuery(".tnpc-row").draggable({
-//        connectToSortable: "#newsletter-builder-area-center-frame-content",
-//        //helper: "clone",
-//        revert: false,
-//        handle: ".tnpc-row-move"
-//    });
-
     jQuery(".newsletter-sidebar-buttons-content-tab").draggable({
         connectToSortable: "#newsletter-builder-area-center-frame-content",
-        //helper: "clone",
-        helper: function(e) {
-            //console.log(e.currentTarget.dataset.id);
-            //debugger;
+
+        // Build the helper for dragging
+        helper: function (e) {
             var helper = jQuery(document.getElementById("draggable-helper")).clone();
             // Do not uset .data() with jQuery
             helper.attr("data-id", e.currentTarget.dataset.id);
@@ -392,98 +203,175 @@ jQuery(function () {
         revert: false,
         start: function () {
             if (jQuery('.tnpc-row').length) {
-                //jQuery('.tnpc-row').append('<div class="tnpc-drop-here">Drag&Drop blocks here!</div>');
             } else {
                 jQuery('#newsletter-builder-area-center-frame-content').append('<div class="tnpc-drop-here">Drag&Drop blocks here!</div>');
             }
         },
         stop: function (event, ui) {
-            //debugger;
             jQuery('.tnpc-drop-here').remove();
         }
     });
 
-//close edit
-    jQuery(".tnpc-edit-box-buttons-cancel").click(function () {
-        jQuery(this).parent().parent().parent().fadeOut(500)
-        jQuery(this).parent().parent().slideUp(500)
-    });
-
-    jQuery("#tnpc-block-options .tnpc-edit-box-buttons-save").click(function () {
-        
-        // fix for Codemirror
-        if (typeof templateEditor !== 'undefined') { templateEditor.save(); };
-        
-//        console.log(target.data('options'));
-        
-        jQuery(this).parent().parent().parent().fadeOut(500)
-        jQuery(this).parent().parent().slideUp(500)
-
-        var data = jQuery("#tnpc-block-options-form").serialize();
-        var dataArray = jQuery("#tnpc-block-options-form").serializeArray()
-        var options = "";
-        for (var i = 0; i < dataArray.length; i++) {
-            //alert(dataArray[i]);
-            if (dataArray[i].name.startsWith("options"))
-                options += dataArray[i].name + "=" + encodeURIComponent(dataArray[i].value) + "&";
-        }
-        jQuery.post(ajaxurl, data, function (response) {
+    // Closes the block options layer (without saving)
+    jQuery("#tnpc-block-options-cancel").click(function () {
+        jQuery(this).parent().parent().fadeOut(500);
+        jQuery.post(ajaxurl, start_options, function (response) {
             target.html(response);
-            target.attr("data-options", options);
-            target.find(".tnpc-row-edit").hover_edit();
-            tnp_mobile_preview();
-            //alert(data);
+            jQuery("#tnpc-block-options-form").html("");
         });
     });
 
-// initialize controls
+    // Fires the save event for block options
+    jQuery("#tnpc-block-options-save").click(function (e) {
+        e.preventDefault();
+        // fix for Codemirror
+        if (typeof templateEditor !== 'undefined') {
+            templateEditor.save();
+        }
+
+        if (window.tinymce)
+            window.tinymce.triggerSave();
+
+        jQuery("#tnpc-block-options").fadeOut(500);
+
+        var data = jQuery("#tnpc-block-options-form").serialize();
+
+        jQuery.post(ajaxurl, data, function (response) {
+            target.html(response);
+            tnpc_mobile_preview();
+            //target.attr("data-options", options);
+            //target.find(".tnpc-row-edit").hover_edit();
+            jQuery("#tnpc-block-options-form").html("");
+        });
+    });
+
+    // live preview from block options *** EXPERIMENTAL ***
+    jQuery('#tnpc-block-options-form').change(function () {
+        var data = jQuery("#tnpc-block-options-form").serialize();
+        jQuery.post(ajaxurl, data, function (response) {
+            target.html(response);
+        }).fail(function () {
+            alert("Block rendering failed");
+        });
+
+    });
+
     jQuery(".tnpc-row").add_delete();
     jQuery(".tnpc-row").add_block_edit();
-    jQuery(".tnpc-row-edit").hover_edit();
+    jQuery(".tnpc-row").add_block_clone();
 
-});
+    tnpc_mobile_preview();
 
-function tnp_mobile_preview() {
-    var d = document.getElementById("tnp-mobile-preview").contentWindow.document;
+}
+
+function tnpc_mobile_preview() {
+
+    var d = document.getElementById("tnpc-mobile-preview").contentWindow.document;
     d.open();
 
     d.write("<!DOCTYPE html>\n<html>\n<head>\n");
-    d.write("<link rel='stylesheet' href='" + TNP_HOME_URL + "?na=emails-composer-css&ver=" + Math.random() + "' type='text/css'");
+    d.write("<link rel='stylesheet' href='" + TNP_HOME_URL + "?na=emails-composer-css&ver=" + Math.random() + "' type='text/css'>");
+    d.write("<style type='text/css'>.tnpc-row-delete, .tnpc-row-edit-block, .tnpc-row-clone { display: none; }</style>");
     d.write("</head>\n<body style='margin: 0; padding: 0;'><div style='width: 320px!important'>");
     d.write(jQuery("#newsletter-builder-area-center-frame-content").html());
     d.write("</div>\n</body>\n</html>");
     d.close();
 }
 
-function create() {
+function tnpc_save(form) {
 
     jQuery("#newsletter-preloaded-export").html(jQuery("#newsletter-builder-area-center-frame-content").html());
 
     jQuery("#newsletter-preloaded-export .tnpc-row-delete").remove();
     jQuery("#newsletter-preloaded-export .tnpc-row-edit-block").remove();
+    jQuery("#newsletter-preloaded-export .tnpc-row-clone").remove();
     jQuery("#newsletter-preloaded-export .tnpc-row").removeClass("ui-draggable");
-    preload_export_html = jQuery("#newsletter-preloaded-export").html();
 
-    if (preload_export_html.indexOf('<style type="text/css">') > -1) {
-        export_content = preload_export_html;
-        jQuery("#tnpc-edit-export .text").val(export_content);
-        jQuery('#tnpc-form input[name="options[body]"]').attr('value', export_content);
-        jQuery("#tnpc-form").submit();
-    } else {
-            jQuery.get(TNP_HOME_URL + "?na=emails-composer-css&ver=" + Math.random(), {action: "tnpc_css"}, function (data) {
-            export_content = '<!DOCTYPE html>\n<html>\n<head>\n<title>Newsletter</title>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta http-equiv="X-UA-Compatible" content="IE=edge">\n';
-            export_content += '<style type="text/css">' + data + '</style>';
-            //export_content += '\n<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel="stylesheet" type="text/css">';
-            export_content += '</head>\n<body style="margin: 0; padding: 0;">\n';
-            export_content += preload_export_html;
-            export_content += '\n</body>\n</html>';
-            jQuery("#tnpc-edit-export .text").val(export_content);
-            jQuery('#tnpc-form input[name="options[body]"]').attr('value', export_content);
-            jQuery("#tnpc-form").submit();
-        });
-    }
+    let preload_export_html = jQuery("#newsletter-preloaded-export").html();
+    preload_export_html = jQuery.trim(preload_export_html);
 
+    let css = jQuery.trim(form.elements["options[css]"].value);
+
+    let export_content = '<!DOCTYPE html>\n<html>\n<head>\n<title>{subject}</title>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta http-equiv="X-UA-Compatible" content="IE=edge">\n';
+    export_content += '<style type="text/css">' + css + '</style>';
+    export_content += '</head>\n<body style="margin: 0; padding: 0;">\n';
+    export_content += preload_export_html;
+    export_content += '\n</body>\n</html>';
+    form.elements["options[body]"].value = export_content;
+    form.elements["options[subject]"].value = jQuery('#options-title').val();
     jQuery("#newsletter-preloaded-export").html(' ');
 
 }
 
+function tnpc_test() {
+    let form = document.getElementById("tnpc-form");
+    tnpc_save(form);
+    form.act.value = "test";
+    form.submit();
+}
+
+function openTab(evt, tabName) {
+    evt.preventDefault();
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+
+function tnpc_show_presets() {
+
+    jQuery('.tnpc-controls input').attr('disabled', true);
+    jQuery('#newsletter-builder-area-center-frame-content').load(ajaxurl, {
+        action: "tnpc_presets",
+    });
+
+}
+
+function tnpc_load_preset(id) {
+
+    jQuery('#newsletter-builder-area-center-frame-content').load(ajaxurl, {
+        action: "tnpc_presets",
+        id: id
+    }, function () {
+        start_composer();
+        jQuery('.tnpc-controls input').attr('disabled', false);
+    });
+
+}
+
+function tnpc_scratch() {
+
+    jQuery('#newsletter-builder-area-center-frame-content').html(" ");
+    start_composer();
+
+}
+
+function tnpc_reload_options(e) {
+    e.preventDefault();
+    let options = jQuery("#tnpc-block-options-form").serializeArray();
+    for (let i=0; i<options.length; i++) {
+        if (options[i].name == 'action') {
+            options[i].value = 'tnpc_options';
+        }
+    }
+    //console.log(options);
+    //debugger;
+    options["action"] = "tnpc_options";
+    options["id"] = container.data("id");
+    jQuery("#tnpc-block-options-form").load(ajaxurl, options);
+}

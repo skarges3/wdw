@@ -4,52 +4,27 @@
  * @var $controls NewsletterControls 
  */
 ?>
+<?php $fields->text('q', __('Search')) ?>
 
-<table class="form-table">
-    <tr>
-        <th><?php _e('Search Giphy', 'newsletter') ?></th>
-        <td>
-            <?php $controls->text('q') ?>
-        </td>
-    </tr>
-    <tr>
-        <th><?php _e('Choose', 'newsletter') ?></th>
-        <td>
-            <div style="clear: both" id="tnp-giphy-results">Write something in the search above</div>
-        </td>
-    </tr>
-    <tr>
-        <th><?php _e('Selected', 'newsletter') ?></th>
-        <td>
-            <?php $controls->text('giphy_url') ?>
-        </td>
-    </tr>
-    <tr>
-        <th>&nbsp;</th>
-        <td>
-            <div id="giphy-preview"></div>
-        </td>
-    </tr>
-    <tr>
-        <th><?php _e('Background', 'newsletter') ?></th>
-        <td>
-            <?php $controls->block_background() ?>
-        </td>
-    </tr>
-    <tr>
-        <th><?php _e('Padding', 'newsletter') ?></th>
-        <td>
-            <?php $controls->block_padding() ?>
-        </td>
-    </tr>
-</table>
+<div style="clear: both; max-height: 300px; overflow: scroll; margin-bottom: 15px" id="tnp-giphy-results"></div>
+
+<?php $controls->hidden('giphy_url') ?>
+            <div id="giphy-preview">
+                <?php if (!empty($controls->data['giphy_url'])) { ?>
+                <img src="<?php echo esc_attr($controls->data['giphy_url'])?>" style="max-width: 300px">
+                <?php } ?>
+            </div>
+
+
+<?php $fields->block_commons() ?>
 
 <script type="text/javascript">
 
     function choose_gif(url) {
-        jQuery("#tnp-giphy-results").html("");
+        //jQuery("#tnp-giphy-results").html("");
         jQuery("#options-giphy_url").val(url);
-        jQuery("#giphy-preview").html('<img src="' + url + '" />');
+        jQuery("#giphy-preview").html('<img src="' + url + '" style="max-width: 300px">');
+        jQuery("#options-giphy_url").trigger("change");
     }
 
     jQuery("#options-q").keyup(
@@ -58,13 +33,18 @@
                     window.clearTimeout(tid);
                 }
                 tid = window.setTimeout(function () {
-                            jQuery.get("https://api.giphy.com/v1/gifs/search", {api_key: "57FLbVJJd7oQBZ0fEiRnzhM2VtZp5OP1", q: jQuery("#options-q").val()}, function (data) {
+                    var rating = "r";
+                    var limit = 20;
+                    var offset = 0;
+                    
+                            jQuery.get("https://api.giphy.com/v1/gifs/search", {limit: limit, rating: rating, api_key: "57FLbVJJd7oQBZ0fEiRnzhM2VtZp5OP1", q: jQuery("#options-q").val()}, function (data) {
                                 jQuery("#tnp-giphy-results").html("");
                                 jQuery.each(data.data, function (index, value) {
-                                    jQuery("#tnp-giphy-results").append('<img src="' + value.images.fixed_width_small.url + '" onclick="choose_gif(\'' + value.images.fixed_height.url + '\')" style="float:left;" />');
+                                    jQuery("#tnp-giphy-results").append('<div style="overflow: hidden; width: 120px; height: 120px; float: left; margin: 5px"><img src="' + value.images.fixed_width_small.url + '" onclick="choose_gif(\'' + value.images.fixed_height.url + '\')" style="float:left; max-width: 100%"></div>');
                                 });
                             }, "json");
                         }, 500);
             });
+jQuery("#options-q").trigger('keyup');
 
 </script>

@@ -19,7 +19,7 @@ class NewsletterUsers extends NewsletterModule {
     }
 
     function __construct() {
-        parent::__construct('users', '1.2.4');
+        parent::__construct('users', '1.3.0');
         add_action('init', array($this, 'hook_init'));
     }
 
@@ -30,10 +30,10 @@ class NewsletterUsers extends NewsletterModule {
     }
 
     function hook_wp_ajax_newsletter_users_export() {
-        require_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
-        $controls = new NewsletterControls();
+
         $newsletter = Newsletter::instance();
-        if (current_user_can('manage_options') || ($newsletter->options['editor'] == 1 && current_user_can('manage_categories'))) {
+        if ($newsletter->is_allowed()) {
+            require_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
             $controls = new NewsletterControls();
 
             if ($controls->is_action('export')) {
@@ -71,6 +71,7 @@ class NewsletterUsers extends NewsletterModule {
   `ip` varchar(50) NOT NULL DEFAULT '',
   `wp_user_id` int(11) NOT NULL DEFAULT '0',
   `http_referer` varchar(255) NOT NULL DEFAULT '',
+  `geo` tinyint(4) NOT NULL DEFAULT '0',
   `country` varchar(4) NOT NULL DEFAULT '',
   `region` varchar(100) NOT NULL DEFAULT '',
   `city` varchar(100) NOT NULL DEFAULT '',
@@ -91,6 +92,14 @@ class NewsletterUsers extends NewsletterModule {
         $sql .= "PRIMARY KEY (`id`),\nUNIQUE KEY `email` (`email`),\nKEY `wp_user_id` (`wp_user_id`)\n) $charset_collate;";
 
         dbDelta($sql);
+        
+        if ($this->old_version < '1.2.7') {
+            $this->query("update " . NEWSLETTER_USERS_TABLE . " set geo=1 where country<>''");
+            
+        }
+        if ($this->old_version > '1.2.5' && $this->old_version < '1.2.9') {
+            $this->upgrade_query("ALTER TABLE " . NEWSLETTER_USERS_TABLE . " DROP COLUMN last_ip;");
+        }
         
     }
 

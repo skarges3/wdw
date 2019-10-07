@@ -9,7 +9,7 @@
  */
 function wpmm_plugin_info($plugin_slug) {
 	add_filter('extra_plugin_headers', 'wpmm_add_extra_plugin_headers', 99, 1);
-	
+
 	$plugin_data = get_plugin_data(WPMM_PATH . $plugin_slug . '.php');
 
 	return $plugin_data;
@@ -91,15 +91,15 @@ function wpmm_get_banners() {
 				'link' => 'https://designmodo.com/postcards/',
 				'image' => $banners_path . 'postcards.jpg',
 				'utm' => true
+			),
+			array(
+				'title' => 'Blocksy',
+				'link' => 'https://creativethemes.com/blocksy/',
+				'image' => $banners_path . 'blocksy.jpg',
+				'utm' => true
 			)
 		),
 		'resource' => array(
-			array(
-				'title' => 'Free WordPress Theme',
-				'link' => 'https://designmodo.com/free-wordpress-theme/',
-				'image' => $banners_path . 'ayoshop.jpg',
-				'utm' => true
-			),
 			array(
 				'title' => 'Linecons',
 				'link' => 'https://designmodo.com/linecons-free/',
@@ -131,6 +131,29 @@ function wpmm_sanitize_ga_code($string) {
 	preg_match('/UA-\d{4,10}(-\d{1,4})?/', $string, $matches);
 
 	return isset($matches[0]) ? $matches[0] : '';
+}
+
+/**
+ * Return allowed HTML tags for GDPR module textareas
+ * 
+ * @since 2.2.2
+ * @return array
+ */
+function wpmm_gdpr_textarea_allowed_html() {
+	$allowed_html = array(
+		'a' => array(
+			'href' => array(),
+			'title' => array(),
+			'class' => array(),
+			'rel' => array(),
+			'target' => array()
+		),
+		'strong' => array(),
+		'em' => array(),
+		'p' => array(),
+	);
+
+	return apply_filters('wpmm_gdpr_textarea_allowed_html', $allowed_html);
 }
 
 if (!function_exists('wp_scripts')) {

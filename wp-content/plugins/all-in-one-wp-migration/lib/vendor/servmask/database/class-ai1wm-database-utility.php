@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,10 @@
  * ███████║███████╗██║  ██║ ╚████╔╝ ██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
  * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Kangaroos cannot jump here' );
+}
 
 class Ai1wm_Database_Utility {
 
@@ -98,7 +102,7 @@ class Ai1wm_Database_Utility {
 	/**
 	 * Escape MySQL special characters
 	 *
-	 * @param  string $data Data to replace.
+	 * @param  string $data Data to escape
 	 * @return string
 	 */
 	public static function escape_mysql( $data ) {
@@ -114,7 +118,7 @@ class Ai1wm_Database_Utility {
 	/**
 	 * Unescape MySQL special characters
 	 *
-	 * @param  string $data Data to replace.
+	 * @param  string $data Data to unescape
 	 * @return string
 	 */
 	public static function unescape_mysql( $data ) {
@@ -125,5 +129,35 @@ class Ai1wm_Database_Utility {
 				array( "\x00", "\n", "\r", '\\', "'", '"', "\x1a" )
 			)
 		);
+	}
+
+	/**
+	 * Encode base64 characters
+	 *
+	 * @param  string $data Data to encode
+	 * @return string
+	 */
+	public static function base64_encode( $data ) {
+		return base64_encode( $data );
+	}
+
+	/**
+	 * Encode base64 characters
+	 *
+	 * @param  string $data Data to decode
+	 * @return string
+	 */
+	public static function base64_decode( $data ) {
+		return base64_decode( $data );
+	}
+
+	/**
+	 * Validate base64 data
+	 *
+	 * @param  string  $data Data to validate
+	 * @return boolean
+	 */
+	public static function base64_validate( $data ) {
+		return base64_encode( base64_decode( $data ) ) === $data;
 	}
 }

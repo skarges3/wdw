@@ -1,7 +1,5 @@
 <?php
-if (!defined('ABSPATH'))
-    exit;
-
+defined('ABSPATH') || exit;
 
 @include_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
 $module = Newsletter::instance();
@@ -45,6 +43,20 @@ if ($controls->is_action('reschedule')) {
 }
 
 if ($controls->is_action('trigger')) {
+    Newsletter::instance()->hook_newsletter();
+    $controls->messages = 'Triggered';
+}
+
+if ($controls->is_action('conversion')) {
+    $this->logger->info('Maybe convert to utf8mb4');
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    if (function_exists('maybe_convert_table_to_utf8mb4')) {
+        maybe_convert_table_to_utf8mb4(NEWSLETTER_EMAILS_TABLE);
+        maybe_convert_table_to_utf8mb4(NEWSLETTER_USERS_TABLE);
+        $controls->messages = 'Done.';
+    } else {
+        $controls->errors = 'Table conversion function not available';
+    }
     Newsletter::instance()->hook_newsletter();
     $controls->messages = 'Triggered';
 }
@@ -105,7 +117,7 @@ if ($controls->is_action('test')) {
                 $controls->messages .= '- Try to remove the return path on main settings.<br>';
             }
 
-            $controls->messages .= '<a href="https://www.thenewsletterplugin.com/documentation/email-sending-issues" target="_blank">Read more</a>.';
+            $controls->messages .= '<a href="https://www.thenewsletterplugin.com/documentation/email-sending-issues" target="_blank"><strong>' . __('Read more', 'newsletter') . '</strong></a>.';
 
             $parts = explode('@', $module->options['sender_email']);
             $sitename = strtolower($_SERVER['SERVER_NAME']);
@@ -121,6 +133,16 @@ if ($controls->is_action('test')) {
 }
 
 $options = $module->get_options('status');
+
+// Compute the number of newsletters ongoing and other stats
+$emails = $wpdb->get_results("select * from " . NEWSLETTER_EMAILS_TABLE . " where status='sending' and send_on<" . time() . " order by id asc");
+$total = 0;
+$queued = 0;
+foreach ($emails as $email) {
+    $total += $email->total;
+    $queued += $email->total - $email->sent;
+}
+$speed = Newsletter::$instance->options['scheduler_max'];
 ?>
 
 <div class="wrap tnp-main-status" id="tnp-wrap">
@@ -150,7 +172,54 @@ $options = $module->get_options('status');
                 </thead>
 
                 <tbody>
+                    <?php
+                    $method = '';
+                    if (function_exists('get_filesystem_method')) {
+                        $method = get_filesystem_method(array(), WP_PLUGIN_DIR);
+                    }
+                    ?>
+                    <tr>
+                        <td>Add-ons installable</td>
+                        <td>
+                            <?php if (empty($method)) { ?>
+                                <span class="tnp-maybe">MAYBE</span>
 
+                            <?php } else if ($method == 'direct') { ?>
+                                <span class="tnp-ok">OK</span>
+                            <?php } else { ?>
+                                <span class="tnp-ko">KO</span>
+                            <?php } ?>
+
+                        </td>
+                        <td>
+                            <?php if (empty($method)) { ?>
+                                No able to check, just try the add-ons manager one click install
+                            <?php } else if ($method == 'direct') { ?>
+                                The add-ons manager can install our add-ons
+                            <?php } else { ?>
+                                The plugins dir could be read-only, you can install add-ons uploading the package from the
+                                plugins panel (or uploading them directly via FTP). This is unusual you should ask te provider
+                                about file and folder permissions.
+                            <?php } ?>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>Delivering</td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <?php if (count($emails)) { ?>
+                                Delivering <?php echo count($emails) ?> newsletters to about <?php echo $queued ?> recipients.
+                                At speed of <?php echo $speed ?> emails per hour it will take <?php printf('%.1f', $queued / $speed) ?> hours to finish.
+
+                            <?php } else { ?>
+                                Nothing delivering right now
+                            <?php } ?>
+                        </td>
+
+                    </tr>
                     <tr>
                         <td>Mailing</td>
                         <td>
@@ -366,7 +435,7 @@ $options = $module->get_options('status');
                     <tr>
                         <td>Database Charset</td>
                         <td>
-                            <?php if (DB_CHARSET != 'utf8' && DB_CHARSET != 'utf8mb4') { ?>
+                            <?php if ($wpdb->charset != 'utf8mb4') { ?>
                                 <span class="tnp-ko">KO</span>
                             <?php } else { ?>
                                 <span class="tnp-ok">OK</span>
@@ -374,14 +443,15 @@ $options = $module->get_options('status');
 
                         </td>
                         <td>
-                            Charset: <?php echo DB_CHARSET; ?>
+                            Charset: <?php echo $wpdb->charset; ?>
                             <br>
-                            <?php if (DB_CHARSET != 'utf8' && DB_CHARSET != 'utf8mb4') { ?>
-                                The recommended charset for your database is <code>utf8</code> or <code>utf8mb4</code>
-                                but the <a href="https://codex.wordpress.org/Converting_Database_Character_Sets" target="_blank">conversion</a>
-                                could be tricky. If you're not experiencing problem, leave things as is.
+                            <?php if ($wpdb->charset != 'utf8mb4') { ?>
+                                The recommended charset for your database is <code>utf8mb4</code> to avoid possible saving errors when you use emoji. 
+                                Read the WordPress Codex <a href="https://codex.wordpress.org/Converting_Database_Character_Sets" target="_blank">conversion 
+                                    instructions</a> (skilled technicia required).
                             <?php } else { ?>
-
+                                    If you experience newsletter saving database error
+                                    <?php $controls->button('conversion', 'Try tables upgrade')?>
                             <?php } ?>
                         </td>
                     </tr>
@@ -572,6 +642,21 @@ $options = $module->get_options('status');
                             <?php } ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            Alternate cron
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <?php if (defined('ALTERNATE_WP_CRON') && ALTERNATE_WP_CRON) { ?>
+                                Using the alternate cron trigger.
+                            <?php } else { ?>
+
+                            <?php } ?>
+                        </td>
+                    </tr>
 
                     <tr>
                         <td>
@@ -622,7 +707,7 @@ $options = $module->get_options('status');
                         </td>
                         <td>
                             <?php if (!$res) { ?>
-                                The blog is not responding to Newsletter URLs: ask the provider or your IT consultant to check this problem. Report the URL and error blow<br>
+                                The blog is not responding to Newsletter URLs: ask the provider or your IT consultant to check this problem. Report the URL and error below<br>
                                 Error: <?php echo esc_html($message) ?><br>
                             <?php } else { ?>
 
@@ -694,6 +779,26 @@ $options = $module->get_options('status');
                             <?php if (!$res) { ?>
                                 The blog cannot contact www.thenewsletterplugin.com to check the license or the extension versions.<br>
                                 Error: <?php echo esc_html($message) ?><br>
+                            <?php } else { ?>
+
+                            <?php } ?>
+                        </td>
+                    </tr>   
+                    
+                    <tr>
+                        <td>
+                            Addons update
+                        </td>
+                        <td>
+                            <?php if (NEWSLETTER_EXTENSION_UPDATE) { ?>
+                                <span class="tnp-ok">OK</span>
+                            <?php } else { ?>
+                                <span class="tnp-ko">KO</span>
+                            <?php } ?>
+                        </td>
+                        <td>
+                            <?php if (!NEWSLETTER_EXTENSION_UPDATE) { ?>
+                                Addons update has been disabled. 
                             <?php } else { ?>
 
                             <?php } ?>
@@ -783,43 +888,43 @@ $options = $module->get_options('status');
 
 
                     <?php /*
-                    $memory = intval(WP_MEMORY_LIMIT);
-                    if (false !== strpos(WP_MEMORY_LIMIT, 'G'))
-                        $memory *= 1024;
-                    ?>
-                    <tr>
-                        <td>
-                            PHP memory limit
-                        </td>
-                        <td>
-                            <?php if ($memory < 64) { ?>
-                                <span class="tnp-ko">MAYBE</span>
-                            <?php } else if ($memory < 128) { ?>
-                                <span class="tnp-maybe">MAYBE</span>
-                            <?php } else { ?>
-                                <span class="tnp-ok">OK</span>
-                            <?php } ?>    
-                        </td>
-                        <td>
-                            WordPress WP_MEMORY_LIMIT is set to <?php echo $memory ?> megabyte but your PHP setting could allow more than that.
-                            Anyway we suggest to set the value to at least 64M.
-                            <a href="https://www.thenewsletterplugin.com/documentation/status-panel#status-memory" target="_blank">Read more</a>.
-                            <?php if ($memory < 64) { ?>
-                                This value is too low you should increase it adding <code>define('WP_MEMORY_LIMIT', '64M');</code> to your <code>wp-config.php</code>.
-                                <a href="https://www.thenewsletterplugin.com/documentation/status-panel#status-memory" target="_blank">Read more</a>.
-                            <?php } else if ($memory < 128) { ?>
-                                The value should be fine, it depends on how many plugins you're running and how many resource are required by your theme.
-                                Blank pages may happen with low memory problems. Eventually increase it adding <code>define('WP_MEMORY_LIMIT', '128M');</code>
-                                to your <code>wp-config.php</code>.
-                                <a href="https://www.thenewsletterplugin.com/documentation/status-panel#status-memory" target="_blank">Read more</a>.
-                            <?php } else { ?>
+                      $memory = intval(WP_MEMORY_LIMIT);
+                      if (false !== strpos(WP_MEMORY_LIMIT, 'G'))
+                      $memory *= 1024;
+                      ?>
+                      <tr>
+                      <td>
+                      PHP memory limit
+                      </td>
+                      <td>
+                      <?php if ($memory < 64) { ?>
+                      <span class="tnp-ko">MAYBE</span>
+                      <?php } else if ($memory < 128) { ?>
+                      <span class="tnp-maybe">MAYBE</span>
+                      <?php } else { ?>
+                      <span class="tnp-ok">OK</span>
+                      <?php } ?>
+                      </td>
+                      <td>
+                      WordPress WP_MEMORY_LIMIT is set to <?php echo $memory ?> megabyte but your PHP setting could allow more than that.
+                      Anyway we suggest to set the value to at least 64M.
+                      <a href="https://www.thenewsletterplugin.com/documentation/status-panel#status-memory" target="_blank">Read more</a>.
+                      <?php if ($memory < 64) { ?>
+                      This value is too low you should increase it adding <code>define('WP_MEMORY_LIMIT', '64M');</code> to your <code>wp-config.php</code>.
+                      <a href="https://www.thenewsletterplugin.com/documentation/status-panel#status-memory" target="_blank">Read more</a>.
+                      <?php } else if ($memory < 128) { ?>
+                      The value should be fine, it depends on how many plugins you're running and how many resource are required by your theme.
+                      Blank pages may happen with low memory problems. Eventually increase it adding <code>define('WP_MEMORY_LIMIT', '128M');</code>
+                      to your <code>wp-config.php</code>.
+                      <a href="https://www.thenewsletterplugin.com/documentation/status-panel#status-memory" target="_blank">Read more</a>.
+                      <?php } else { ?>
 
-                            <?php } ?>
+                      <?php } ?>
 
-                        </td>
-                    </tr>
+                      </td>
+                      </tr>
                      */ ?>
-                    
+
                     <?php
                     $ip = gethostbyname($_SERVER['HTTP_HOST']);
                     $name = gethostbyaddr($ip);
@@ -924,6 +1029,13 @@ $options = $module->get_options('status');
                             ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td>NEWSLETTER_CRON_INTERVAL</td>
+                        <td>
+                            <?php echo NEWSLETTER_CRON_INTERVAL . ' (seconds)'; ?>
+                        </td>
+                    </tr>
+                    
                     <tr>
                         <td>NEWSLETTER_CRON_INTERVAL</td>
                         <td>

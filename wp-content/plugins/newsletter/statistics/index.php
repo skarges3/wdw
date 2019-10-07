@@ -94,7 +94,7 @@ $overview_click_rate = array_reverse($overview_click_rate);
 
     </div>
 
-    <div id="tnp-body">
+    <div id="tnp-body" class="tnp-statistics">
         <form method="post" action="">
 
             <?php $controls->init(); ?>

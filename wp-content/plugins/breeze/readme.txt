@@ -1,9 +1,9 @@
 === Breeze - WordPress Cache Plugin ===
 Contributors: Cloudways
-Tags: cache, caching, performance, wp-cache, cdn, combine, compress, speed plugin, database cache,gzip, http compression, js cache, minify, optimize, page cache, performance, speed, expire headers
+Tags: cache,caching, performance, wp-cache, cdn, combine, compress, speed plugin, database cache,gzip, http compression, js cache, minify, optimize, page cache, performance, speed, expire headers
 Requires at least: 4.5
-Tested up to: 4.9.5
-Stable tag: 1.0.10
+Tested up to: 5.2.1
+Stable tag: 1.0.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -145,8 +145,11 @@ Using Gzip, Breeze compresses the request files, further reducing the size of th
 
 == Changelog ==
 
+= 1.0.11 =
+* Fix: Change wp_redirect to wp_safe_redirect to fix redirect vulnerability of URL
+
 = 1.0.10 =
-* Add: Allow Purge Cache for Editors role
+* Add: Allow Purge Cache for Editors role.
 
 = 1.0.9 =
 * Add: Option to move JS file to footer during minification

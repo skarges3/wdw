@@ -1,5 +1,6 @@
 <?php
 require_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
+
 $controls = new NewsletterControls();
 $module = NewsletterEmails::instance();
 
@@ -18,7 +19,7 @@ if ($controls->is_action('theme')) {
         $email['token'] = $module->get_token();
 
         if ($controls->data['theme'] == 'rawhtml') {
-            $email['editor'] = 1;
+            $email['editor'] = NewsletterEmails::EDITOR_HTML;
             $email['message'] = "<!DOCTYPE html>\n<html>\n<head>\n<title>Your email title</title>\n</head>\n<body>\n</body>\n</html>";
         } else {
             $theme_options = $module->get_current_theme_options();
@@ -41,20 +42,15 @@ if ($controls->is_action('theme')) {
             } else {
                 $email['message_text'] = 'You need a modern email client to read this email. Read it online: {email_url}.';
             }
+            $email['editor'] = NewsletterEmails::EDITOR_TINYMCE;
         }
 
         $email['type'] = 'message';
         $email['send_on'] = time();
         $email = Newsletter::instance()->save_email($email);
-        ?>
-        <script>
-            location.href = "<?php echo $module->get_admin_page_url('edit'); ?>&id=<?php echo $email->id; ?>";
-        </script>
-        <div class="wrap">
-            <p>If you are not automatically redirected to the composer, <a href="<?php echo $module->get_admin_page_url('edit'); ?>&id=<?php echo $email->id; ?>">click here</a>.</p>
-        </div>
-        <?php
-        return;
+        
+        $controls->js_redirect($module->get_editor_url($email->id, $email->editor));
+        return;        
     }
 }
 
@@ -151,7 +147,7 @@ function newsletter_emails_get_theme_options($theme) {
 
     <div id="tnp-body" class="tnp-body-lite"> 
 
-        <form method="post" action="<?php echo $module->get_admin_page_url('new'); ?>">
+        <form method="post" action="">
             <?php $controls->init(); ?>
             <?php $controls->hidden('theme'); ?>
 

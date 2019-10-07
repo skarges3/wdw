@@ -52,9 +52,8 @@ $emails = $module->get_emails('message');
             <p>
                 <a href="<?php echo $module->get_admin_page_url('theme'); ?>" class="button-primary"><?php _e('New newsletter', 'newsletter') ?></a>
                 <?php $controls->button_confirm('delete_selected', __('Delete selected newsletters', 'newsletter')); ?>
-
             </p>
-            <table class="widefat" style="width: 100%">
+            <table class="widefat tnp-newsletters-list" style="width: 100%">
                 <thead>
                     <tr>
                         <th>&nbsp;</th>
@@ -63,7 +62,6 @@ $emails = $module->get_emails('message');
                         <th><?php _e('Status', 'newsletter') ?></th>
                         <th><?php _e('Progress', 'newsletter') ?>&nbsp;(*)</th>
                         <th><?php _e('Date', 'newsletter') ?></th>
-                        <th><?php _e('Tracking', 'newsletter') ?></th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
@@ -74,10 +72,7 @@ $emails = $module->get_emails('message');
 
                 <tbody>
                     <?php
-                    foreach ($emails as $email) {
-                        $email_options = maybe_unserialize($email->options);
-                        $composer = isset($email_options['composer']);
-                        ?>
+                    foreach ($emails as $email) { ?>
                         <tr>
                             <td><input type="checkbox" name="ids[]" value="<?php echo $email->id; ?>"/></td>
                             <td><?php echo $email->id; ?></td>
@@ -90,29 +85,18 @@ $emails = $module->get_emails('message');
                             </td>
 
                             <td>
-                                <?php
-                                if ($email->status == 'sending') {
-                                    if ($email->send_on > time()) {
-                                        _e('Scheduled', 'newsletter');
-                                    } else {
-                                        _e('Sending', 'newsletter');
-                                    }
-                                } else {
-                                    echo $email->status;
-                                }
-                                ?>
+                                <?php $module->show_email_status_label($email) ?>
                             </td>
-                            <td><?php if ($email->status == 'sent' || $email->status == 'sending') echo $email->sent . ' ' . __('of', 'newsletter') . ' ' . $email->total; ?></td>
+                            <td>
+                                <?php $module->show_email_progress_bar($email, array('numbers'=>true)) ?>
+                            </td>
                             <td><?php if ($email->status == 'sent' || $email->status == 'sending') echo $module->format_date($email->send_on); ?></td>
-                            <td><?php echo $email->track == 1 ? __('Yes', 'newsletter') : __('No', 'newsletter'); ?></td>
-                            
-                            <td><a class="button-primary"
-                                   href="<?php echo $module->get_admin_page_url($email->status == 'new' && $composer ? 'composer' : 'edit') ?>&amp;id=<?php echo $email->id; ?>">
-                                    <i class="fa fa-<?php echo $composer ? 'th-large' : 'pencil' ?>"></i> <?php _e('Edit', 'newsletter') ?>
-                                </a></td>
+                            <td>
+                                <?php echo $module->get_edit_button($email) ?>
+                            </td>
                             
                             <td>
-                                <a class="button-primary" href="<?php echo NewsletterStatistics::instance()->get_statistics_url($email->id); ?>"><i class="fa fa-bar-chart"></i> <?php _e('Statistics', 'newsletter') ?></a>
+                                <a class="button-primary" href="<?php echo NewsletterStatistics::instance()->get_statistics_url($email->id); ?>"><i class="fa fa-chart-bar"></i> <?php _e('Statistics', 'newsletter') ?></a>
                             </td>
                             <td><a class="button-primary" target="_blank" rel="noopener" href="<?php echo home_url('/')?>?na=view&id=<?php echo $email->id; ?>"><i class="fa fa-eye"></i>&nbsp;<?php _e('View', 'newsletter')?></a></td>
                             <td><?php $controls->button_copy($email->id); ?></td>
@@ -122,7 +106,7 @@ $emails = $module->get_emails('message');
                 </tbody>
             </table>
             <p>
-                (*) <?php _e('Expected total at the end of the delivery may differ, due to subscriptions/unsubscriptions occured meanwhile.', 'newsletter') ?>
+                (*) <?php _e('Expected total at the end of the delivery may differ due to subscriptions/unsubscriptions occurred meanwhile.', 'newsletter') ?>
             </p>
         </form>
     </div>

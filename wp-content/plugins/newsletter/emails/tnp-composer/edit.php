@@ -1,5 +1,14 @@
 <?php
 if (!defined('ABSPATH')) exit;
+
+function tnp_buttons_row() {
+    ?>
+<div class="tnpc-edit-box-buttons">
+    <div class="tnpc-edit-box-buttons-cancel"><?php _e("Cancel", "newsletter") ?></div>
+    <div class="tnpc-edit-box-buttons-save"><?php _e("Save", "newsletter") ?></div>
+</div>
+<?php
+}
 ?>
 <div class="tnpc-edit" id="tnpc-edit-image">
     <div class="tnpc-edit-box">
@@ -10,15 +19,14 @@ if (!defined('ABSPATH')) exit;
                 <input type="text" class="tnpc-edit-box-content-field-input image"/>
                 <input class="button select_image" value="Select or Upload Image" type="button">
             </div>
+            <div class="tnpc-edit-box-content-text"><?php _e("WIDTH", "newsletter") ?><span>(optional but recommended)</span></div>
+            <div class="tnpc-edit-box-content-field"><input type="text" class="tnpc-edit-box-content-field-input width"/></div>
             <div class="tnpc-edit-box-content-text"><?php _e("ALT TEXT", "newsletter") ?><span>(optional but recommended)</span></div>
             <div class="tnpc-edit-box-content-field"><input type="text" class="tnpc-edit-box-content-field-input alt"/></div>
             <div class="tnpc-edit-box-content-text"><?php _e("LINK", "newsletter") ?> <span>(optional link address including http://)</span></div>
             <div class="tnpc-edit-box-content-field"><input type="text" class="tnpc-edit-box-content-field-input url"/></div>
         </div>
-        <div class="tnpc-edit-box-buttons">
-            <div class="tnpc-edit-box-buttons-save"><?php _e("Save", "newsletter") ?></div>
-            <div class="tnpc-edit-box-buttons-cancel"><?php _e("Cancel", "newsletter") ?></div>
-        </div>
+        <?php tnp_buttons_row() ?>
     </div>
 </div>
 <script type="text/javascript">
@@ -33,9 +41,6 @@ if (!defined('ABSPATH')) exit;
         // Create the media frame.
         file_frame = wp.media.frames.file_frame = wp.media({
             title: jQuery('#tnpc-edit-image .image').val(),
-            button: {
-                text: 'Insert',
-            },
             multiple: false  // Set to true to allow multiple files to be selected
         });
         // When an image is selected, run a callback.
@@ -65,10 +70,7 @@ if (!defined('ABSPATH')) exit;
             <div class="tnpc-edit-box-content-text"><?php _e("URL", "newsletter") ?> <span>(full address including http://)</span></div>
             <div class="tnpc-edit-box-content-field"><input type="text" class="tnpc-edit-box-content-field-input url"/></div>
         </div>
-        <div class="tnpc-edit-box-buttons">
-            <div class="tnpc-edit-box-buttons-save"><?php _e("Save", "newsletter") ?></div>
-            <div class="tnpc-edit-box-buttons-cancel"><?php _e("Cancel", "newsletter") ?></div>
-        </div>
+        <?php tnp_buttons_row() ?>
     </div>
 </div>
 
@@ -86,10 +88,7 @@ if (!defined('ABSPATH')) exit;
             <div class="tnpc-edit-box-content-text"><?php _e("Background Color", "newsletter") ?></div>
             <div class="tnpc-edit-box-content-field"><input type="text" class="tnpc-edit-box-content-field-input bgcolor"/></div>
         </div>
-        <div class="tnpc-edit-box-buttons">
-            <div class="tnpc-edit-box-buttons-save"><?php _e("Save", "newsletter") ?></div>
-            <div class="tnpc-edit-box-buttons-cancel"><?php _e("Cancel", "newsletter") ?></div>
-        </div>
+        <?php tnp_buttons_row() ?>
     </div>
 </div>
 
@@ -141,10 +140,7 @@ if (!defined('ABSPATH')) exit;
                 </select>
             </div>
         </div>
-        <div class="tnpc-edit-box-buttons">
-            <div class="tnpc-edit-box-buttons-save"><?php _e("Save", "newsletter") ?></div>
-            <div class="tnpc-edit-box-buttons-cancel"><?php _e("Cancel", "newsletter") ?></div>
-        </div>
+        <?php tnp_buttons_row() ?>
     </div>
 </div>
 
@@ -157,10 +153,7 @@ if (!defined('ABSPATH')) exit;
             <div class="tnpc-edit-box-content-text"><?php _e("Text", "newsletter") ?></div>
             <div class="tnpc-edit-box-content-field"><textarea class="tnpc-edit-box-content-field-textarea text"></textarea></div>
         </div>
-        <div class="tnpc-edit-box-buttons">
-            <div class="tnpc-edit-box-buttons-save"><?php _e("Save", "newsletter") ?></div>
-            <div class="tnpc-edit-box-buttons-cancel"><?php _e("Cancel", "newsletter") ?></div>
-        </div>
+        <?php tnp_buttons_row() ?>
     </div>
 </div>
 
@@ -201,10 +194,7 @@ if (!defined('ABSPATH')) exit;
                 </select>
             </div>
         </div>
-        <div class="tnpc-edit-box-buttons">
-            <div class="tnpc-edit-box-buttons-save"><?php _e("Save", "newsletter") ?></div>
-            <div class="tnpc-edit-box-buttons-cancel"><?php _e("Cancel", "newsletter") ?></div>
-        </div>
+        <?php tnp_buttons_row() ?>
     </div>
 </div>
 
@@ -247,21 +237,16 @@ if (!defined('ABSPATH')) exit;
             </div>
             <div class="tnpc-edit-box-content-text"><?php _e("Tags (comma separated)", "newsletter") ?></div>
             <div class="tnpc-edit-box-content-field"><input type="text" class="tnpc-edit-box-content-field-input tags"/></div>
-        </div>
-        <div class="tnpc-edit-box-buttons">
             <?php _e("Any prior changes to single posts will be lost when editing these settings.", "newsletter") ?>
-            <div class="tnpc-edit-box-buttons-save"><?php _e("Save", "newsletter") ?></div>
-            <div class="tnpc-edit-box-buttons-cancel"><?php _e("Cancel", "newsletter") ?></div>
         </div>
+        <?php tnp_buttons_row() ?>
     </div>
 </div>
 
+<?php // General container for generic block options ?>
 <div class="tnpc-edit" id="tnpc-block-options">
     <div class="tnpc-edit-box">
         <form id="tnpc-block-options-form" onsubmit="return false;"></form>
-        <div class="tnpc-edit-box-buttons">
-            <div class="tnpc-edit-box-buttons-save"><?php _e("Save", "newsletter") ?></div>
-            <div class="tnpc-edit-box-buttons-cancel"><?php _e("Cancel", "newsletter") ?></div>
-        </div>
+        <?php tnp_buttons_row() ?>
     </div>
 </div>

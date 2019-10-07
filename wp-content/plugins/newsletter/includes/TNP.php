@@ -22,10 +22,12 @@ class TNP {
 
     public static function subscribe($params) {
 
-//        error_reporting(E_ALL);
-
         $newsletter = Newsletter::instance();
         $subscription = NewsletterSubscription::instance();
+
+        // default params
+	    $defaults = array('send_emails' => true);
+	    $params = array_merge ($defaults, $params);
 
         // Messages
         $options = get_option('newsletter', array());
@@ -126,13 +128,14 @@ class TNP {
             setcookie('newsletter', $user->id . '-' . $user->token, time() + 60 * 60 * 24 * 365, '/');
         }
 
-        if (empty($params['send_emails']) || !$params['send_emails']) {
+        // skip messages if send_emails = false
+        if (!$params['send_emails']) {
             return $user;
         }
 
         $message_type = ($user->status == 'C') ? 'confirmed' : 'confirmation';
         $subscription->send_message($message_type, $user);
-        
+
         return $user;
     }
 
@@ -277,11 +280,12 @@ class TNP {
     public static function newsletters($params) {
 
         global $wpdb;
+	    $newsletter = Newsletter::instance();
 
         $list = $wpdb->get_results("SELECT id, subject, created, status, total, sent, send_on FROM " . NEWSLETTER_EMAILS_TABLE . " ORDER BY id DESC LIMIT 10", OBJECT);
 
         if ($wpdb->last_error) {
-            $this->logger->error($wpdb->last_error);
+            $newsletter->logger->error($wpdb->last_error);
             return false;
         }
 

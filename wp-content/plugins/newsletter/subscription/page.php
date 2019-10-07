@@ -15,8 +15,12 @@
 if (!defined('ABSPATH')) exit;
 
 $module = NewsletterSubscription::instance();
-$user = $module->get_user_from_request(true);
 $message_key = $module->get_message_key_from_request();
+if ($message_key == 'confirmation') {
+    $user = $module->get_user_from_request(true, 'preconfirm');
+} else {
+    $user = $module->get_user_from_request(true);
+}
 $message = apply_filters('newsletter_page_text', '', $message_key, $user);
 $options = $module->get_options('', $module->get_user_language($user));
 if (!$message) {

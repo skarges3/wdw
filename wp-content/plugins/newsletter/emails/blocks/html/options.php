@@ -3,6 +3,13 @@
  * @var $options array contains all the options the current block we're ediging contains
  * @var $controls NewsletterControls 
  */
+
+$default_options = array(
+    'block_background'=>'#ffffff',
+    
+);
+
+$options = array_merge($default_options, $options);
 ?>
 
 <style>
@@ -30,3 +37,6 @@
         </td>
     </tr>
 </table>
+
+
+<?php $fields->block_commons() ?>
