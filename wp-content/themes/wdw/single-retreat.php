@@ -14,6 +14,7 @@
     $start_date = null;
     $end_date = null;
     $days_away = 0;
+    $event_full = false;
     
     $invite_time = "";
     $invite_date = "";
@@ -40,6 +41,7 @@
     $start_date = get_post_meta( get_the_ID(), 'start_date', true );
     $end_date = get_post_meta( get_the_ID(), 'end_date', true );
     $days_away = get_post_meta( get_the_ID(), 'days_away', true );
+    $event_full = get_post_meta( get_the_ID(), 'event_full', true );
 
     $invite_time = get_post_meta( get_the_ID(), 'invite_time', true );
     $invite_date = get_post_meta( get_the_ID(), 'invite_date', true );
@@ -252,7 +254,7 @@
   <section class="rsvp rsvp-retreat">
     <div>
       <h3>Details from your host</h3>
-      <p><?php echo $event_description; ?></p>
+      <p style="white-space: pre-line;"><?php echo $event_description; ?></p>
     </div>
     <span></span>
     <span></span>
@@ -275,20 +277,19 @@
   <section class="invitation_form invitation_form--IGJ">
     <section id="register" class="invitation_form__container animated">
 
-      {% if jogfull == "yes" %}
-        {% set formId = 4713375 %}
-        <div class="retreatfull">
-          <h2>This Women Doing Well Retreat is currently FULL.</h2>
-          <p>
-            But don't worry &mdash; below is a waitlist form, and if any
-            availability opens up, you'll be the first to know.
-          </p>
-        </div>
-      {% else %}
-        {% set formId = entry.formAssemblyFormId %} 
-      {% endif %}
-
-      <?php echo do_shortcode("[formassembly formid=4649199]"); ?>
+        <?php if ($event_full) : ?>
+            <div class="retreatfull">
+            <h2>This Women Doing Well Retreat is currently FULL.</h2>
+            <p>
+                But don't worry &mdash; below is a waitlist form, and if any
+                availability opens up, you'll be the first to know.
+            </p>
+            </div>
+            <?php echo do_shortcode("[formassembly formid=4713375]"); ?>
+        <?php else : ?>
+            <?php echo do_shortcode("[formassembly formid=4649199]"); ?>
+        <?php endif;  ?>
+      
     </section>
   </section>
 
@@ -457,52 +458,3 @@
     });
   });
 </script>
-
-
-<div style="white-space: pre-line; margin: 200px auto;">
-
-ID: <?php echo $event_id; ?>
-
-Title: <?php echo $event_title; ?>
-
-Hosted By: <?php echo $hosted_by; ?>
-
-Theme: <?php echo $theme; ?>
-
-Color: <?php echo $color; ?>
-
-State date: <?php echo $start_date; ?>
-
-End date: <?php echo $end_date; ?>
-
-Days Away: <?php echo $days_away; ?>
-
-Invite Time: <?php echo $invite_time; ?>
-
-Invite Date: <?php echo $invite_date; ?>
-
-RSVP Date: <?php echo $rsvp_date; ?>
-
-Start Time: <?php echo $start_time; ?>
-
-End Time: <?php echo $end_time; ?>
-
-Time Zone: <?php echo $time_zone; ?>
-
-Contact Name: <?php echo $contact_name; ?>
-
-Contact Email: <?php echo $contact_email; ?>
-
-Contact Email 2: <?php echo $contact_email_2; ?>
-
-Contact Phone: <?php echo $contact_phone; ?>
-
-Invite Location: <?php echo $invite_location; ?>
-
-Invite Street: <?php echo $invite_street; ?>
-
-Invite City/State/ZIP: <?php echo $invite_citystatezip; ?>
-
-Event Description: <?php echo $event_description; ?>
-
-</div>
