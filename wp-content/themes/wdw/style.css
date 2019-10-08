@@ -4038,3 +4038,87 @@ table.dotlead td:last-child {padding-left: .2em; width: 36%;}
     background-position: center;
   }
 }
+
+* {
+  box-sizing: border-box;
+}
+
+.WDWR--invitedetails {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  grid-template-areas: "form mockup";
+}
+.WDWR--invitedetails .invitation_form {
+  grid-area: form;
+  padding: 0;
+}
+.WDWR--invitedetails .invitation_form .invitation_form__container {
+  box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 0px;
+  padding: 2em;
+  max-width: 1000px;
+  margin: auto;
+  z-index: 999;
+}
+.WDWR--invitedetails .invitation_form .invitation_form__container .wFormContainer {
+  width: 100% !important;
+}
+.WDWR--invitedetails .WDWR-Mockup {
+  grid-area: mockup;
+}
+.WDWR--invitedetails .WDWR-Mockup .invite {
+  height: 70vh;
+  background: none;
+  position: sticky;
+  top: 0;
+}
+.WDWR--invitedetails .WDWR-Mockup .invite .env-behind {
+  background-image: url("/wp-content/themes/wdw/images/env-behind--Power-Words-Teal.png");
+  background-size: contain;
+  width: 450px;
+  height: 570px;
+}
+.WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--Solid.env-behind--Navy, .WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--PictureMask.env-behind--Navy, .WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--PictureRight.env-behind--Navy {
+  background-image: url("/wp-content/themes/wdw/images/invites/env-behind--Solid-Navy.png");
+}
+.WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--Solid.env-behind--Teal, .WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--PictureMask.env-behind--Teal, .WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--PictureRight.env-behind--Teal {
+  background-image: url("/wp-content/themes/wdw/images/invites/env-behind--Solid-Teal.png");
+}
+.WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--Solid.env-behind--Mulberry, .WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--PictureMask.env-behind--Mulberry, .WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--PictureRight.env-behind--Mulberry {
+  background-image: url("/wp-content/themes/wdw/images/invites/env-behind--Solid-Mulberry.png");
+}
+.WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--Solid.env-behind--Blush, .WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--PictureMask.env-behind--Blush, .WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--PictureRight.env-behind--Blush {
+  background-image: url("/wp-content/themes/wdw/images/invites/env-behind--Solid-Blush.png");
+}
+.WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--PowerWords.env-behind--Navy {
+  background-image: url("/wp-content/themes/wdw/images/invites/env-behind--Power-Words-Teal.png");
+}
+.WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--PowerWords.env-behind--Teal {
+  background-image: url("/wp-content/themes/wdw/images/invites/env-behind--Power-Words-Teal.png");
+}
+.WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--PowerWords.env-behind--Mulberry {
+  background-image: url("/wp-content/themes/wdw/images/invites/env-behind--Power-Words-Blush.png");
+}
+.WDWR--invitedetails .WDWR-Mockup .invite .env-behind.env-behind--PowerWords.env-behind--Blush {
+  background-image: url("/wp-content/themes/wdw/images/invites/env-behind--Power-Words-Blush.png");
+}
+.WDWR--invitedetails .WDWR-Mockup .invite .env-card--PowerWords .bg-img-contain,
+.WDWR--invitedetails .WDWR-Mockup .invite .env-card--Solid .bg-img-contain {
+  visibility: hidden;
+}
+.WDWR--invitedetails .WDWR-Mockup .invite .ppp-teal,
+.WDWR--invitedetails .WDWR-Mockup .invite .ppp-mulberry {
+  display: none;
+}
+.WDWR--invitedetails .WDWR-Mockup .detailsection {
+  position: sticky;
+  top: 70vh;
+  z-index: 0;
+  background: none;
+}
+
+body.single-retreat-invite #page {
+  overflow: unset;
+}

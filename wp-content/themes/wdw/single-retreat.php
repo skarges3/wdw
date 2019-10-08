@@ -163,13 +163,7 @@
         <img id="whitemask" src="/wp-content/themes/wdw/images/invites/white-mask.svg" />
         <div id="mask-bg"></div>
 
-        {% if themecolor == "Teal" %}
-        <img id="ppp-navy" src="/assets/img/content/wdw/ppp-teal.png" /> {%
-        elseif themecolor == "Mulberry" %}
-        <img id="ppp-navy" src="/assets/img/content/wdw/ppp-mulberry.png" /> {%
-        else %}
-        <img id="ppp-navy" src="/assets/img/content/wdw/ppp-navy.png" /> {%
-        endif %}
+        <img id="ppp-navy" src="/wp-content/themes/wdw/images/invites/ppp-<?php echo $ppp_image; ?>.png" />
 
         <p class="env-card__details">
           <em>Hosted by</em> <?php echo $hosted_by; ?><br /><br />
@@ -188,7 +182,7 @@
   </section>
   <a class="page-anchor" name="details"></a>
   <section
-    class="detailsection detailsection--IGJ detailsection--{{ themecolor }}"
+    class="detailsection detailsection--IGJ detailsection--<?php echo $color; ?>"
     id="details"
   >
     <div>
@@ -285,9 +279,9 @@
                 availability opens up, you'll be the first to know.
             </p>
             </div>
-            <?php echo do_shortcode("[formassembly formid=4713375]"); ?>
+            <?php echo do_shortcode("[formassembly formid=4758542]"); ?>
         <?php else : ?>
-            <?php echo do_shortcode("[formassembly formid=4649199]"); ?>
+            <?php echo do_shortcode("[formassembly formid=4758538]"); ?>
         <?php endif;  ?>
       
     </section>
@@ -301,8 +295,10 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/plugins/ScrollToPlugin.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function(event) {
-    var eventIdTag = document.querySelector("#tfa_3");
-    eventIdTag.setAttribute("value", "{{ event.Id }}");
+    var eventIdTag = document.querySelector("#tfa_1");
+    eventIdTag.setAttribute("value", "<?php echo $event_id; ?>");
+    var hostTag = document.querySelector("#tfa_2");
+    hostTag.setAttribute("value", "<?php echo $hosted_by; ?>");
   });
 </script>
 <script>
